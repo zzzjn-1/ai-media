@@ -35,4 +35,5 @@ Thumbs.db
 # ===== Office 锁文件 / 临时垃圾 =====
 ~$*
 *.tmp
+*.bak
 desktop.ini
