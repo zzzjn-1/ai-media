@@ -1,0 +1,59 @@
+const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
+  <Box style={{ flexDirection: 'row', gap: 28, height: 620 }}>
+    {/* 左侧深色标题栏 */}
+    <Box style={{ width: 330, height: 620, background: '#0F172A', borderRadius: 16, padding: 44, justifyContent: 'space-between' }}>
+      <Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
+          <Box style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(59,130,246,0.16)', justifyContent: 'center', alignItems: 'center' }}>
+            <FAIcon name='wrench' style={{ fill: '#67E8F9', width: 28, height: 28 }} />
+          </Box>
+          <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3 }}>难点拆解与修复证据</Text>
+        </Box>
+        <Box style={{ width: 56, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
+        <Text style={{ fontSize: 16, color: '#94A3B8', lineHeight: 1.8, marginTop: 24 }}>
+          不停留在「遇到困难」，每条都追到根因，并给出可复跑的验证结果。
+        </Text>
+      </Box>
+      <Text style={{ fontSize: 13, color: '#475569' }}>现象 → 根因 → 修复 → 验证</Text>
+    </Box>
+
+    {/* 右侧四条难点链 */}
+    <Box style={{ flex: 1, height: 620, justifyContent: 'space-between' }}>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>① 领域词表跨模块不一致</Text>
+        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+          前端 / Mock / 种子数据各写一份，筛选点选空白。修复：DOMAINS 唯一真源 + Mock 自动补全。验证：五领域筛选全量有数据，Mock 与真实后端一致。
+        </Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>② 索引陈旧致检索命中率 0%</Text>
+        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+          重建数据库后复用旧 FAISS 索引（169 vs 270 向量），chunk 整体错位。修复：索引签名（数量 / 最大 id / 维度）校验，过期自动重建。验证：重启后 270 向量、命中率恢复。
+        </Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>③ 评测与生产口径漂移</Text>
+        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+          评测脚本内嵌参数、自行拼装检索逻辑，数字失去证明力。修复：评测直接调用生产检索函数，参数同源。验证：全量 180 条 100%，消融 61.1% → 100%。
+        </Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>④ 演示凭证三处不一致</Text>
+        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+          「INSERT OR IGNORE」使新口令常量从未生效，代码 / 页面 / 文档三个值。修复：常量对齐数据库并注明仅新库生效，口令哈希程序化核验。验证：代码 / 登录页 / 文档 / 数据库四端一致。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+
+  {/* C 区页脚 */}
+  <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>AI 自媒体内容创作助手 · 项目汇报</Text>
+    </Box>
+    <Text style={{ fontSize: 14, color: '#94A3B8' }}>13 / 14</Text>
+  </Box>
+</Slide>

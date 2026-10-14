@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI 自媒体内容创作助手 — 原型演示</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --panel:#ffffff; --ink:#1f2329; --muted:#6b7280;
+    --line:#e5e7eb; --brand:#185fa5; --brand-soft:#e6f1fb;
+    --green:#0f6e56; --amber:#854f0b; --red:#a32d2d; --radius:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+  .app{display:flex;min-height:100vh}
+  .sidebar{width:210px;background:var(--panel);border-right:1px solid var(--line);padding:18px 12px;flex-shrink:0}
+  .brand{font-weight:600;font-size:15px;padding:6px 10px 14px;color:var(--brand)}
+  .nav{list-style:none}
+  .nav li{padding:10px 12px;border-radius:8px;color:var(--muted);cursor:pointer;margin-bottom:4px}
+  .nav li:hover{background:var(--brand-soft);color:var(--brand)}
+  .nav li.active{background:var(--brand);color:#fff}
+  .main{flex:1;padding:22px 28px;overflow:auto}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .topbar h2{font-size:18px;font-weight:600}
+  .view{display:none;animation:fade .2s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:860px){.g2,.g3{grid-template-columns:1fr}.sidebar{width:150px}}
+  .pill{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;background:var(--brand-soft);color:var(--brand);margin-right:6px}
+  .pill.amber{background:#faefda;color:var(--amber)}
+  .pill.green{background:#e1f5ee;color:var(--green)}
+  .meta{color:var(--muted);font-size:12px;margin-top:6px}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:8px;padding:8px 14px;font-size:13px}
+  .btn{background:var(--brand);color:#fff}
+  .btn.ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .tag{font-size:12px;color:var(--muted);background:#f1f1f3;padding:2px 8px;border-radius:6px;margin:2px 4px 2px 0;display:inline-block}
+  input,select,textarea{font-family:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:8px;width:100%;background:#fff;color:var(--ink)}
+  label{font-size:12px;color:var(--muted);display:block;margin:10px 0 4px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .ver{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fafbfc}
+  .ver h4{font-size:14px;margin-bottom:6px;color:var(--brand)}
+  .tabs{display:flex;gap:8px;margin-bottom:12px}
+  .tab{padding:6px 14px;border-radius:8px;background:#eef0f3;color:var(--muted);cursor:pointer}
+  .tab.active{background:var(--brand);color:#fff}
+  .empty{color:var(--muted);text-align:center;padding:40px 0}
+  .hint{font-size:12px;color:var(--muted);background:var(--brand-soft);padding:8px 12px;border-radius:8px;margin-bottom:12px}
+  .toast{position:fixed;bottom:24px;right:24px;background:#1f2329;color:#fff;padding:10px 16px;border-radius:8px;display:none}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">创作助手 · 原型</div>
+    <ul class="nav">
+      <li class="active" data-view="materials">素材库管理</li>
+      <li data-view="hotspots">热点看板</li>
+      <li data-view="topics">选题列表</li>
+      <li data-view="generate">文案生成对比</li>
+      <li data-view="adapt">平台适配预览</li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="topbar"><h2 id="viewTitle">素材库管理</h2>
+      <div class="row"><span class="pill green">已登录 · demo</span><button class="btn ghost" onclick="toast('已退出（演示）')">退出</button></div>
+    </div>
+
+    <!-- 素材库 -->
+    <section class="view active" id="view-materials">
+      <div class="hint">核心闭环三步内可达：热点 → 选题 → 生成。素材经导入后自动分块、向量化入库。</div>
+      <div class="card"><div class="row">
+        <input style="flex:1" placeholder="搜索素材（关键词 / 语义）" />
+        <select style="width:140px"><option>全部平台</option><option>公众号</option><option>小红书</option><option>抖音</option></select>
+        <button class="btn">导入素材</button>
+      </div></div>
+      <div class="grid g2" id="materialList"></div>
+    </section>
+
+    <!-- 热点看板 -->
+    <section class="view" id="view-hotspots">
+      <div class="row" style="margin-bottom:12px">
+        <span class="tag">科技</span><span class="tag">生活</span><span class="tag">财经</span><span class="tag">美妆</span><span class="tag">教育</span>
+      </div>
+      <div class="grid g3" id="hotspotList"></div>
+    </section>
+
+    <!-- 选题列表 -->
+    <section class="view" id="view-topics">
+      <div class="hint">系统结合热点趋势 + 素材库 + 账号定位生成选题；每条标注推荐理由与目标受众。</div>
+      <div class="grid g2" id="topicList"></div>
+    </section>
+
+    <!-- 文案生成对比 -->
+    <section class="view" id="view-generate">
+      <div class="grid g3">
+        <div class="card">
+          <h3 style="margin-bottom:8px">创作参数</h3>
+          <label>选题</label><input value="AI 写作会不会取代自媒体人？" />
+          <label>目标平台</label>
+          <select id="genPlatform"><option>公众号</option><option>小红书</option><option>抖音</option></select>
+          <label>语气</label>
+          <select id="genTone"><option>专业</option><option>轻松</option><option>犀利</option></select>
+          <label>篇幅</label>
+          <select id="genLength"><option>短</option><option>中</option><option>长</option></select>
+          <label>人设口吻</label><input id="genVoice" placeholder="如：理性克制的技术观察者" />
+          <label>创作意图</label><textarea rows="2" placeholder="引发讨论 / 种草 / 科普"></textarea>
+          <div style="margin-top:14px"><button class="btn" id="genBtn" onclick="runGenerate()">一键生成 3 版本</button></div>
+        </div>
+        <div class="card" style="grid-column:span 2">
+          <h3 style="margin-bottom:8px">多版本对比</h3>
+          <div id="versionArea"><div class="empty">点击「一键生成 3 版本」查看结果（演示：模拟 SSE 流式产出）</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 平台适配预览 -->
+    <section class="view" id="view-adapt">
+      <div class="hint">同一选题一次创作，按各平台规范分别适配标题 / 字数 / 标签 / 排版，支持批量导出。</div>
+      <div class="tabs" id="adaptTabs"></div>
+      <div class="card" id="adaptBody"><div class="empty">请先在「文案生成对比」生成版本</div></div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------- 导航 ----------
+const titles={materials:'素材库管理',hotspots:'热点看板',topics:'选题列表',generate:'文案生成对比',adapt:'平台适配预览'};
+document.querySelectorAll('.nav li').forEach(li=>li.onclick=()=>{
+  document.querySelectorAll('.nav li').forEach(x=>x.classList.remove('active'));
+  li.classList.add('active');
+  const v=li.dataset.view;
+  document.querySelectorAll('.view').forEach(s=>s.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  document.getElementById('viewTitle').textContent=titles[v];
+});
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',1600);}
+
+// ---------- 示例数据 ----------
+const materials=[
+  {t:'3 个月涨粉 10w 的选题心法',p:'小红书',d:'美妆',tags:['爆款','复盘'],c:'导入于 2026-09-20 · 分块 6'},
+  {t:'AI 工具实测：效率提升 300%',p:'公众号',d:'科技',tags:['AI','干货'],c:'导入于 2026-09-18 · 分块 9'},
+  {t:'普通人的理财第一步',p:'抖音',d:'财经',tags:['科普','口播'],c:'导入于 2026-09-15 · 分块 4'},
+  {t:'新手化妆避坑指南',p:'小红书',d:'美妆',tags:['教程'],c:'导入于 2026-09-12 · 分块 7'}
+];
+const hotspots=[
+  {t:'大模型集体降价，创作者迎来红利',d:'科技',h:9821},
+  {t:'反向旅游成年轻人新宠',d:'生活',h:7640},
+  {t:'利率下调如何影响钱包',d:'财经',h:6512},
+  {t:'换季护肤避雷清单',d:'美妆',h:5430},
+  {t:'AI 写作是否取代自媒体人',d:'科技',h:4990},
+  {t:'副业刚需：内容变现路径',d:'教育',h:4210}
+];
+const topics=[
+  {t:'AI 写作会不会取代自媒体人？',r:'热点高关注+科技领域契合账号定位',a:'科技爱好者/创作者',hot:'AI 写作是否取代自媒体人'},
+  {t:'普通人如何用 AI 提效 3 倍',r:'结合素材库爆款复盘，落地性强',a:'职场新人/小团队',hot:'大模型集体降价'},
+  {t:'利率下调，普通人该怎么做',r:'财经热点+已有理财素材可复用',a:'理财小白',hot:'利率下调如何影响钱包'}
+];
+
+// ---------- 渲染 ----------
+function renderMaterials(){
+  document.getElementById('materialList').innerHTML=materials.map(m=>`
+    <div class="card"><h4>${m.t}</h4>
+      <div><span class="pill">${m.p}</span><span class="pill amber">${m.d}</span>${m.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="meta">${m.c} · 已向量化入库 FAISS</div></div>`).join('');
+}
+function renderHotspots(){
+  document.getElementById('hotspotList').innerHTML=hotspots.map(h=>`
+    <div class="card"><div class="row" style="justify-content:space-between">
+      <span class="pill">${h.d}</span><b style="color:var(--red)">🔥 ${h.h}</b></div>
+      <h4 style="margin:8px 0">${h.t}</h4>
+      <div class="meta">定时采集去重 · is_active=1</div></div>`).join('');
+}
+function renderTopics(){
+  document.getElementById('topicList').innerHTML=topics.map((t,i)=>`
+    <div class="card"><h4>${t.t}</h4>
+      <div class="meta">推荐理由：${t.r}</div>
+      <div class="meta">目标受众：${t.a}</div>
+      <div class="meta">关联热点：${t.hot}</div>
+      <div style="margin-top:10px"><button class="btn" onclick="gotoGenerate('${t.t}')">一键选用</button></div></div>`).join('');
+}
+function gotoGenerate(title){
+  document.querySelector('.nav li[data-view="generate"]').click();
+  document.querySelector('#view-generate input').value=title;
+  toast('已带入选题：'+title);
+}
+
+// ---------- 生成模拟 ----------
+let genDone=false;
+function runGenerate(){
+  const btn=document.getElementById('genBtn');btn.disabled=true;btn.textContent='生成中…';
+  setTimeout(()=>{
+    const plat=document.getElementById('genPlatform').value;
+    const tone=document.getElementById('genTone').value;
+    const vers=[
+      {n:1,title:`${plat}视角｜${document.querySelector('#view-generate input').value}`,body:`版本一（${tone}）：从趋势切入，先抛冲突再给方法，结尾引导互动。`,tags:['#热点','#干货']},
+      {n:2,title:`别慌，${plat}给你另一种解法`,body:`版本二（${tone}）：用反转结构制造记忆点，中段嵌入素材库范例增强可信度。`,tags:['#观点','#复盘']},
+      {n:3,title:`3 步搞定，附模板`,body:`版本三（${tone}）：清单式结构，降低阅读门槛，便于收藏转发。`,tags:['#教程','#模板']}
+    ];
+    document.getElementById('versionArea').innerHTML=`<div class="grid g3">`+vers.map(v=>`
+      <div class="ver"><h4>版本 ${v.n}</h4><div style="font-weight:600">${v.title}</div>
+      <p style="margin:6px 0;color:#374151">${v.body}</p>
+      <div>${v.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="meta">风格一致性：一致 · 替换建议：无高频重复</div></div>`).join('')+`</div>
+      <div style="margin-top:12px"><button class="btn" onclick="gotoAdapt('${plat}')">进入平台适配 →</button></div>`;
+    btn.disabled=false;btn.textContent='重新生成';genDone=true;
+    toast('已生成 3 个版本（SSE 流式演示）');
+  },900);
+}
+function gotoAdapt(plat){
+  document.querySelector('.nav li[data-view="adapt"]').click();
+  const plats=['公众号','小红书','抖音'];
+  document.getElementById('adaptTabs').innerHTML=plats.map((p,i)=>
+    `<div class="tab ${p===plat?'active':''}" onclick="switchAdapt('${p}',this)">${p}</div>`).join('');
+  renderAdapt(plat);
+}
+function switchAdapt(p,el){document.querySelectorAll('#adaptTabs .tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderAdapt(p);}
+function renderAdapt(p){
+  const rule={ '公众号':{t:64,b:'图文排版/段落分明',h:'#话题#'},
+    '小红书':{t:20,b:'短句+emoji+分段',h:'#话题# ×10'},
+    '抖音':{t:30,b:'口语化/强钩子',h:'#话题# ×5'} }[p];
+  const sample={ '公众号':'<h3>标题（≤64字）</h3><p>正文采用图文排版，段落分明，适合深度阐述与案例拆解……</p>',
+    '小红书':'<h3>标题（≤20字）</h3><p>✨短句 + emoji 分段，强种草感，话题标签 ×10……</p>',
+    '抖音':'<h3>标题（≤30字）</h3><p>口语化开头抛钩子，适合口播，话题标签 ×5……</p>' }[p];
+  document.getElementById('adaptBody').innerHTML=`
+    <div class="row" style="margin-bottom:10px">
+      <span class="pill">标题上限 ${rule.t} 字</span><span class="pill green">排版：${rule.b}</span><span class="pill amber">标签：${rule.h}</span>
+    </div>${sample}
+    <div style="margin-top:12px"><button class="btn">导出 txt</button> <button class="btn ghost">导出 docx</button> <button class="btn ghost">生成发布备注</button></div>`;
+}
+renderMaterials();renderHotspots();renderTopics();
+</script>
+</body>
+</html>

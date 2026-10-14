@@ -1,0 +1,59 @@
+/* 全局基础样式（preflight 已关闭，这里做最小重置，避免与 AntD 冲突） */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f4f6f9;
+  color: #1f2329;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* 通用卡片（内容页用 Tailwind 类，这里给一个兜底） */
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+/* 可见焦点环：覆盖非 AntD 原生控件，避免与 AntD 自带焦点样式冲突 */
+input:not(.ant-input):not([disabled]):focus-visible,
+textarea:not(.ant-input):not([disabled]):focus-visible,
+select:not(.ant-select-selector):focus-visible,
+button:not(.ant-btn):not([disabled]):focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.22);
+}
+
+/* 可点击元素光标反馈（AntD 组件自带） */
+button:not([disabled]):not(.ant-btn) { cursor: pointer; }
+
+/* 轻量滚动条 */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #c3cbd5; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #aab4c0; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* 尊重用户的「减少动效」系统偏好（无障碍） */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

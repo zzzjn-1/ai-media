@@ -1,0 +1,38 @@
+# ===== 依赖 =====
+node_modules/
+frontend/node_modules/
+
+# ===== Python =====
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ===== 数据库（运行时数据；schema.sql 纳入版本控制） =====
+db/*.db
+db/*.db-*
+db/*.db.*
+
+# ===== 环境变量 / 密钥 =====
+*.env
+.env.local
+.env.*.local
+
+# ===== 构建产物 =====
+frontend/dist/
+dist/
+build/
+
+# ===== 工具 / 个人数据 =====
+.workbuddy/
+
+# ===== 操作系统 / 编辑器 =====
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# ===== Office 锁文件 / 临时垃圾 =====
+~$*
+*.tmp
+desktop.ini

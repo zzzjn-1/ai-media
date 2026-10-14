@@ -1,0 +1,29 @@
+const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+
+<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+  <Image src="assets/hero_cover.png" style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, objectFit: 'cover' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'linear-gradient(100deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.62) 48%, rgba(15,23,42,0.18) 100%)' }} />
+
+  <Box style={{ position: 'absolute', left: 80, top: 140, width: 800 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+      <Box style={{ width: 8, height: 8, borderRadius: 4, background: '#06B6D4' }} />
+      <Text style={{ fontSize: 16, color: '#67E8F9', letterSpacing: 4 }}>项目汇报 · PROJECT REPORT</Text>
+    </Box>
+    <Text style={{ fontSize: 62, fontWeight: 'bold', lineHeight: 1.2, marginTop: 22, backgroundImage: 'linear-gradient(135deg, #FFFFFF 0%, #BAE6FD 58%, #67E8F9 100%)', backgroundClip: 'text', color: 'transparent' }}>
+      AI 自媒体内容创作助手
+    </Text>
+    <Text style={{ fontSize: 24, color: '#CBD5E1', marginTop: 20, lineHeight: 1.5 }}>
+      从热点到爆款的全链路内容生产工作台
+    </Text>
+    <Box style={{ width: 72, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 30 }} />
+    <Text style={{ fontSize: 16, color: '#94A3B8', marginTop: 26, lineHeight: 1.6 }}>
+      覆盖微信公众号 · 小红书 · 抖音 ｜ 科技 / 生活 / 财经 / 美妆 / 教育 五大领域
+    </Text>
+  </Box>
+
+  <Box style={{ position: 'absolute', left: 80, bottom: 52, flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+    <Text style={{ fontSize: 15, color: '#94A3B8' }}>汇报人：项目组</Text>
+    <Box style={{ width: 1, height: 14, background: '#475569' }} />
+    <Text style={{ fontSize: 15, color: '#94A3B8' }}>2026-10-12</Text>
+  </Box>
+</Slide>

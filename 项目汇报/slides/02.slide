@@ -1,0 +1,66 @@
+const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
+  <Box style={{ flexDirection: 'row', gap: 28, height: 620 }}>
+    {/* 左侧深色标题栏 */}
+    <Box style={{ width: 366, height: 620, background: '#0F172A', borderRadius: 16, padding: 44, justifyContent: 'space-between' }}>
+      <Box>
+        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#FFFFFF' }}>目录</Text>
+        <Text style={{ fontSize: 15, color: '#67E8F9', letterSpacing: 3, marginTop: 8 }}>CONTENTS</Text>
+        <Box style={{ width: 56, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
+        <Text style={{ fontSize: 16, color: '#94A3B8', lineHeight: 1.8, marginTop: 26 }}>
+          四个章节回答四个问题：产品做了什么、技术上怎么实现、过程如何推进、难点怎样解决。
+        </Text>
+      </Box>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+        <Text style={{ fontSize: 13, color: '#475569' }}>AI 自媒体内容创作助手</Text>
+      </Box>
+    </Box>
+
+    {/* 右侧四章条目 */}
+    <Box style={{ flex: 1, height: 620, justifyContent: 'space-between' }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 20, paddingBottom: 22, borderBottom: '1px solid #E2E8F0' }}>
+        <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3B82F6', width: 56 }}>01</Text>
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0F172A' }}>项目概况</Text>
+          <Text style={{ fontSize: 16, color: '#64748B', marginTop: 8, lineHeight: 1.6 }}>产品定位、五步核心闭环与六大功能模块全景</Text>
+        </Box>
+        <Text style={{ fontSize: 14, color: '#94A3B8', marginTop: 6 }}>P03 – P05</Text>
+      </Box>
+      <Box style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 20, paddingBottom: 22, borderBottom: '1px solid #E2E8F0' }}>
+        <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3B82F6', width: 56 }}>02</Text>
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0F172A' }}>技术方案</Text>
+          <Text style={{ fontSize: 16, color: '#64748B', marginTop: 8, lineHeight: 1.6 }}>四层系统架构与四项关键技术的选型逻辑</Text>
+        </Box>
+        <Text style={{ fontSize: 14, color: '#94A3B8', marginTop: 6 }}>P06 – P08</Text>
+      </Box>
+      <Box style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 20, paddingBottom: 22, borderBottom: '1px solid #E2E8F0' }}>
+        <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3B82F6', width: 56 }}>03</Text>
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0F172A' }}>实现过程</Text>
+          <Text style={{ fontSize: 16, color: '#64748B', marginTop: 8, lineHeight: 1.6 }}>M1–M5 里程碑推进节奏与量化评测成果</Text>
+        </Box>
+        <Text style={{ fontSize: 14, color: '#94A3B8', marginTop: 6 }}>P09 – P11</Text>
+      </Box>
+      <Box style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 20 }}>
+        <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3B82F6', width: 56 }}>04</Text>
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0F172A' }}>难点与应对</Text>
+          <Text style={{ fontSize: 16, color: '#64748B', marginTop: 8, lineHeight: 1.6 }}>四个真实难点的根因拆解与可验证的修复证据</Text>
+        </Box>
+        <Text style={{ fontSize: 14, color: '#94A3B8', marginTop: 6 }}>P12 – P14</Text>
+      </Box>
+    </Box>
+  </Box>
+
+  {/* C 区页脚 */}
+  <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>AI 自媒体内容创作助手 · 项目汇报</Text>
+    </Box>
+    <Text style={{ fontSize: 14, color: '#94A3B8' }}>02 / 14</Text>
+  </Box>
+</Slide>

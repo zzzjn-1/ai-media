@@ -1,0 +1,18 @@
+const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+
+<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(820px 480px at 78% 72%, rgba(59,130,246,0.16) 0%, rgba(15,23,42,0) 66%)' }} />
+
+  <Box style={{ position: 'absolute', left: 80, top: 0, width: 1280, height: 720, flexDirection: 'row', alignItems: 'center', gap: 56 }}>
+    <Text style={{ fontSize: 150, fontWeight: 'bold', lineHeight: 1.0, letterSpacing: -6, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
+      03
+    </Text>
+    <Box style={{ width: 640 }}>
+      <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#FFFFFF' }}>实现过程</Text>
+      <Box style={{ width: 72, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
+      <Text style={{ fontSize: 20, color: '#CBD5E1', marginTop: 22, lineHeight: 1.7 }}>
+        五个里程碑、每阶段「文档先行 → 实现 → 评审 → 修复」闭环，全部结论有评测数据背书。
+      </Text>
+    </Box>
+  </Box>
+</Slide>

@@ -1,0 +1,117 @@
+const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
+  {/* A 区标题块 */}
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
+      <Box>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>定位与核心闭环</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>一站式定位：把「找题 — 写稿 — 改稿 — 发布」压缩进同一条链路</Text>
+      </Box>
+    </Box>
+  </Box>
+
+  {/* B 区内容 */}
+  <Box style={{ flexDirection: 'row', gap: 28, height: 520 }}>
+    {/* 左栏 35%：定位 + 覆盖 + 判断 */}
+    <Box style={{ width: 390, flexDirection: 'column', gap: 18 }}>
+      <Text style={{ fontSize: 17, color: '#334155', lineHeight: 1.75 }}>
+        面向微信公众号 / 小红书 / 抖音的一站式 AI 内容生产工作台：素材库与热点追踪打底，选题、生成、适配、导出逐环相扣，创作者不再在多个工具间搬运上下文。
+      </Text>
+      <Box style={{ flexDirection: 'row', gap: 12 }}>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '14px 16px', alignItems: 'center' }}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3B82F6' }}>3</Text>
+          <Text style={{ fontSize: 13, color: '#64748B', marginTop: 2 }}>目标平台</Text>
+        </Box>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '14px 16px', alignItems: 'center' }}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3B82F6' }}>5</Text>
+          <Text style={{ fontSize: 13, color: '#64748B', marginTop: 2 }}>内容领域</Text>
+        </Box>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '14px 16px', alignItems: 'center' }}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#3B82F6' }}>3</Text>
+          <Text style={{ fontSize: 13, color: '#64748B', marginTop: 2 }}>创作风格</Text>
+        </Box>
+      </Box>
+      <Box style={{ background: '#0F172A', borderRadius: 12, padding: '16px 18px', marginTop: 'auto' }}>
+        <Text style={{ fontSize: 15, color: '#E2E8F0', lineHeight: 1.7 }}>
+          闭环即差异点：单点工具只解决一环，我们交付的是整条可演示、可度量流水线。
+        </Text>
+      </Box>
+    </Box>
+
+    {/* 右栏 65%：闭环流程图 */}
+    <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 16, padding: '24px 20px', boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
+      <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A', marginBottom: 8 }}>核心闭环（计划书 T4.4 验收项）</Text>
+      <svg width="690" height="330" viewBox="0 0 690 330">
+        <defs>
+          <linearGradient id="gradBlue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#06B6D4" />
+          </linearGradient>
+        </defs>
+        {/* 五个节点 */}
+        <g>
+          <rect x="4" y="70" width="122" height="120" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+          <circle cx="65" cy="100" r="16" fill="url(#gradBlue)" />
+          <text x="65" y="106" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">1</text>
+          <text x="65" y="140" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">热点看板</text>
+          <text x="65" y="164" textAnchor="middle" fontSize="12" fill="#64748B">多领域热度追踪</text>
+        </g>
+        <g>
+          <rect x="146" y="70" width="122" height="120" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+          <circle cx="207" cy="100" r="16" fill="url(#gradBlue)" />
+          <text x="207" y="106" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">2</text>
+          <text x="207" y="140" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">选题列表</text>
+          <text x="207" y="164" textAnchor="middle" fontSize="12" fill="#64748B">一键选用热点</text>
+        </g>
+        <g>
+          <rect x="288" y="70" width="122" height="120" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+          <circle cx="349" cy="100" r="16" fill="url(#gradBlue)" />
+          <text x="349" y="106" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">3</text>
+          <text x="349" y="140" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">文案生成</text>
+          <text x="349" y="164" textAnchor="middle" fontSize="12" fill="#64748B">RAG · ≥3 版本</text>
+        </g>
+        <g>
+          <rect x="430" y="70" width="122" height="120" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+          <circle cx="491" cy="100" r="16" fill="url(#gradBlue)" />
+          <text x="491" y="106" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">4</text>
+          <text x="491" y="140" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">平台适配</text>
+          <text x="491" y="164" textAnchor="middle" fontSize="12" fill="#64748B">按规范预览</text>
+        </g>
+        <g>
+          <rect x="572" y="70" width="114" height="120" rx="14" fill="#0F172A" stroke="#0F172A" strokeWidth="1.5" />
+          <circle cx="629" cy="100" r="16" fill="url(#gradBlue)" />
+          <text x="629" y="106" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">5</text>
+          <text x="629" y="140" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#FFFFFF">导出发布</text>
+          <text x="629" y="164" textAnchor="middle" fontSize="12" fill="#94A3B8">txt / docx</text>
+        </g>
+        {/* 箭头 */}
+        <g stroke="#3B82F6" strokeWidth="2" fill="none">
+          <path d="M126 130 L 144 130" markerEnd="url(#arrowBlue)" />
+          <path d="M268 130 L 286 130" />
+          <path d="M410 130 L 428 130" />
+          <path d="M552 130 L 570 130" />
+        </g>
+        <defs>
+          <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0 0 L 8 4 L 0 8 z" fill="#3B82F6" />
+          </marker>
+        </defs>
+        {/* 回流虚线 */}
+        <path d="M629 196 C 629 250, 65 250, 65 196" stroke="#06B6D4" strokeWidth="1.5" strokeDasharray="5 5" fill="none" />
+        <text x="347" y="272" textAnchor="middle" fontSize="13" fill="#64748B">导出反馈反哺下一轮选题（闭环持续运转）</text>
+        <text x="347" y="310" textAnchor="middle" fontSize="13" fill="#94A3B8">六页工作台 + FlowContext 跨页流转，全程无需切换工具</text>
+      </svg>
+    </Box>
+  </Box>
+
+  {/* C 区页脚 */}
+  <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>AI 自媒体内容创作助手 · 项目汇报</Text>
+    </Box>
+    <Text style={{ fontSize: 14, color: '#94A3B8' }}>04 / 14</Text>
+  </Box>
+</Slide>

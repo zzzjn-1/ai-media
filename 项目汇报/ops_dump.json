@@ -1,0 +1,3341 @@
+{
+ "01.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 0.0,
+    "y": 0.0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A",
+    "fill_alpha": 42
+   },
+   {
+    "x": 60.0,
+    "y": 109.8,
+    "w": 6.0,
+    "h": 6.0,
+    "shape_type": "ellipse",
+    "fill_color": "06B6D4"
+   },
+   {
+    "x": 60.0,
+    "y": 257.4,
+    "w": 54.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 150.75,
+    "y": 2.06,
+    "w": 0.75,
+    "h": 10.5,
+    "fill_color": "475569"
+   }
+  ],
+  "texts": [
+   {
+    "x": 73.5,
+    "y": 105.0,
+    "w": 155.04,
+    "h": 15.6,
+    "text": "项目汇报 · PROJECT REPORT",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "67E8F9",
+    "_ls": 3.0
+   },
+   {
+    "x": 60.0,
+    "y": 137.1,
+    "w": 600.0,
+    "h": 55.8,
+    "text": "AI 自媒体内容创作助手",
+    "font_size": 46,
+    "font_name": "Microsoft YaHei",
+    "font_color": "B5EFFC",
+    "_bold": true
+   },
+   {
+    "x": 60.0,
+    "y": 207.9,
+    "w": 600.0,
+    "h": 27.0,
+    "text": "从热点到爆款的全链路内容生产工作台",
+    "font_size": 18,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   },
+   {
+    "x": 60.0,
+    "y": 279.9,
+    "w": 600.0,
+    "h": 19.2,
+    "text": "覆盖微信公众号 · 小红书 · 抖音 ｜ 科技 / 生活 / 财经 / 美妆 / 教育 五大领域",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 60.0,
+    "y": 0.0,
+    "w": 78.75,
+    "h": 14.62,
+    "text": "汇报人：项目组",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 163.5,
+    "y": 0.0,
+    "w": 61.65,
+    "h": 14.62,
+    "text": "2026-10-12",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [
+   {
+    "x": 0.0,
+    "y": 0.0,
+    "w": 960.0,
+    "h": 540.0,
+    "image": "D:\\新建文件夹\\ai media\\项目汇报\\assets\\hero_cover.png"
+   }
+  ],
+  "lines": []
+ },
+ "02.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 15.0,
+    "w": 274.5,
+    "h": 465.0,
+    "shape_type": "roundRect",
+    "_corner": 4372,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 81.0,
+    "y": 131.02,
+    "w": 42.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 343.5,
+    "y": 63.23,
+    "w": 568.5,
+    "h": 0.75,
+    "fill_color": "E2E8F0"
+   },
+   {
+    "x": 343.5,
+    "y": 202.03,
+    "w": 568.5,
+    "h": 0.75,
+    "fill_color": "E2E8F0"
+   },
+   {
+    "x": 343.5,
+    "y": 340.82,
+    "w": 568.5,
+    "h": 0.75,
+    "fill_color": "E2E8F0"
+   }
+  ],
+  "texts": [
+   {
+    "x": 81.0,
+    "y": 48.0,
+    "w": 208.5,
+    "h": 42.9,
+    "text": "目录",
+    "font_size": 33,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 81.0,
+    "y": 96.9,
+    "w": 208.5,
+    "h": 14.62,
+    "text": "CONTENTS",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "67E8F9",
+    "_ls": 2.25
+   },
+   {
+    "x": 81.0,
+    "y": 153.52,
+    "w": 208.5,
+    "h": 64.8,
+    "text": "四个章节回答四个问题：产品做了什么、技术上怎么实现、过程如何推进、难点怎样解决。",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 96.0,
+    "y": 434.33,
+    "w": 102.18,
+    "h": 12.68,
+    "text": "AI 自媒体内容创作助手",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "475569"
+   },
+   {
+    "x": 343.5,
+    "y": 15.0,
+    "w": 42.0,
+    "h": 29.25,
+    "text": "01",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 15.0,
+    "w": 448.83,
+    "h": 23.4,
+    "text": "项目概况",
+    "font_size": 18,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 44.4,
+    "w": 448.83,
+    "h": 19.2,
+    "text": "产品定位、五步核心闭环与六大功能模块全景",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 868.83,
+    "y": 15.0,
+    "w": 47.67,
+    "h": 13.65,
+    "text": "P03 – P05",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 343.5,
+    "y": 153.8,
+    "w": 42.0,
+    "h": 29.25,
+    "text": "02",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 153.8,
+    "w": 448.83,
+    "h": 23.4,
+    "text": "技术方案",
+    "font_size": 18,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 183.2,
+    "w": 448.83,
+    "h": 19.2,
+    "text": "四层系统架构与四项关键技术的选型逻辑",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 868.83,
+    "y": 153.8,
+    "w": 47.67,
+    "h": 13.65,
+    "text": "P06 – P08",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 343.5,
+    "y": 292.6,
+    "w": 42.0,
+    "h": 29.25,
+    "text": "03",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 292.6,
+    "w": 448.83,
+    "h": 23.4,
+    "text": "实现过程",
+    "font_size": 18,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 322.0,
+    "w": 448.83,
+    "h": 19.2,
+    "text": "M1–M5 里程碑推进节奏与量化评测成果",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 868.83,
+    "y": 292.6,
+    "w": 47.67,
+    "h": 13.65,
+    "text": "P09 – P11",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 343.5,
+    "y": 431.4,
+    "w": 42.0,
+    "h": 29.25,
+    "text": "04",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 431.4,
+    "w": 448.83,
+    "h": 23.4,
+    "text": "难点与应对",
+    "font_size": 18,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 400.5,
+    "y": 460.8,
+    "w": 448.83,
+    "h": 19.2,
+    "text": "四个真实难点的根因拆解与可验证的修复证据",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 868.83,
+    "y": 431.4,
+    "w": 47.67,
+    "h": 13.65,
+    "text": "P12 – P14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "02 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": []
+ },
+ "03.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 0.0,
+    "y": 0.0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A",
+    "fill_alpha": 42
+   },
+   {
+    "x": 60.0,
+    "y": 331.65,
+    "w": 54.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   }
+  ],
+  "texts": [
+   {
+    "x": 60.0,
+    "y": 162.0,
+    "w": 675.0,
+    "h": 90.0,
+    "text": "01",
+    "font_size": 90,
+    "font_name": "Microsoft YaHei",
+    "font_color": "209CE5",
+    "_bold": true,
+    "_ls": -3.0
+   },
+   {
+    "x": 60.0,
+    "y": 259.5,
+    "w": 675.0,
+    "h": 52.65,
+    "text": "项目概况",
+    "font_size": 40,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 60.0,
+    "y": 351.15,
+    "w": 675.0,
+    "h": 24.0,
+    "text": "产品定位、五步核心闭环与六大功能模块全景",
+    "font_size": 15,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   }
+  ],
+  "images": [
+   {
+    "x": 0.0,
+    "y": 0.0,
+    "w": 960.0,
+    "h": 540.0,
+    "image": "D:\\新建文件夹\\ai media\\项目汇报\\assets\\section_visual.png"
+   }
+  ],
+  "lines": []
+ },
+ "04.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 39.75,
+    "w": 4.5,
+    "h": 25.5,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 48.0,
+    "y": 192.75,
+    "w": 91.5,
+    "h": 64.43,
+    "shape_type": "roundRect",
+    "_corner": 13970,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 148.5,
+    "y": 192.75,
+    "w": 91.5,
+    "h": 64.43,
+    "shape_type": "roundRect",
+    "_corner": 13970,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 249.0,
+    "y": 192.75,
+    "w": 91.5,
+    "h": 64.43,
+    "shape_type": "roundRect",
+    "_corner": 13970,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 48.0,
+    "y": 270.67,
+    "w": 292.5,
+    "h": 62.25,
+    "shape_type": "roundRect",
+    "_corner": 14458,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 361.5,
+    "y": 90.0,
+    "w": 550.5,
+    "h": 53.55,
+    "shape_type": "roundRect",
+    "_corner": 22409,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 379.5,
+    "y": 178.05,
+    "w": 91.5,
+    "h": 90.0,
+    "shape_type": "roundRect",
+    "_corner": 11667,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 1.12
+   },
+   {
+    "x": 413.25,
+    "y": 188.55,
+    "w": 24.0,
+    "h": 24.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 486.0,
+    "y": 178.05,
+    "w": 91.5,
+    "h": 90.0,
+    "shape_type": "roundRect",
+    "_corner": 11667,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 1.12
+   },
+   {
+    "x": 519.75,
+    "y": 188.55,
+    "w": 24.0,
+    "h": 24.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 592.5,
+    "y": 178.05,
+    "w": 91.5,
+    "h": 90.0,
+    "shape_type": "roundRect",
+    "_corner": 11667,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 1.12
+   },
+   {
+    "x": 626.25,
+    "y": 188.55,
+    "w": 24.0,
+    "h": 24.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 699.0,
+    "y": 178.05,
+    "w": 91.5,
+    "h": 90.0,
+    "shape_type": "roundRect",
+    "_corner": 11667,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 1.12
+   },
+   {
+    "x": 732.75,
+    "y": 188.55,
+    "w": 24.0,
+    "h": 24.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 805.5,
+    "y": 178.05,
+    "w": 85.5,
+    "h": 90.0,
+    "shape_type": "roundRect",
+    "_corner": 12281,
+    "fill_color": "0F172A",
+    "border_color": "0F172A",
+    "border_width": 1.12
+   },
+   {
+    "x": 836.25,
+    "y": 188.55,
+    "w": 24.0,
+    "h": 24.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   }
+  ],
+  "texts": [
+   {
+    "x": 64.5,
+    "y": 25.65,
+    "w": 403.92,
+    "h": 33.15,
+    "text": "定位与核心闭环",
+    "font_size": 26,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 64.5,
+    "y": 61.8,
+    "w": 403.92,
+    "h": 17.55,
+    "text": "一站式定位：把「找题 — 写稿 — 改稿 — 发布」压缩进同一条链路",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 48.0,
+    "y": 90.0,
+    "w": 292.5,
+    "h": 89.25,
+    "text": "面向微信公众号 / 小红书 / 抖音的一站式 AI 内容生产工作台：素材库与热点追踪打底，选题、生成、适配、导出逐环相扣，创作者不再在多个工具间搬运上下文。",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "334155"
+   },
+   {
+    "x": 60.0,
+    "y": 203.25,
+    "w": 67.5,
+    "h": 29.25,
+    "text": "3",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 60.0,
+    "y": 234.0,
+    "w": 67.5,
+    "h": 12.68,
+    "text": "目标平台",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 160.5,
+    "y": 203.25,
+    "w": 67.5,
+    "h": 29.25,
+    "text": "5",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 160.5,
+    "y": 234.0,
+    "w": 67.5,
+    "h": 12.68,
+    "text": "内容领域",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 261.0,
+    "y": 203.25,
+    "w": 67.5,
+    "h": 29.25,
+    "text": "3",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 261.0,
+    "y": 234.0,
+    "w": 67.5,
+    "h": 12.68,
+    "text": "创作风格",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 61.5,
+    "y": 282.67,
+    "w": 265.5,
+    "h": 38.25,
+    "text": "闭环即差异点：单点工具只解决一环，我们交付的是整条可演示、可度量流水线。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "E2E8F0"
+   },
+   {
+    "x": 376.5,
+    "y": 108.0,
+    "w": 520.5,
+    "h": 17.55,
+    "text": "核心闭环（计划书 T4.4 验收项）",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 421.99,
+    "y": 195.83,
+    "w": 12.15,
+    "h": 15.75,
+    "text": "1",
+    "font_size": 11,
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 399.75,
+    "y": 220.1,
+    "w": 57.38,
+    "h": 17.85,
+    "text": "热点看板",
+    "font_size": 13,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 393.75,
+    "y": 241.17,
+    "w": 67.5,
+    "h": 12.6,
+    "text": "多领域热度追踪",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 528.49,
+    "y": 195.83,
+    "w": 12.15,
+    "h": 15.75,
+    "text": "2",
+    "font_size": 11,
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 506.25,
+    "y": 220.1,
+    "w": 57.38,
+    "h": 17.85,
+    "text": "选题列表",
+    "font_size": 13,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 504.75,
+    "y": 241.17,
+    "w": 58.5,
+    "h": 12.6,
+    "text": "一键选用热点",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 634.99,
+    "y": 195.83,
+    "w": 12.15,
+    "h": 15.75,
+    "text": "3",
+    "font_size": 11,
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 612.75,
+    "y": 220.1,
+    "w": 57.38,
+    "h": 17.85,
+    "text": "文案生成",
+    "font_size": 13,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 610.71,
+    "y": 241.17,
+    "w": 59.58,
+    "h": 12.6,
+    "text": "RAG · ≥3 版本",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 741.49,
+    "y": 195.83,
+    "w": 12.15,
+    "h": 15.75,
+    "text": "4",
+    "font_size": 11,
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 719.25,
+    "y": 220.1,
+    "w": 57.38,
+    "h": 17.85,
+    "text": "平台适配",
+    "font_size": 13,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 722.25,
+    "y": 241.17,
+    "w": 49.5,
+    "h": 12.6,
+    "text": "按规范预览",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 844.99,
+    "y": 195.83,
+    "w": 12.15,
+    "h": 15.75,
+    "text": "5",
+    "font_size": 11,
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 822.75,
+    "y": 220.1,
+    "w": 57.38,
+    "h": 17.85,
+    "text": "导出发布",
+    "font_size": 13,
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 825.21,
+    "y": 241.17,
+    "w": 50.58,
+    "h": 12.6,
+    "text": "txt / docx",
+    "font_size": 9,
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 544.12,
+    "y": 321.56,
+    "w": 190.12,
+    "h": 13.65,
+    "text": "导出反馈反哺下一轮选题（闭环持续运转）",
+    "font_size": 10,
+    "font_color": "64748B"
+   },
+   {
+    "x": 511.17,
+    "y": 350.06,
+    "w": 256.03,
+    "h": 13.65,
+    "text": "六页工作台 + FlowContext 跨页流转，全程无需切换工具",
+    "font_size": 10,
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "04 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": [
+   {
+    "x1": 848.25,
+    "y1": 272.55,
+    "x2": 839.93,
+    "y2": 281.83,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 839.93,
+    "y1": 281.83,
+    "x2": 816.92,
+    "y2": 289.43,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 816.92,
+    "y1": 289.43,
+    "x2": 782.16,
+    "y2": 295.33,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 782.16,
+    "y1": 295.33,
+    "x2": 738.58,
+    "y2": 299.55,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 738.58,
+    "y1": 299.55,
+    "x2": 689.14,
+    "y2": 302.08,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 689.14,
+    "y1": 302.08,
+    "x2": 636.75,
+    "y2": 302.92,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 636.75,
+    "y1": 302.92,
+    "x2": 584.36,
+    "y2": 302.08,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 584.36,
+    "y1": 302.08,
+    "x2": 534.92,
+    "y2": 299.55,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 534.92,
+    "y1": 299.55,
+    "x2": 491.34,
+    "y2": 295.33,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 491.34,
+    "y1": 295.33,
+    "x2": 456.58,
+    "y2": 289.43,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 456.58,
+    "y1": 289.43,
+    "x2": 433.57,
+    "y2": 281.83,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   },
+   {
+    "x1": 433.57,
+    "y1": 281.83,
+    "x2": 425.25,
+    "y2": 272.55,
+    "color": "06B6D4",
+    "w": 1.12,
+    "dash": "dash"
+   }
+  ]
+ },
+ "05.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 15.0,
+    "w": 274.5,
+    "h": 465.0,
+    "shape_type": "roundRect",
+    "_corner": 4372,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 81.0,
+    "y": 48.0,
+    "w": 39.0,
+    "h": 39.0,
+    "shape_type": "roundRect",
+    "_corner": 26923,
+    "fill_color": "3B82F6",
+    "fill_alpha": 84
+   },
+   {
+    "x": 91.68,
+    "y": 58.68,
+    "w": 17.64,
+    "h": 17.64,
+    "fill_color": "67E8F9",
+    "shape_type": "donut"
+   },
+   {
+    "x": 97.14,
+    "y": 64.14,
+    "w": 6.72,
+    "h": 6.72,
+    "shape_type": "ellipse",
+    "fill_color": "67E8F9"
+   },
+   {
+    "x": 81.0,
+    "y": 106.5,
+    "w": 42.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 343.5,
+    "y": 15.0,
+    "w": 568.5,
+    "h": 50.7,
+    "shape_type": "roundRect",
+    "_corner": 17751,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 358.56,
+    "y": 35.28,
+    "w": 5.85,
+    "h": 2.73,
+    "fill_color": "3B82F6",
+    "shape_type": "roundRect",
+    "_corner": 5000
+   },
+   {
+    "x": 358.56,
+    "y": 37.23,
+    "w": 16.38,
+    "h": 10.14,
+    "fill_color": "3B82F6",
+    "shape_type": "roundRect",
+    "_corner": 8000
+   },
+   {
+    "x": 343.5,
+    "y": 97.86,
+    "w": 568.5,
+    "h": 50.7,
+    "shape_type": "roundRect",
+    "_corner": 17751,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 358.37,
+    "y": 125.75,
+    "w": 3.51,
+    "h": 3.51,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 365.0,
+    "y": 119.51,
+    "w": 3.51,
+    "h": 3.51,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 371.62,
+    "y": 114.83,
+    "w": 3.51,
+    "h": 3.51,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 343.5,
+    "y": 180.72,
+    "w": 568.5,
+    "h": 50.7,
+    "shape_type": "roundRect",
+    "_corner": 17751,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 357.0,
+    "y": 196.32,
+    "w": 19.5,
+    "h": 19.5,
+    "fill_color": "3B82F6",
+    "shape_type": "star5"
+   },
+   {
+    "x": 343.5,
+    "y": 263.58,
+    "w": 568.5,
+    "h": 50.7,
+    "shape_type": "roundRect",
+    "_corner": 17751,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 360.9,
+    "y": 280.35,
+    "w": 6.63,
+    "h": 17.16,
+    "fill_color": "3B82F6",
+    "shape_type": "roundRect",
+    "_corner": 20000,
+    "_rotation": 45
+   },
+   {
+    "x": 343.5,
+    "y": 346.44,
+    "w": 568.5,
+    "h": 50.7,
+    "shape_type": "roundRect",
+    "_corner": 17751,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 358.75,
+    "y": 364.19,
+    "w": 5.07,
+    "h": 5.07,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 369.67,
+    "y": 364.19,
+    "w": 5.07,
+    "h": 5.07,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 364.22,
+    "y": 374.72,
+    "w": 5.07,
+    "h": 5.07,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 343.5,
+    "y": 429.3,
+    "w": 568.5,
+    "h": 50.7,
+    "shape_type": "roundRect",
+    "_corner": 17751,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 362.85,
+    "y": 446.85,
+    "w": 7.8,
+    "h": 7.8,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 360.51,
+    "y": 455.43,
+    "w": 12.48,
+    "h": 8.97,
+    "fill_color": "3B82F6",
+    "shape_type": "roundRect",
+    "_corner": 50000
+   }
+  ],
+  "texts": [
+   {
+    "x": 130.5,
+    "y": 50.93,
+    "w": 153.0,
+    "h": 33.15,
+    "text": "六大功能模块",
+    "font_size": 26,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 81.0,
+    "y": 127.5,
+    "w": 208.5,
+    "h": 64.8,
+    "text": "对应计划书 F1–F6 功能清单，每模块均可独立演示，合起来构成完整创作闭环。",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 81.0,
+    "y": 434.33,
+    "w": 208.5,
+    "h": 12.68,
+    "text": "F1 – F6 · 模块全景",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "475569"
+   },
+   {
+    "x": 388.5,
+    "y": 24.0,
+    "w": 486.69,
+    "h": 17.55,
+    "text": "素材库管理",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 388.5,
+    "y": 43.05,
+    "w": 486.69,
+    "h": 13.65,
+    "text": "语料导入 / 自动分块 / 加密存储 / 语义检索",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 887.19,
+    "y": 34.01,
+    "w": 11.31,
+    "h": 12.68,
+    "text": "F1",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 388.5,
+    "y": 106.86,
+    "w": 486.69,
+    "h": 17.55,
+    "text": "热点看板",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 388.5,
+    "y": 125.91,
+    "w": 486.69,
+    "h": 13.65,
+    "text": "五领域热点采集、热度与趋势可视化",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 887.19,
+    "y": 116.87,
+    "w": 11.31,
+    "h": 12.68,
+    "text": "F1",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 388.5,
+    "y": 189.72,
+    "w": 486.69,
+    "h": 17.55,
+    "text": "选题策划",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 388.5,
+    "y": 208.77,
+    "w": 486.69,
+    "h": 13.65,
+    "text": "结合账号人设与热点，一键生成 ≥3 条选题",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 887.19,
+    "y": 199.73,
+    "w": 11.31,
+    "h": 12.68,
+    "text": "F2",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 388.5,
+    "y": 272.58,
+    "w": 465.04,
+    "h": 17.55,
+    "text": "文案生成对比",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 388.5,
+    "y": 291.63,
+    "w": 465.04,
+    "h": 13.65,
+    "text": "RAG 检索增强 + SSE 流式产出多版本对比",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 865.54,
+    "y": 282.59,
+    "w": 32.95,
+    "h": 12.68,
+    "text": "F3 / F4",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 388.5,
+    "y": 355.44,
+    "w": 486.69,
+    "h": 17.55,
+    "text": "平台适配预览",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 388.5,
+    "y": 374.49,
+    "w": 486.69,
+    "h": 13.65,
+    "text": "按平台硬性规范逐条适配，支持 txt / docx 导出",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 887.19,
+    "y": 365.45,
+    "w": 11.31,
+    "h": 12.68,
+    "text": "F5",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 388.5,
+    "y": 438.3,
+    "w": 486.69,
+    "h": 17.55,
+    "text": "账号人设",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 388.5,
+    "y": 457.35,
+    "w": 486.69,
+    "h": 13.65,
+    "text": "定位 / 语气 / 领域配置，驱动全链路风格一致",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 887.19,
+    "y": 448.31,
+    "w": 11.31,
+    "h": 12.68,
+    "text": "F6",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "05 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": [
+   {
+    "x1": 360.12,
+    "y1": 127.5,
+    "x2": 366.75,
+    "y2": 121.26,
+    "color": "3B82F6",
+    "w": 1.0
+   },
+   {
+    "x1": 366.75,
+    "y1": 121.26,
+    "x2": 373.38,
+    "y2": 116.58,
+    "color": "3B82F6",
+    "w": 1.0
+   },
+   {
+    "x1": 362.85,
+    "y1": 368.48,
+    "x2": 365.58,
+    "y2": 375.3,
+    "color": "3B82F6",
+    "w": 1.0
+   },
+   {
+    "x1": 370.65,
+    "y1": 368.48,
+    "x2": 367.92,
+    "y2": 375.3,
+    "color": "3B82F6",
+    "w": 1.0
+   }
+  ]
+ },
+ "06.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 232.5,
+    "y": 270.82,
+    "w": 54.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   }
+  ],
+  "texts": [
+   {
+    "x": 60.0,
+    "y": 213.75,
+    "w": 130.5,
+    "h": 112.5,
+    "text": "02",
+    "font_size": 112,
+    "font_name": "Microsoft YaHei",
+    "font_color": "209CE5",
+    "_bold": true,
+    "_ls": -4.5
+   },
+   {
+    "x": 232.5,
+    "y": 198.67,
+    "w": 480.0,
+    "h": 52.65,
+    "text": "技术方案",
+    "font_size": 40,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 232.5,
+    "y": 290.32,
+    "w": 480.0,
+    "h": 51.0,
+    "text": "四层系统架构与四项关键技术：检索、编排、安全、流式各自闭环，合起来支撑「离线可跑、接 Key 即用」。",
+    "font_size": 15,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   }
+  ],
+  "images": [],
+  "lines": []
+ },
+ "07.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 39.75,
+    "w": 4.5,
+    "h": 25.5,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 48.0,
+    "y": 90.0,
+    "w": 495.0,
+    "h": 33.0,
+    "shape_type": "roundRect",
+    "_corner": 36364,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 73.5,
+    "y": 114.0,
+    "w": 444.0,
+    "h": 72.0,
+    "shape_type": "roundRect",
+    "_corner": 12500,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 1.12
+   },
+   {
+    "x": 73.5,
+    "y": 114.0,
+    "w": 4.5,
+    "h": 72.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 291.0,
+    "y": 204.0,
+    "w": 9.0,
+    "h": 9.0,
+    "shape_type": "triangle",
+    "fill_color": "3B82F6",
+    "_rotation": 180
+   },
+   {
+    "x": 73.5,
+    "y": 216.0,
+    "w": 444.0,
+    "h": 72.0,
+    "shape_type": "roundRect",
+    "_corner": 12500,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 1.12
+   },
+   {
+    "x": 73.5,
+    "y": 216.0,
+    "w": 4.5,
+    "h": 72.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 291.0,
+    "y": 306.0,
+    "w": 9.0,
+    "h": 9.0,
+    "shape_type": "triangle",
+    "fill_color": "3B82F6",
+    "_rotation": 180
+   },
+   {
+    "x": 73.5,
+    "y": 318.0,
+    "w": 444.0,
+    "h": 72.0,
+    "shape_type": "roundRect",
+    "_corner": 12500,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 1.12
+   },
+   {
+    "x": 73.5,
+    "y": 318.0,
+    "w": 4.5,
+    "h": 72.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 291.0,
+    "y": 408.0,
+    "w": 9.0,
+    "h": 9.0,
+    "shape_type": "triangle",
+    "fill_color": "3B82F6",
+    "_rotation": 180
+   },
+   {
+    "x": 73.5,
+    "y": 420.0,
+    "w": 444.0,
+    "h": 39.0,
+    "shape_type": "roundRect",
+    "_corner": 23077,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 564.0,
+    "y": 90.0,
+    "w": 348.0,
+    "h": 71.06,
+    "shape_type": "roundRect",
+    "_corner": 14776,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 581.73,
+    "y": 106.97,
+    "w": 3.9,
+    "h": 7.8,
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 586.8,
+    "y": 102.68,
+    "w": 3.9,
+    "h": 12.09,
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 591.87,
+    "y": 98.78,
+    "w": 3.9,
+    "h": 15.99,
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 564.0,
+    "y": 173.06,
+    "w": 348.0,
+    "h": 71.06,
+    "shape_type": "roundRect",
+    "_corner": 14776,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 584.46,
+    "y": 182.23,
+    "w": 8.58,
+    "h": 8.58,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 583.29,
+    "y": 190.03,
+    "w": 10.92,
+    "h": 8.58,
+    "fill_color": "3B82F6",
+    "shape_type": "roundRect",
+    "_corner": 12000
+   },
+   {
+    "x": 564.0,
+    "y": 256.12,
+    "w": 348.0,
+    "h": 71.06,
+    "shape_type": "roundRect",
+    "_corner": 14776,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 579.0,
+    "y": 268.8,
+    "w": 19.5,
+    "h": 8.58,
+    "fill_color": "3B82F6",
+    "shape_type": "rightArrow"
+   }
+  ],
+  "texts": [
+   {
+    "x": 64.5,
+    "y": 25.65,
+    "w": 351.81,
+    "h": 33.15,
+    "text": "系统架构",
+    "font_size": 26,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 64.5,
+    "y": 61.8,
+    "w": 351.81,
+    "h": 17.55,
+    "text": "四层架构 · 三条关键决策：检索质量、数据安全、实时体验",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 93.0,
+    "y": 128.43,
+    "w": 251.1,
+    "h": 18.9,
+    "text": "前端展示层 · React 18 + Vite + AntD 5",
+    "font_size": 14,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 93.0,
+    "y": 153.39,
+    "w": 366.66,
+    "h": 14.7,
+    "text": "六大页面按路由懒加载 ｜ JWT 鉴权 ｜ SSE 事件流消费 ｜ Mock / 真实双模式",
+    "font_size": 10,
+    "font_color": "64748B"
+   },
+   {
+    "x": 93.0,
+    "y": 230.43,
+    "w": 190.35,
+    "h": 18.9,
+    "text": "服务层 · FastAPI（14 端点）",
+    "font_size": 14,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 93.0,
+    "y": 255.39,
+    "w": 517.65,
+    "h": 14.7,
+    "text": "auth / hotspots / materials / topics / copy(SSE) / persona / export ｜ APScheduler 热点定时采集",
+    "font_size": 10,
+    "font_color": "64748B"
+   },
+   {
+    "x": 93.0,
+    "y": 332.43,
+    "w": 188.19,
+    "h": 18.9,
+    "text": "检索与生成层 · 自研 RAG 编排",
+    "font_size": 14,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 93.0,
+    "y": 357.39,
+    "w": 422.31,
+    "h": 14.7,
+    "text": "FAISS 粗排 40 → 规则重排 Top-5 ｜ LangChain LCEL 提示词编排 ｜ LLM / Mock 双后端",
+    "font_size": 10,
+    "font_color": "64748B"
+   },
+   {
+    "x": 93.0,
+    "y": 434.16,
+    "w": 417.36,
+    "h": 16.8,
+    "text": "数据层 · SQLite（字段加密）+ FAISS 索引 ｜ 90 素材 / 270 分块 / 10 热点",
+    "font_size": 12,
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 607.5,
+    "y": 97.71,
+    "w": 114.0,
+    "h": 18.52,
+    "text": "两阶段检索保质量",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 579.0,
+    "y": 116.72,
+    "w": 318.0,
+    "h": 37.12,
+    "text": "粗排求全、重排求准：同领域 / 同风格先验加权，离线口径下 Top-5 命中率 100%。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 607.5,
+    "y": 180.77,
+    "w": 114.0,
+    "h": 18.52,
+    "text": "字段级加密保安全",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 579.0,
+    "y": 199.78,
+    "w": 318.0,
+    "h": 37.12,
+    "text": "素材正文与分块 Fernet 加密落库，口令哈希存储；检索按账号隔离，杜绝跨租户可见。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 607.5,
+    "y": 263.83,
+    "w": 100.6,
+    "h": 18.52,
+    "text": "SSE 流式保体验",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 579.0,
+    "y": 282.84,
+    "w": 318.0,
+    "h": 37.12,
+    "text": "生成进度逐事件推送、版本就绪即渲染，长任务不白屏；离线 Mock 走同一事件协议。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "07 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": [
+   {
+    "x1": 295.5,
+    "y1": 189.0,
+    "x2": 295.5,
+    "y2": 208.5,
+    "color": "3B82F6",
+    "w": 1.5,
+    "dash": "dash"
+   },
+   {
+    "x1": 295.5,
+    "y1": 291.0,
+    "x2": 295.5,
+    "y2": 310.5,
+    "color": "3B82F6",
+    "w": 1.5,
+    "dash": "dash"
+   },
+   {
+    "x1": 295.5,
+    "y1": 393.0,
+    "x2": 295.5,
+    "y2": 412.5,
+    "color": "3B82F6",
+    "w": 1.5,
+    "dash": "dash"
+   }
+  ]
+ },
+ "08.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 15.0,
+    "w": 274.5,
+    "h": 465.0,
+    "shape_type": "roundRect",
+    "_corner": 4372,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 81.0,
+    "y": 99.15,
+    "w": 42.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 343.5,
+    "y": 15.0,
+    "w": 568.5,
+    "h": 84.15,
+    "shape_type": "roundRect",
+    "_corner": 12478,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 343.5,
+    "y": 141.95,
+    "w": 568.5,
+    "h": 84.15,
+    "shape_type": "roundRect",
+    "_corner": 12478,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 343.5,
+    "y": 268.9,
+    "w": 568.5,
+    "h": 84.15,
+    "shape_type": "roundRect",
+    "_corner": 12478,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 343.5,
+    "y": 395.85,
+    "w": 568.5,
+    "h": 84.15,
+    "shape_type": "roundRect",
+    "_corner": 12478,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   }
+  ],
+  "texts": [
+   {
+    "x": 81.0,
+    "y": 48.0,
+    "w": 208.5,
+    "h": 33.15,
+    "text": "四项关键技术",
+    "font_size": 26,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 81.0,
+    "y": 120.15,
+    "w": 208.5,
+    "h": 64.8,
+    "text": "每项技术都回答「是什么」与「解决什么」——不为技术而技术，指标可复测。",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 96.0,
+    "y": 434.33,
+    "w": 96.14,
+    "h": 12.68,
+    "text": "计划书 4.1 / 4.5 落地",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "475569"
+   },
+   {
+    "x": 358.5,
+    "y": 27.0,
+    "w": 538.5,
+    "h": 18.52,
+    "text": "RAG 两阶段检索",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 358.5,
+    "y": 50.03,
+    "w": 538.5,
+    "h": 37.12,
+    "text": "FAISS 粗排召回 40 条，规则重排叠加同领域 / 同风格先验取 Top-5 进入提示词。解决「素材找不准」：离线口径全量 180 条命中率 100%，消融显示重排贡献 +38.9pp。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 358.5,
+    "y": 153.95,
+    "w": 538.5,
+    "h": 18.52,
+    "text": "LangChain LCEL 编排",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 358.5,
+    "y": 176.97,
+    "w": 538.5,
+    "h": 37.12,
+    "text": "提示词模板化组装与多版本解析走标准 Runnable，向量检索与重排保留自研以保证可控与离线可跑。解决「链路不可复现」：离线 Mock 与生产走同一条编排路径。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 358.5,
+    "y": 280.9,
+    "w": 538.5,
+    "h": 18.52,
+    "text": "字段级加密（Fernet）",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 358.5,
+    "y": 303.92,
+    "w": 538.5,
+    "h": 37.12,
+    "text": "素材正文 / 分块加密落库，密钥经环境变量与数据分离；用户口令 PBKDF2 哈希。解决「素材资产安全」：数据库文件外泄不泄露正文，且不影响检索与分块预览。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 358.5,
+    "y": 407.85,
+    "w": 538.5,
+    "h": 18.52,
+    "text": "SSE 流式生成",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 358.5,
+    "y": 430.88,
+    "w": 538.5,
+    "h": 37.12,
+    "text": "生成进度、逐版本、完成事件实时推送，前端边收边渲染。解决「长任务等待焦虑」：离线链路单篇平均 0.10s，接真实 LLM 后同一协议可观测每一步耗时。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "08 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": []
+ },
+ "09.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 232.5,
+    "y": 270.82,
+    "w": 54.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   }
+  ],
+  "texts": [
+   {
+    "x": 60.0,
+    "y": 213.75,
+    "w": 130.5,
+    "h": 112.5,
+    "text": "03",
+    "font_size": 112,
+    "font_name": "Microsoft YaHei",
+    "font_color": "209CE5",
+    "_bold": true,
+    "_ls": -4.5
+   },
+   {
+    "x": 232.5,
+    "y": 198.67,
+    "w": 480.0,
+    "h": 52.65,
+    "text": "实现过程",
+    "font_size": 40,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 232.5,
+    "y": 290.32,
+    "w": 480.0,
+    "h": 51.0,
+    "text": "五个里程碑、每阶段「文档先行 → 实现 → 评审 → 修复」闭环，全部结论有评测数据背书。",
+    "font_size": 15,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   }
+  ],
+  "images": [],
+  "lines": []
+ },
+ "10.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 39.75,
+    "w": 4.5,
+    "h": 25.5,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 48.0,
+    "y": 90.0,
+    "w": 864.0,
+    "h": 225.0,
+    "shape_type": "roundRect",
+    "_corner": 5333,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 154.5,
+    "y": 160.5,
+    "w": 18.0,
+    "h": 18.0,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 303.0,
+    "y": 160.5,
+    "w": 18.0,
+    "h": 18.0,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 451.5,
+    "y": 160.5,
+    "w": 18.0,
+    "h": 18.0,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 600.0,
+    "y": 160.5,
+    "w": 18.0,
+    "h": 18.0,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6"
+   },
+   {
+    "x": 748.5,
+    "y": 160.5,
+    "w": 18.0,
+    "h": 18.0,
+    "shape_type": "ellipse",
+    "fill_color": "06B6D4"
+   },
+   {
+    "x": 111.0,
+    "y": 241.5,
+    "w": 738.0,
+    "h": 39.0,
+    "shape_type": "roundRect",
+    "_corner": 19231,
+    "fill_color": "F8FAFC",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 48.0,
+    "y": 330.0,
+    "w": 424.5,
+    "h": 69.68,
+    "shape_type": "roundRect",
+    "_corner": 15070,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 487.5,
+    "y": 330.0,
+    "w": 424.5,
+    "h": 69.68,
+    "shape_type": "roundRect",
+    "_corner": 15070,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   }
+  ],
+  "texts": [
+   {
+    "x": 64.5,
+    "y": 25.65,
+    "w": 354.24,
+    "h": 33.15,
+    "text": "M1 – M5 里程碑",
+    "font_size": 26,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 64.5,
+    "y": 61.8,
+    "w": 354.24,
+    "h": 17.55,
+    "text": "五阶段推进节奏：需求设计 → 数据 → 后端 → 前端 → 测试优化",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 154.8,
+    "y": 137.7,
+    "w": 24.9,
+    "h": 21.0,
+    "text": "M1",
+    "font_size": 15,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 135.38,
+    "y": 187.27,
+    "w": 61.88,
+    "h": 15.75,
+    "text": "需求与设计",
+    "font_size": 11,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 121.97,
+    "y": 206.81,
+    "w": 87.75,
+    "h": 13.12,
+    "text": "PRD / 架构 / 数据库",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 303.3,
+    "y": 137.7,
+    "w": 24.9,
+    "h": 21.0,
+    "text": "M2",
+    "font_size": 15,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 289.5,
+    "y": 187.27,
+    "w": 50.62,
+    "h": 15.75,
+    "text": "数据工程",
+    "font_size": 11,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 271.69,
+    "y": 206.81,
+    "w": 85.31,
+    "h": 13.12,
+    "text": "90 语料 / 270 分块",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 451.8,
+    "y": 137.7,
+    "w": 24.9,
+    "h": 21.0,
+    "text": "M3",
+    "font_size": 15,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 438.0,
+    "y": 187.27,
+    "w": 50.62,
+    "h": 15.75,
+    "text": "后端服务",
+    "font_size": 11,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 416.72,
+    "y": 206.81,
+    "w": 92.25,
+    "h": 13.12,
+    "text": "14 端点 + SSE + 加密",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 600.3,
+    "y": 137.7,
+    "w": 24.9,
+    "h": 21.0,
+    "text": "M4",
+    "font_size": 15,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 580.88,
+    "y": 187.27,
+    "w": 61.88,
+    "h": 15.75,
+    "text": "前端工作台",
+    "font_size": 11,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 572.91,
+    "y": 206.81,
+    "w": 76.88,
+    "h": 13.12,
+    "text": "六页 + Mock 演示",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 748.8,
+    "y": 137.7,
+    "w": 24.9,
+    "h": 21.0,
+    "text": "M5",
+    "font_size": 15,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 729.38,
+    "y": 187.27,
+    "w": 61.88,
+    "h": 15.75,
+    "text": "测试与优化",
+    "font_size": 11,
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 719.72,
+    "y": 206.81,
+    "w": 80.25,
+    "h": 13.12,
+    "text": "四指标达标 + 拆包",
+    "font_size": 9,
+    "font_color": "64748B"
+   },
+   {
+    "x": 299.77,
+    "y": 257.2,
+    "w": 365.51,
+    "h": 14.17,
+    "text": "每个阶段结束均有评审报告与可复现验证记录（M1–M4 审查报告 + M5 测试报告）",
+    "font_size": 10,
+    "font_color": "64748B"
+   },
+   {
+    "x": 64.5,
+    "y": 343.5,
+    "w": 391.5,
+    "h": 17.55,
+    "text": "交付纪律",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 64.5,
+    "y": 367.05,
+    "w": 391.5,
+    "h": 38.25,
+    "text": "文档先行再落码，每轮「生成 → 自审 → 人类评审 → 按 P0–P3 分级修复」；文档随代码同步升版，杜绝「代码走了、文档没走」。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   },
+   {
+    "x": 504.0,
+    "y": 343.5,
+    "w": 391.5,
+    "h": 17.55,
+    "text": "验证方式",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 504.0,
+    "y": 367.05,
+    "w": 391.5,
+    "h": 38.25,
+    "text": "类型检查 + 构建门禁、180 条评测集全量复跑、真实后端冒烟（登录 / 检索 / 选题 / 生成 SSE）、浏览器截图取证——每项结论可复现。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "10 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": [
+   {
+    "x1": 111.0,
+    "y1": 169.5,
+    "x2": 849.0,
+    "y2": 169.5,
+    "color": "209CE5",
+    "w": 2.25
+   }
+  ]
+ },
+ "11.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 39.75,
+    "w": 4.5,
+    "h": 25.5,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 48.0,
+    "y": 90.0,
+    "w": 315.0,
+    "h": 240.98,
+    "shape_type": "roundRect",
+    "_corner": 5602,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 384.0,
+    "y": 90.0,
+    "w": 528.0,
+    "h": 60.0,
+    "shape_type": "roundRect",
+    "_corner": 17500,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 384.0,
+    "y": 160.5,
+    "w": 528.0,
+    "h": 60.0,
+    "shape_type": "roundRect",
+    "_corner": 17500,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 384.0,
+    "y": 231.0,
+    "w": 528.0,
+    "h": 60.0,
+    "shape_type": "roundRect",
+    "_corner": 17500,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 384.0,
+    "y": 301.5,
+    "w": 528.0,
+    "h": 40.12,
+    "shape_type": "roundRect",
+    "_corner": 26168,
+    "fill_color": "3B82F6",
+    "fill_alpha": 92,
+    "border_color": "3B82F6",
+    "border_width": 0.75
+   }
+  ],
+  "texts": [
+   {
+    "x": 64.5,
+    "y": 25.65,
+    "w": 310.77,
+    "h": 33.15,
+    "text": "数据与评测成果",
+    "font_size": 26,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 64.5,
+    "y": 61.8,
+    "w": 310.77,
+    "h": 17.55,
+    "text": "计划书 6.2 四项量化指标：阈值 vs 实测，全部达标",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 72.0,
+    "y": 132.75,
+    "w": 267.0,
+    "h": 14.62,
+    "text": "素材检索 Top-5 命中率",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "67E8F9",
+    "_ls": 1.5
+   },
+   {
+    "x": 72.0,
+    "y": 147.38,
+    "w": 267.0,
+    "h": 85.05,
+    "text": "100%",
+    "font_size": 81,
+    "font_name": "Microsoft YaHei",
+    "font_color": "209CE5",
+    "_bold": true,
+    "_ls": -3.0
+   },
+   {
+    "x": 72.0,
+    "y": 232.42,
+    "w": 267.0,
+    "h": 40.8,
+    "text": "阈值 ≥ 90% ｜ 全量 180 条评测任务实测 180/180，五领域全部 100%。",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   },
+   {
+    "x": 72.0,
+    "y": 273.52,
+    "w": 15.0,
+    "h": 15.0,
+    "text": "✓",
+    "font_size": 14,
+    "font_color": "06B6D4"
+   },
+   {
+    "x": 93.0,
+    "y": 273.9,
+    "w": 226.8,
+    "h": 13.65,
+    "text": "消融：关闭重排仅 61.1% —— 重排贡献 +38.9pp",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 399.0,
+    "y": 100.5,
+    "w": 112.5,
+    "h": 39.0,
+    "text": "100%",
+    "font_size": 30,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 525.0,
+    "y": 104.14,
+    "w": 340.5,
+    "h": 16.58,
+    "text": "平台适配符合率",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 525.0,
+    "y": 122.21,
+    "w": 340.5,
+    "h": 13.65,
+    "text": "阈值 ≥90% ｜ 54/54 硬性规范（标题长度 / 标签格式 / 数量上限）",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 879.0,
+    "y": 111.36,
+    "w": 18.0,
+    "h": 18.0,
+    "text": "✓",
+    "font_size": 16,
+    "font_color": "06B6D4"
+   },
+   {
+    "x": 399.0,
+    "y": 171.0,
+    "w": 112.5,
+    "h": 39.0,
+    "text": "100%",
+    "font_size": 30,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 525.0,
+    "y": 174.64,
+    "w": 340.5,
+    "h": 16.58,
+    "text": "文案一次可用率",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 525.0,
+    "y": 192.71,
+    "w": 340.5,
+    "h": 13.65,
+    "text": "阈值 ≥80% ｜ 54/54 版本通过结构规则（离线回归基线）",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 879.0,
+    "y": 181.86,
+    "w": 18.0,
+    "h": 18.0,
+    "text": "✓",
+    "font_size": 16,
+    "font_color": "06B6D4"
+   },
+   {
+    "x": 399.0,
+    "y": 241.5,
+    "w": 112.5,
+    "h": 39.0,
+    "text": "0.10s",
+    "font_size": 30,
+    "font_name": "Microsoft YaHei",
+    "font_color": "3B82F6",
+    "_bold": true
+   },
+   {
+    "x": 525.0,
+    "y": 245.14,
+    "w": 340.5,
+    "h": 16.58,
+    "text": "单篇平均生成耗时",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 525.0,
+    "y": 263.21,
+    "w": 340.5,
+    "h": 13.65,
+    "text": "阈值 ≤15s ｜ 18 任务实测均值 0.10s、最大 0.17s",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 879.0,
+    "y": 252.36,
+    "w": 18.0,
+    "h": 18.0,
+    "text": "✓",
+    "font_size": 16,
+    "font_color": "06B6D4"
+   },
+   {
+    "x": 399.0,
+    "y": 302.44,
+    "w": 498.0,
+    "h": 38.25,
+    "text": "数字背后是三次真实迭代：88.9% → 100% 的检索提升，来自补风格加权、召回池 20→40、索引签名自动重建——每个数字都可复现。",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "334155"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "11 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": []
+ },
+ "12.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 232.5,
+    "y": 270.82,
+    "w": 54.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   }
+  ],
+  "texts": [
+   {
+    "x": 60.0,
+    "y": 213.75,
+    "w": 130.5,
+    "h": 112.5,
+    "text": "04",
+    "font_size": 112,
+    "font_name": "Microsoft YaHei",
+    "font_color": "209CE5",
+    "_bold": true,
+    "_ls": -4.5
+   },
+   {
+    "x": 232.5,
+    "y": 198.67,
+    "w": 480.0,
+    "h": 52.65,
+    "text": "难点与应对",
+    "font_size": 40,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 232.5,
+    "y": 290.32,
+    "w": 480.0,
+    "h": 51.0,
+    "text": "四个真实难点：词表不一致、索引陈旧、口径漂移、凭证失真——每个都有根因拆解与可验证的修复证据。",
+    "font_size": 15,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   }
+  ],
+  "images": [],
+  "lines": []
+ },
+ "13.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "F8FAFC"
+   },
+   {
+    "x": 48.0,
+    "y": 15.0,
+    "w": 247.5,
+    "h": 465.0,
+    "shape_type": "roundRect",
+    "_corner": 4848,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 81.0,
+    "y": 48.0,
+    "w": 39.0,
+    "h": 39.0,
+    "shape_type": "roundRect",
+    "_corner": 26923,
+    "fill_color": "3B82F6",
+    "fill_alpha": 84
+   },
+   {
+    "x": 91.68,
+    "y": 58.68,
+    "w": 17.64,
+    "h": 17.64,
+    "shape_type": "ellipse",
+    "fill_color": "67E8F9"
+   },
+   {
+    "x": 81.0,
+    "y": 106.5,
+    "w": 42.0,
+    "h": 3.0,
+    "shape_type": "ellipse",
+    "fill_color": "209CE5"
+   },
+   {
+    "x": 316.5,
+    "y": 15.0,
+    "w": 595.5,
+    "h": 73.43,
+    "shape_type": "roundRect",
+    "_corner": 14300,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 316.5,
+    "y": 145.53,
+    "w": 595.5,
+    "h": 73.43,
+    "shape_type": "roundRect",
+    "_corner": 14300,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 316.5,
+    "y": 276.05,
+    "w": 595.5,
+    "h": 73.43,
+    "shape_type": "roundRect",
+    "_corner": 14300,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   },
+   {
+    "x": 316.5,
+    "y": 406.58,
+    "w": 595.5,
+    "h": 73.43,
+    "shape_type": "roundRect",
+    "_corner": 14300,
+    "fill_color": "FFFFFF",
+    "border_color": "E2E8F0",
+    "border_width": 0.75
+   }
+  ],
+  "texts": [
+   {
+    "x": 130.5,
+    "y": 52.88,
+    "w": 202.5,
+    "h": 29.25,
+    "text": "难点拆解与修复证据",
+    "font_size": 22,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 81.0,
+    "y": 127.5,
+    "w": 181.5,
+    "h": 64.8,
+    "text": "不停留在「遇到困难」，每条都追到根因，并给出可复跑的验证结果。",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 81.0,
+    "y": 434.33,
+    "w": 181.5,
+    "h": 12.68,
+    "text": "现象 → 根因 → 修复 → 验证",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "475569"
+   },
+   {
+    "x": 330.0,
+    "y": 24.75,
+    "w": 568.5,
+    "h": 16.58,
+    "text": "① 领域词表跨模块不一致",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 330.0,
+    "y": 45.08,
+    "w": 568.5,
+    "h": 33.6,
+    "text": "前端 / Mock / 种子数据各写一份，筛选点选空白。修复：DOMAINS 唯一真源 + Mock 自动补全。验证：五领域筛选全量有数据，Mock 与真实后端一致。",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 330.0,
+    "y": 155.28,
+    "w": 568.5,
+    "h": 16.58,
+    "text": "② 索引陈旧致检索命中率 0%",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 330.0,
+    "y": 175.6,
+    "w": 568.5,
+    "h": 33.6,
+    "text": "重建数据库后复用旧 FAISS 索引（169 vs 270 向量），chunk 整体错位。修复：索引签名（数量 / 最大 id / 维度）校验，过期自动重建。验证：重启后 270 向量、命中率恢复。",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 330.0,
+    "y": 285.8,
+    "w": 568.5,
+    "h": 16.58,
+    "text": "③ 评测与生产口径漂移",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 330.0,
+    "y": 306.12,
+    "w": 568.5,
+    "h": 33.6,
+    "text": "评测脚本内嵌参数、自行拼装检索逻辑，数字失去证明力。修复：评测直接调用生产检索函数，参数同源。验证：全量 180 条 100%，消融 61.1% → 100%。",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 330.0,
+    "y": 416.33,
+    "w": 568.5,
+    "h": 16.58,
+    "text": "④ 演示凭证三处不一致",
+    "font_size": 13,
+    "font_name": "Microsoft YaHei",
+    "font_color": "0F172A",
+    "_bold": true
+   },
+   {
+    "x": 330.0,
+    "y": 436.65,
+    "w": 568.5,
+    "h": 33.6,
+    "text": "「INSERT OR IGNORE」使新口令常量从未生效，代码 / 页面 / 文档三个值。修复：常量对齐数据库并注明仅新库生效，口令哈希程序化核验。验证：代码 / 登录页 / 文档 / 数据库四端一致。",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "64748B"
+   },
+   {
+    "x": 61.5,
+    "y": 495.67,
+    "w": 163.17,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   },
+   {
+    "x": 876.51,
+    "y": 495.67,
+    "w": 35.49,
+    "h": 13.65,
+    "text": "13 / 14",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "94A3B8"
+   }
+  ],
+  "images": [],
+  "lines": []
+ },
+ "14.slide": {
+  "shapes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 960.0,
+    "h": 540.0,
+    "fill_color": "0F172A"
+   },
+   {
+    "x": 120.0,
+    "y": 186.75,
+    "w": 6.0,
+    "h": 6.0,
+    "shape_type": "ellipse",
+    "fill_color": "06B6D4"
+   },
+   {
+    "x": 120.0,
+    "y": 317.78,
+    "w": 114.15,
+    "h": 26.62,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6",
+    "fill_alpha": 86,
+    "border_color": "3B82F6",
+    "border_width": 0.75
+   },
+   {
+    "x": 244.65,
+    "y": 317.78,
+    "w": 114.15,
+    "h": 26.62,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6",
+    "fill_alpha": 86,
+    "border_color": "3B82F6",
+    "border_width": 0.75
+   },
+   {
+    "x": 369.3,
+    "y": 317.78,
+    "w": 114.15,
+    "h": 26.62,
+    "shape_type": "ellipse",
+    "fill_color": "3B82F6",
+    "fill_alpha": 86,
+    "border_color": "3B82F6",
+    "border_width": 0.75
+   }
+  ],
+  "texts": [
+   {
+    "x": 133.5,
+    "y": 181.95,
+    "w": 85.44,
+    "h": 15.6,
+    "text": "结语 · CLOSING",
+    "font_size": 12,
+    "font_name": "Microsoft YaHei",
+    "font_color": "67E8F9",
+    "_ls": 3.0
+   },
+   {
+    "x": 238.5,
+    "y": 197.55,
+    "w": 503.7,
+    "h": 96.6,
+    "text": "指标全部达成，\n方法可以复用。",
+    "font_size": 34,
+    "font_name": "Microsoft YaHei",
+    "font_color": "FFFFFF",
+    "_bold": true
+   },
+   {
+    "x": 122.11,
+    "y": 294.15,
+    "w": 723.87,
+    "h": 23.62,
+    "text": "计划书 6.2 四项量化指标全部达标；「文档先行、唯一真源、证据交付」的协作方法，可复用于任何 AI 辅助工程项目。",
+    "font_size": 14,
+    "font_name": "Microsoft YaHei",
+    "font_color": "CBD5E1"
+   },
+   {
+    "x": 135.0,
+    "y": 323.78,
+    "w": 84.15,
+    "h": 14.62,
+    "text": "检索命中率 100%",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "BAE6FD"
+   },
+   {
+    "x": 259.65,
+    "y": 323.78,
+    "w": 84.15,
+    "h": 14.62,
+    "text": "适配符合率 100%",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "BAE6FD"
+   },
+   {
+    "x": 384.3,
+    "y": 323.78,
+    "w": 84.15,
+    "h": 14.62,
+    "text": "一次可用率 100%",
+    "font_size": 11,
+    "font_name": "Microsoft YaHei",
+    "font_color": "BAE6FD"
+   },
+   {
+    "x": 120.0,
+    "y": 344.4,
+    "w": 720.0,
+    "h": 13.65,
+    "text": "AI 自媒体内容创作助手 · 项目汇报 ｜ 2026-10-12 ｜ 感谢评审",
+    "font_size": 10,
+    "font_name": "Microsoft YaHei",
+    "font_color": "475569"
+   }
+  ],
+  "images": [],
+  "lines": []
+ }
+}

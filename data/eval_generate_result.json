@@ -1,0 +1,43 @@
+{
+  "split": "test",
+  "task_count": 18,
+  "version_total": 54,
+  "version_pass": 54,
+  "usable_rate_rule": 1.0,
+  "usable_rate_llm": null,
+  "avg_generation_seconds": 0.1,
+  "max_generation_seconds": 0.17,
+  "by_domain": {
+    "科技": {
+      "pass": 15,
+      "total": 15,
+      "seconds": 0.5
+    },
+    "美妆": {
+      "pass": 15,
+      "total": 15,
+      "seconds": 0.5
+    },
+    "教育": {
+      "pass": 9,
+      "total": 9,
+      "seconds": 0.3
+    },
+    "生活": {
+      "pass": 3,
+      "total": 3,
+      "seconds": 0.1
+    },
+    "财经": {
+      "pass": 12,
+      "total": 12,
+      "seconds": 0.5
+    }
+  },
+  "bad_cases": [],
+  "errors": [],
+  "thresholds": {
+    "usable_rate": 0.8,
+    "avg_seconds": 15.0
+  }
+}

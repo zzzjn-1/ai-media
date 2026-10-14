@@ -1,0 +1,3677 @@
+{
+  "meta": {
+    "version": "V1.2.0",
+    "generated_at": "2026-10-12T16:07:28",
+    "source_db": "D:\\新建文件夹\\ai media\\db\\app.db",
+    "total": 180,
+    "split": {
+      "train": 144,
+      "val": 18,
+      "test": 18
+    },
+    "split_method": "global shuffle (seed=20261010), 8:1:1",
+    "dimensions": {
+      "platforms": [
+        "weixin",
+        "xhs",
+        "douyin"
+      ],
+      "domains": [
+        "科技",
+        "生活",
+        "财经",
+        "美妆",
+        "教育"
+      ],
+      "intents": [
+        "种草测评",
+        "干货科普",
+        "观点评论",
+        "情感故事"
+      ],
+      "styles": [
+        "专业",
+        "轻松",
+        "犀利"
+      ]
+    },
+    "metric_baseline": {
+      "一次可用率": ">=80%",
+      "平台规范适配符合率": ">=90%",
+      "素材检索Top-5命中率": ">=90%",
+      "单篇平均生成时间": "<=15s"
+    },
+    "source_db_locked": true,
+    "source_db_note": "此评测集由 db/app.db 特定快照(90素材/270分块/10热点)生成；重置/重建库后须重新执行 data/build_eval_set.py 以保证评测集与源库一致。"
+  },
+  "coverage_matrix": {
+    "weixin": {
+      "科技": 12,
+      "生活": 12,
+      "财经": 12,
+      "美妆": 12,
+      "教育": 12
+    },
+    "xhs": {
+      "科技": 12,
+      "生活": 12,
+      "财经": 12,
+      "美妆": 12,
+      "教育": 12
+    },
+    "douyin": {
+      "科技": 12,
+      "生活": 12,
+      "财经": 12,
+      "美妆": 12,
+      "教育": 12
+    }
+  },
+  "style_distribution": {
+    "专业": 60,
+    "轻松": 60,
+    "犀利": 60
+  },
+  "tasks": [
+    {
+      "id": "E001",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E002",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E003",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E004",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E005",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E006",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E007",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E008",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E009",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E010",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E011",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E012",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在公众号渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E013",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E014",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E015",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E016",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E017",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E018",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E019",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E020",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E021",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E022",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E023",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E024",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在公众号渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E025",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E026",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E027",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E028",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E029",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E030",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E031",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E032",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E033",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E034",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E035",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E036",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在公众号渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E037",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E038",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E039",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E040",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E041",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E042",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E043",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E044",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E045",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E046",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E047",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E048",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在公众号渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E049",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E050",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E051",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E052",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E053",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E054",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E055",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E056",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E057",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E058",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E059",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E060",
+      "platform": "weixin",
+      "platform_cn": "公众号",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在公众号渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E061",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E062",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E063",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E064",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E065",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E066",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E067",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E068",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E069",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E070",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E071",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E072",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在小红书渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E073",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E074",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E075",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E076",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E077",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E078",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E079",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E080",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E081",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E082",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E083",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E084",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在小红书渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E085",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E086",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E087",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E088",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E089",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E090",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E091",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E092",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E093",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E094",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E095",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E096",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在小红书渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E097",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E098",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E099",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E100",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E101",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E102",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E103",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E104",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E105",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E106",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E107",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E108",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在小红书渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E109",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E110",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E111",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E112",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E113",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E114",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E115",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E116",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E117",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E118",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E119",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E120",
+      "platform": "xhs",
+      "platform_cn": "小红书",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在小红书渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E121",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E122",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E123",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E124",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E125",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E126",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E127",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E128",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E129",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E130",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        164,
+        165,
+        194,
+        195,
+        224,
+        225
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E131",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        168,
+        169,
+        198,
+        199,
+        228,
+        229
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E132",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "科技",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "关注效率的职场与极客人群",
+      "query": "为科技领域账号在抖音渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "科技",
+      "gold_material_ids": [
+        166,
+        167,
+        196,
+        197,
+        226,
+        227
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E133",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E134",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E135",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E136",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E137",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E138",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E139",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E140",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E141",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E142",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        158,
+        159,
+        188,
+        189,
+        218,
+        219
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E143",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        162,
+        163,
+        192,
+        193,
+        222,
+        223
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E144",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "生活",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "注重生活品质的都市年轻群体",
+      "query": "为生活领域账号在抖音渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "生活",
+      "gold_material_ids": [
+        160,
+        161,
+        190,
+        191,
+        220,
+        221
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E145",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E146",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E147",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E148",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E149",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E150",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E151",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E152",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E153",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E154",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        176,
+        177,
+        206,
+        207,
+        236,
+        237
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E155",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        180,
+        181,
+        210,
+        211,
+        240,
+        241
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E156",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "财经",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "有资产配置需求的中产投资者",
+      "query": "为财经领域账号在抖音渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "财经",
+      "gold_material_ids": [
+        178,
+        179,
+        208,
+        209,
+        238,
+        239
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E157",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E158",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E159",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E160",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E161",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E162",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E163",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E164",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E165",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E166",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        170,
+        171,
+        200,
+        201,
+        230,
+        231
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E167",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        174,
+        175,
+        204,
+        205,
+        234,
+        235
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E168",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "美妆",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "爱尝鲜的成分党与化妆新手",
+      "query": "为美妆领域账号在抖音渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "美妆",
+      "gold_material_ids": [
+        172,
+        173,
+        202,
+        203,
+        232,
+        233
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E169",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「专业」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E170",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「轻松」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "test"
+    },
+    {
+      "id": "E171",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "种草测评",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「犀利」口吻产出一篇关于「种草测评」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E172",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「专业」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E173",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「轻松」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "val"
+    },
+    {
+      "id": "E174",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "干货科普",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「犀利」口吻产出一篇关于「干货科普」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E175",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「专业」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E176",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「轻松」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E177",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "观点评论",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「犀利」口吻产出一篇关于「观点评论」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E178",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "专业",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「专业」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        152,
+        153,
+        182,
+        183,
+        212,
+        213
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E179",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "轻松",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「轻松」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        156,
+        157,
+        186,
+        187,
+        216,
+        217
+      ],
+      "split": "train"
+    },
+    {
+      "id": "E180",
+      "platform": "douyin",
+      "platform_cn": "抖音",
+      "domain": "教育",
+      "style": "犀利",
+      "intent": "情感故事",
+      "audience": "有学习提升需求的职场人与学生家长",
+      "query": "为教育领域账号在抖音渠道，以「犀利」口吻产出一篇关于「情感故事」的文案",
+      "expected_domain": "教育",
+      "gold_material_ids": [
+        154,
+        155,
+        184,
+        185,
+        214,
+        215
+      ],
+      "split": "train"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+
+<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+  <Image src="assets/section_visual.png" style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, objectFit: 'cover' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'linear-gradient(90deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.55) 55%, rgba(15,23,42,0.30) 100%)' }} />
+
+  <Box style={{ position: 'absolute', left: 80, top: 216, width: 900 }}>
+    <Text style={{ fontSize: 120, fontWeight: 'bold', lineHeight: 1.0, letterSpacing: -4, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
+      01
+    </Text>
+    <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#FFFFFF', marginTop: 10 }}>项目概况</Text>
+    <Box style={{ width: 72, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
+    <Text style={{ fontSize: 20, color: '#CBD5E1', marginTop: 22, lineHeight: 1.6 }}>
+      产品定位、五步核心闭环与六大功能模块全景
+    </Text>
+  </Box>
+</Slide>

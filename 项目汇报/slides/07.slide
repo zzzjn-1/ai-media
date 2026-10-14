@@ -1,0 +1,96 @@
+const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
+  {/* A 区标题块 */}
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
+      <Box>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>系统架构</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>四层架构 · 三条关键决策：检索质量、数据安全、实时体验</Text>
+      </Box>
+    </Box>
+  </Box>
+
+  {/* B 区内容 */}
+  <Box style={{ flexDirection: 'row', gap: 28, height: 520 }}>
+    {/* 左侧架构图（L1 主视觉，占 ~58%） */}
+    <Box style={{ width: 660, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 16, padding: '22px 24px', boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
+      <svg width="612" height="470" viewBox="0 0 612 470">
+        <defs>
+          <linearGradient id="archGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#06B6D4" />
+          </linearGradient>
+        </defs>
+        {/* 层 1：前端 */}
+        <rect x="10" y="10" width="592" height="96" rx="12" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+        <rect x="10" y="10" width="6" height="96" rx="3" fill="url(#archGrad)" />
+        <text x="36" y="44" fontSize="18" fontWeight="bold" fill="#0F172A">前端展示层 · React 18 + Vite + AntD 5</text>
+        <text x="36" y="74" fontSize="14" fill="#64748B">六大页面按路由懒加载 ｜ JWT 鉴权 ｜ SSE 事件流消费 ｜ Mock / 真实双模式</text>
+        {/* 连接线 1 */}
+        <path d="M306 110 L 306 136" stroke="#3B82F6" strokeWidth="2" strokeDasharray="4 4" />
+        <path d="M300 130 L 306 142 L 312 130 z" fill="#3B82F6" />
+        {/* 层 2：服务 */}
+        <rect x="10" y="146" width="592" height="96" rx="12" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+        <rect x="10" y="146" width="6" height="96" rx="3" fill="url(#archGrad)" />
+        <text x="36" y="180" fontSize="18" fontWeight="bold" fill="#0F172A">服务层 · FastAPI（14 端点）</text>
+        <text x="36" y="210" fontSize="14" fill="#64748B">auth / hotspots / materials / topics / copy(SSE) / persona / export ｜ APScheduler 热点定时采集</text>
+        {/* 连接线 2 */}
+        <path d="M306 246 L 306 272" stroke="#3B82F6" strokeWidth="2" strokeDasharray="4 4" />
+        <path d="M300 266 L 306 278 L 312 266 z" fill="#3B82F6" />
+        {/* 层 3：检索与生成 */}
+        <rect x="10" y="282" width="592" height="96" rx="12" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+        <rect x="10" y="282" width="6" height="96" rx="3" fill="url(#archGrad)" />
+        <text x="36" y="316" fontSize="18" fontWeight="bold" fill="#0F172A">检索与生成层 · 自研 RAG 编排</text>
+        <text x="36" y="346" fontSize="14" fill="#64748B">FAISS 粗排 40 → 规则重排 Top-5 ｜ LangChain LCEL 提示词编排 ｜ LLM / Mock 双后端</text>
+        {/* 连接线 3 */}
+        <path d="M306 382 L 306 408" stroke="#3B82F6" strokeWidth="2" strokeDasharray="4 4" />
+        <path d="M300 402 L 306 414 L 312 402 z" fill="#3B82F6" />
+        {/* 层 4：数据 */}
+        <rect x="10" y="418" width="592" height="52" rx="12" fill="#0F172A" />
+        <text x="36" y="450" fontSize="16" fontWeight="bold" fill="#FFFFFF">数据层 · SQLite（字段加密）+ FAISS 索引 ｜ 90 素材 / 270 分块 / 10 热点</text>
+      </svg>
+    </Box>
+
+    {/* 右侧三条架构决策 */}
+    <Box style={{ flex: 1, flexDirection: 'column', gap: 16 }}>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '18px 20px', flex: 1, justifyContent: 'center' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <FAIcon name='chart-bar' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
+          <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0F172A' }}>两阶段检索保质量</Text>
+        </Box>
+        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 8, lineHeight: 1.65 }}>
+          粗排求全、重排求准：同领域 / 同风格先验加权，离线口径下 Top-5 命中率 100%。
+        </Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '18px 20px', flex: 1, justifyContent: 'center' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <FAIcon name='lock' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
+          <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0F172A' }}>字段级加密保安全</Text>
+        </Box>
+        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 8, lineHeight: 1.65 }}>
+          素材正文与分块 Fernet 加密落库，口令哈希存储；检索按账号隔离，杜绝跨租户可见。
+        </Text>
+      </Box>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '18px 20px', flex: 1, justifyContent: 'center' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <FAIcon name='arrow-right' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
+          <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0F172A' }}>SSE 流式保体验</Text>
+        </Box>
+        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 8, lineHeight: 1.65 }}>
+          生成进度逐事件推送、版本就绪即渲染，长任务不白屏；离线 Mock 走同一事件协议。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+
+  {/* C 区页脚 */}
+  <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>AI 自媒体内容创作助手 · 项目汇报</Text>
+    </Box>
+    <Text style={{ fontSize: 14, color: '#94A3B8' }}>07 / 14</Text>
+  </Box>
+</Slide>

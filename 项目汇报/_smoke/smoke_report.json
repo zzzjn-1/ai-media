@@ -1,0 +1,288 @@
+{
+  "generated_at": "2026-10-13 10:25:41",
+  "viewport": [
+    1440,
+    900
+  ],
+  "browser": "Microsoft Edge 155 headless=new（Chromium 内核）",
+  "mode": "VITE_USE_MOCK=false（真实 M3 后端，经 Vite 代理 /api → 127.0.0.1:8000）",
+  "total": 13,
+  "passed": 13,
+  "failed": 0,
+  "distinct_md5": 12,
+  "steps": [
+    {
+      "step": "清鉴权态并打开登录页",
+      "ok": true,
+      "seconds": 1.86
+    },
+    {
+      "step": "登录页截图",
+      "ok": true,
+      "seconds": 1.01
+    },
+    {
+      "step": "真实表单登录",
+      "ok": true,
+      "seconds": 0.37
+    },
+    {
+      "step": "素材库管理截图",
+      "ok": true,
+      "seconds": 0.87
+    },
+    {
+      "step": "新领域检索 美妆",
+      "ok": true,
+      "seconds": 0.96
+    },
+    {
+      "step": "热点看板截图",
+      "ok": true,
+      "seconds": 0.9
+    },
+    {
+      "step": "筛选点选 美妆",
+      "ok": true,
+      "seconds": 0.89
+    },
+    {
+      "step": "筛选点选 教育",
+      "ok": true,
+      "seconds": 0.88
+    },
+    {
+      "step": "选题列表截图",
+      "ok": true,
+      "seconds": 0.88
+    },
+    {
+      "step": "生成选题",
+      "ok": true,
+      "seconds": 1.23
+    },
+    {
+      "step": "一键选用带入生成页",
+      "ok": true,
+      "seconds": 1.17
+    },
+    {
+      "step": "SSE 多版本生成",
+      "ok": true,
+      "seconds": 1.56
+    },
+    {
+      "step": "进入平台适配",
+      "ok": true,
+      "seconds": 0.9
+    },
+    {
+      "step": "账号人设截图",
+      "ok": true,
+      "seconds": 1.18
+    },
+    {
+      "step": "未登录路由守卫",
+      "ok": true,
+      "seconds": 1.35
+    }
+  ],
+  "shots": [
+    {
+      "name": "00_login.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\00_login.png",
+      "url": "/",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "e847d354f3481e58931ea099f322a14e",
+      "body_len": 238,
+      "marker": "登录",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "01_materials.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\01_materials.png",
+      "url": "/materials",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "13994558b2b2837793e139e2a5b60a9a",
+      "body_len": 555,
+      "marker": "素材库管理",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "02_materials_search_meizhuang.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\02_materials_search_meizhuang.png",
+      "url": "/materials",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "6ffe6069dca3af1911f6718221a84021",
+      "body_len": 557,
+      "marker": "美妆",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "03_hotspots.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\03_hotspots.png",
+      "url": "/hotspots",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "c4205ec4af9420638e140a5ab278be59",
+      "body_len": 724,
+      "marker": "热点看板",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "04_hotspots_meizhuang.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\04_hotspots_meizhuang.png",
+      "url": "/hotspots",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "2edba5b3d8e439a1ffbfc4b02ec220bd",
+      "body_len": 267,
+      "marker": "美妆",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "05_hotspots_jiaoyu.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\05_hotspots_jiaoyu.png",
+      "url": "/hotspots",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "17c79b3fa3b1800e511eb8e72098971d",
+      "body_len": 261,
+      "marker": "教育",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "06_topics_initial.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\06_topics_initial.png",
+      "url": "/topics",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "37206959ce24966c525f9189463c910c",
+      "body_len": 163,
+      "marker": "选题列表",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "07_topics_generated.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\07_topics_generated.png",
+      "url": "/topics",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "feadc4cc266f8bc4a44cf62df6209806",
+      "body_len": 527,
+      "marker": "一键选用",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "08_generate_params.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\08_generate_params.png",
+      "url": "/generate",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "29ee338d5f6a766a6eec53e7fb2bc8c9",
+      "body_len": 229,
+      "marker": "创作参数",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "09_generate_result.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\09_generate_result.png",
+      "url": "/generate",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "ede72552aa8d8caf2c3b868253043acb",
+      "body_len": 1735,
+      "marker": "版本 1",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "10_adapt.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\10_adapt.png",
+      "url": "/adapt",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "13b2a5ed4b797eb45a6616aafca37099",
+      "body_len": 1977,
+      "marker": "平台适配预览",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "11_persona.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\11_persona.png",
+      "url": "/persona",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "ebda540c3fd4ffe9bad3a4037470eea1",
+      "body_len": 184,
+      "marker": "账号人设",
+      "problems": [],
+      "ok": true,
+      "dup_of": null
+    },
+    {
+      "name": "12_guard_noauth.png",
+      "path": "D:\\新建文件夹\\ai media\\项目汇报\\_smoke\\shots\\12_guard_noauth.png",
+      "url": "/materials",
+      "size": [
+        1440,
+        900
+      ],
+      "md5": "e847d354f3481e58931ea099f322a14e",
+      "body_len": 238,
+      "marker": "登录",
+      "problems": [],
+      "ok": true,
+      "dup_of": "00_login.png",
+      "dup_note": "与 00_login.png 同画面：路由守卫回落登录页，属预期（已由状态断言佐证）"
+    }
+  ]
+}

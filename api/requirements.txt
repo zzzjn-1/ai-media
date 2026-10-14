@@ -1,0 +1,28 @@
+# M3 后端依赖
+# —— 分两层：核心必需（离线可运行）+ 语义增强（可选，装即启用 BGE/重排）
+
+# ---- 核心必需：无这些后端无法启动 ----
+fastapi
+uvicorn
+faiss-cpu
+pydantic
+cryptography
+python-multipart
+apscheduler
+pyjwt
+
+# ---- 语义增强：T3.1「BGE 向量化」与 T3.3「LangChain 编排」的落地依赖 ----
+# 已实测安装并验证：torch 2.14.1 / transformers 5.19.0 / sentence-transformers 6.1.0 / langchain 1.4.4
+sentence-transformers
+langchain
+langchain-community
+
+# ---- 生产链路可选（有 API Key 时启用 OpenAI 兼容接口）----
+# openai
+
+# 说明：
+# 1) EMBEDDING_BACKEND=offline（默认）时无需模型权重即可跑通检索与评测；
+#    EMBEDDING_BACKEND=bge 时用 sentence-transformers 加载 BAAI/bge-large-zh
+#    （经 HF_ENDPOINT 镜像下载，首次约 1.3GB）。
+# 2) RERANK_STRATEGY=lexical（默认）为零依赖重排；=cross 时需额外下载
+#    BAAI/bge-reranker-large；加载失败会自动降级为 lexical，不中断链路。
