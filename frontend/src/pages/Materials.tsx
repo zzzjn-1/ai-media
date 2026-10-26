@@ -6,11 +6,13 @@ import {
 import { PlusOutlined, EyeOutlined, TagOutlined, ReloadOutlined } from '@ant-design/icons'
 import { api } from '../api/client'
 import type { Material, MaterialChunk } from '../api/types'
-import { DOMAINS, PLATFORMS } from '../api/types'
+import { DOMAINS, PLATFORMS, platformLabel } from '../api/types'
 import { useMessage } from '../hooks/useMessage'
 import PageHeader from '../components/PageHeader'
 
-const platformOptions = PLATFORMS.map((p) => ({ value: p.label, label: p.label }))
+// 存码（weixin/xhs/douyin），显示中文——与后端 platform_rules 的码保持一致。
+// 早前这里把中文名当 value 入库，导致平台列一半是 `xhs`、一半是「小红书」。
+const platformOptions = PLATFORMS.map((p) => ({ value: p.code, label: p.label }))
 const domainOptions = DOMAINS.map((d) => ({ value: d, label: d }))
 
 export default function Materials() {
@@ -114,7 +116,9 @@ export default function Materials() {
       dataIndex: 'platforms',
       key: 'platforms',
       render: (v: string) =>
-        (v || '').split(',').filter(Boolean).map((t) => <Tag key={t}>{t}</Tag>),
+        (v || '').split(',').filter(Boolean).map((t) => (
+          <Tag key={t}>{platformLabel(t)}</Tag>
+        )),
     },
     {
       title: '领域',

@@ -51,7 +51,7 @@ export default function Persona() {
       <Card>
         <Form form={form} layout="vertical" disabled={loading}>
           <Form.Item name="display_name" label="展示名称">
-            <Input placeholder="如：AI 效率观察" />
+            <Input placeholder="如：一格观察" />
           </Form.Item>
           <Form.Item name="positioning" label="账号定位">
             <Input.TextArea rows={2} placeholder="一句话说明账号价值主张" />

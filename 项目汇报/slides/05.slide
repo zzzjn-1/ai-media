@@ -1,78 +1,145 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-
-<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
-  <Box style={{ flexDirection: 'row', gap: 28, height: 620 }}>
-    {/* 左侧深色标题栏 */}
-    <Box style={{ width: 366, height: 620, background: '#0F172A', borderRadius: 16, padding: 44, justifyContent: 'space-between' }}>
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', background: '#F8FAFC' }}>
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
       <Box>
-        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-          <Box style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(59,130,246,0.16)', justifyContent: 'center', alignItems: 'center' }}>
-            <FAIcon name='cog' style={{ fill: '#67E8F9', width: 28, height: 28 }} />
-          </Box>
-          <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#FFFFFF' }}>六大功能模块</Text>
-        </Box>
-        <Box style={{ width: 56, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
-        <Text style={{ fontSize: 16, color: '#94A3B8', lineHeight: 1.8, marginTop: 24 }}>
-          对应计划书 F1–F6 功能清单，每模块均可独立演示，合起来构成完整创作闭环。
-        </Text>
-      </Box>
-      <Text style={{ fontSize: 13, color: '#475569' }}>F1 – F6 · 模块全景</Text>
-    </Box>
-
-    {/* 右侧六模块清单 */}
-    <Box style={{ flex: 1, height: 620, justifyContent: 'space-between' }}>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '12px 18px' }}>
-        <FAIcon name='folder' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>素材库管理</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>语料导入 / 自动分块 / 加密存储 / 语义检索</Text>
-        </Box>
-        <Text style={{ fontSize: 13, color: '#94A3B8' }}>F1</Text>
-      </Box>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '12px 18px' }}>
-        <FAIcon name='chart-line' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>热点看板</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>五领域热点采集、热度与趋势可视化</Text>
-        </Box>
-        <Text style={{ fontSize: 13, color: '#94A3B8' }}>F1</Text>
-      </Box>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '12px 18px' }}>
-        <FAIcon name='star' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>选题策划</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>结合账号人设与热点，一键生成 ≥3 条选题</Text>
-        </Box>
-        <Text style={{ fontSize: 13, color: '#94A3B8' }}>F2</Text>
-      </Box>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '12px 18px' }}>
-        <FAIcon name='edit' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>文案生成对比</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>RAG 检索增强 + SSE 流式产出多版本对比</Text>
-        </Box>
-        <Text style={{ fontSize: 13, color: '#94A3B8' }}>F3 / F4</Text>
-      </Box>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '12px 18px' }}>
-        <FAIcon name='share' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>平台适配预览</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>按平台硬性规范逐条适配，支持 txt / docx 导出</Text>
-        </Box>
-        <Text style={{ fontSize: 13, color: '#94A3B8' }}>F5</Text>
-      </Box>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '12px 18px' }}>
-        <FAIcon name='user' style={{ fill: '#3B82F6', width: 26, height: 26 }} />
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>账号人设</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>定位 / 语气 / 领域配置，驱动全链路风格一致</Text>
-        </Box>
-        <Text style={{ fontSize: 13, color: '#94A3B8' }}>F6</Text>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>功能全景与工程规模</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>六个模块对应闭环上的六个位置，不是功能堆叠</Text>
       </Box>
     </Box>
   </Box>
 
-  {/* C 区页脚 */}
+  <Box style={{ flexDirection: 'row', gap: 26, height: 324 }}>
+    <Box style={{ width: 268, flexDirection: 'column' }}>
+      <Text style={{ fontSize: 15, color: '#94A3B8', letterSpacing: 3 }}>MODULES</Text>
+      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#0F172A', lineHeight: 1.15, marginTop: 6 }}>
+        六模块
+      </Text>
+      <Text style={{ fontSize: 16, color: '#334155', lineHeight: 1.8, marginTop: 14 }}>
+        每个模块只做一件事，但上下游都有结构化接口。素材与热点负责「输入」，选题与生成负责「加工」，适配与导出负责「交付」，人设贯穿全程作为约束。
+      </Text>
+      <Box style={{ marginTop: 'auto', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        <Box style={{ width: 20, height: 20, borderRadius: 4, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+        <Text style={{ fontSize: 13, color: '#64748B' }}>标记者为热点 V2 重点重构模块</Text>
+      </Box>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'column', gap: 12 }}>
+      <Box style={{ flexDirection: 'row', gap: 12, flex: 1 }}>
+        <Box style={{ flex: 1, background: '#0F172A', borderRadius: 13, padding: '13px 16px', flexDirection: 'row', gap: 14 }}>
+          <Box style={{ width: 34, height: 34, borderRadius: 9, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>热</Text>
+          </Box>
+          <Box style={{ flex: 1 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>热点看板</Text>
+              <Text style={{ fontSize: 11, color: '#67E8F9', letterSpacing: 1 }}>V2 重构</Text>
+            </Box>
+            <Text style={{ fontSize: 12.5, color: '#CBD5E1', marginTop: 5, lineHeight: 1.6 }}>
+              六源真实热榜采集，跨平台聚合、归一化热度，按领域推荐并给出建议角度
+            </Text>
+          </Box>
+        </Box>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 13, padding: '13px 16px', flexDirection: 'row', gap: 14 }}>
+          <Box style={{ width: 34, height: 34, borderRadius: 9, background: '#EFF6FF', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#3B82F6' }}>素</Text>
+          </Box>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>素材库</Text>
+            <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+              90 篇入库、270 分块，按领域与平台筛选，支持语义检索与风格标签
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+
+      <Box style={{ flexDirection: 'row', gap: 12, flex: 1 }}>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 13, padding: '13px 16px', flexDirection: 'row', gap: 14 }}>
+          <Box style={{ width: 34, height: 34, borderRadius: 9, background: '#EFF6FF', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#3B82F6' }}>题</Text>
+          </Box>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>选题列表</Text>
+            <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+              一句话生成多角度选题；热点可直传，领域与角度一并继承
+            </Text>
+          </Box>
+        </Box>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 13, padding: '13px 16px', flexDirection: 'row', gap: 14 }}>
+          <Box style={{ width: 34, height: 34, borderRadius: 9, background: '#EFF6FF', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#3B82F6' }}>撰</Text>
+          </Box>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>文案生成</Text>
+            <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+              RAG 两阶段检索增强，单次产出 ≥3 个风格版本并做结构校验
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+
+      <Box style={{ flexDirection: 'row', gap: 12, flex: 1 }}>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 13, padding: '13px 16px', flexDirection: 'row', gap: 14 }}>
+          <Box style={{ width: 34, height: 34, borderRadius: 9, background: '#EFF6FF', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#3B82F6' }}>适</Text>
+          </Box>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>平台适配</Text>
+            <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+              按三平台硬性规范改写标题、标签与篇幅，导出前给出符合性检查
+            </Text>
+          </Box>
+        </Box>
+        <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 13, padding: '13px 16px', flexDirection: 'row', gap: 14 }}>
+          <Box style={{ width: 34, height: 34, borderRadius: 9, background: '#EFF6FF', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#3B82F6' }}>人</Text>
+          </Box>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>人设设定</Text>
+            <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
+              领域、受众、语气可配置，作为前置约束注入每一次生成
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  </Box>
+
+  <Box style={{ height: 180, marginTop: 16, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 26px', flexDirection: 'row', alignItems: 'center', boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
+    <Box style={{ width: 132 }}>
+      <Text style={{ fontSize: 13, color: '#94A3B8', letterSpacing: 2 }}>SCALE</Text>
+      <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A', marginTop: 4 }}>当前规模</Text>
+      <Text style={{ fontSize: 12, color: '#64748B', marginTop: 4, lineHeight: 1.5 }}>均为运行时实测</Text>
+    </Box>
+    <Box style={{ width: 1, height: 80, background: '#E2E8F0' }} />
+    <Box style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around' }}>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>90</Text>
+        <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>篇素材文本</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>270</Text>
+        <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>个检索分块</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>180</Text>
+        <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>条评测任务</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>6</Text>
+        <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>个热榜来源</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>14</Text>
+        <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>张数据表</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>19</Text>
+        <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>个接口路由</Text>
+      </Box>
+    </Box>
+  </Box>
+
   <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
     <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
       <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />

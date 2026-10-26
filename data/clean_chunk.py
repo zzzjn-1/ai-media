@@ -40,7 +40,12 @@ from api.core.hot_signal import run_pipeline  # noqa: E402
 SEED_USER_ID = 1
 # 注意：ensure_seed_user 为 INSERT OR IGNORE —— 该口令仅对【全新库】生效；
 # 已存在 demo_seed 行的库（含现有 db/app.db）保留原口令 Demo@2026，与文档/Login.tsx 一致。
-SEED_USER_PASSWORD = "Demo@2026"  # 示例素材归属账号口令（仅演示，生产请改）
+SEED_USER_PASSWORD = "Demo@2026"  # 种子账号口令（仅演示，生产请改）
+# 种子账号的人设展示名：会出现在「账号人设」页，并作为 F3 生成的账号上下文，
+# 必须是像真人设的名字（旧值「示例素材归属账号」是占位说明，演示时不像人设）。
+SEED_USER_DISPLAY_NAME = "一格观察"
+# 旧占位名：仅用于老库回填判据，绝不能用它覆盖用户自己改过的展示名。
+LEGACY_SEED_DISPLAY_NAME = "示例素材归属账号"
 # 官方领域词表（与 frontend/src/api/types.ts 的 DOMAINS 保持一致；新增领域需同步此处）
 SEED_DOMAINS = ["科技", "生活", "财经", "美妆", "教育"]
 
@@ -102,11 +107,16 @@ def ensure_seed_user(conn: sqlite3.Connection):
            (id, username, password_hash, display_name, positioning, tone, domains, status)
            VALUES (?,?,?,?,?,?,?,?)""",
         (SEED_USER_ID, "demo_seed", security.hash_password(SEED_USER_PASSWORD),
-         "示例素材归属账号", "综合自媒体", "专业", ",".join(SEED_DOMAINS), 1),
+         SEED_USER_DISPLAY_NAME, "综合自媒体", "专业", ",".join(SEED_DOMAINS), 1),
     )
     # 账号可能已存在（INSERT OR IGNORE 不更新），此处回填最新领域词表
     conn.execute(
         "UPDATE users SET domains=? WHERE id=?", (",".join(SEED_DOMAINS), SEED_USER_ID)
+    )
+    # 老库回填展示名：仅当仍是旧占位名才改，用户已自定义的名字一律不动
+    conn.execute(
+        "UPDATE users SET display_name=? WHERE id=? AND display_name=?",
+        (SEED_USER_DISPLAY_NAME, SEED_USER_ID, LEGACY_SEED_DISPLAY_NAME),
     )
 
 

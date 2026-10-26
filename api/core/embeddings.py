@@ -12,7 +12,6 @@ api/core/embeddings.py — 可插拔文本向量化（落实 T3.1 BGE 向量化�
 import hashlib
 import math
 import re
-import sys
 
 from ..config import EMBEDDING_BACKEND, EMBEDDING_DIM, EMBEDDING_MODEL, HF_ENDPOINT
 
@@ -53,7 +52,6 @@ class _BgeEmbedding:
     """真实 BGE 向量（sentence_transformers）。首次调用惰性加载权重。"""
 
     def __init__(self, model_name: str):
-        os_env = sys.modules.get("os")
         if HF_ENDPOINT:
             import os
             os.environ.setdefault("HF_ENDPOINT", HF_ENDPOINT)
@@ -70,11 +68,19 @@ class EmbeddingService:
     _instance = None
 
     def __init__(self):
-        if EMBEDDING_BACKEND == "bge":
-            self._impl = _BgeEmbedding(EMBEDDING_MODEL)
-        else:
-            self._impl = _OfflineEmbedding(EMBEDDING_DIM)
         self.backend = EMBEDDING_BACKEND
+        self._impl = None
+        if EMBEDDING_BACKEND == "bge":
+            try:
+                self._impl = _BgeEmbedding(EMBEDDING_MODEL)
+            except Exception as e:  # noqa: BLE001
+                # 权重未下载 / 出网被代理挡住时不许整个服务起不来：
+                # 回落到 offline 哈希向量，并把真实后端如实报给 /api/health。
+                # 已缓存权重时加 HF_HUB_OFFLINE=1 可跳过联网校验（实测不加会被代理打成 502）。
+                print(f"[向量化] BGE 加载失败（{type(e).__name__}: {e}）→ 回落 offline 哈希向量")
+        if self._impl is None:
+            self._impl = _OfflineEmbedding(EMBEDDING_DIM)
+            self.backend = "offline"
         self.dim = self._impl.dim
 
     @classmethod

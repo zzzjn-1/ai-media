@@ -1,69 +1,92 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-
-<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
-  {/* A 区标题块 */}
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', background: '#F8FAFC' }}>
   <Box style={{ height: 100, justifyContent: 'center' }}>
     <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
       <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
       <Box>
-        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>数据与评测成果</Text>
-        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>计划书 6.2 四项量化指标：阈值 vs 实测，全部达标</Text>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>里程碑：六个阶段</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>每个阶段都有明确交付物和可执行验证，不是「做完了」三个字</Text>
       </Box>
     </Box>
   </Box>
 
-  {/* B 区：巨型数字 + 洞察 */}
-  <Box style={{ flexDirection: 'row', gap: 28, height: 520 }}>
-    {/* 左侧主锚点 */}
-    <Box style={{ width: 420, background: '#0F172A', borderRadius: 18, padding: '36px 32px', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 15, color: '#67E8F9', letterSpacing: 2 }}>素材检索 Top-5 命中率</Text>
-      <Text style={{ fontSize: 108, fontWeight: 'bold', lineHeight: 1.05, letterSpacing: -4, marginTop: 10, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
-        100%
+  <Box style={{ height: 290, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 16, padding: '8px 16px', justifyContent: 'center', boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
+    <svg width="1104" height="274" viewBox="0 0 1104 274">
+      <defs>
+        <linearGradient id="gT" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#93C5FD" />
+          <stop offset="70%" stopColor="#3B82F6" />
+          <stop offset="100%" stopColor="#06B6D4" />
+        </linearGradient>
+      </defs>
+      <line x1="46" y1="137" x2="1058" y2="137" stroke="url(#gT)" strokeWidth="2.5" strokeLinecap="round" />
+
+      <line x1="60" y1="103" x2="60" y2="137" stroke="#CBD5E1" strokeWidth="1.2" />
+      <circle cx="60" cy="137" r="7" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="2.5" />
+      <text x="60" y="30" textAnchor="middle" fontSize="12.5" fontWeight="bold" fill="#0F172A">M1 需求与设计</text>
+      <text x="60" y="50" textAnchor="middle" fontSize="10.5" fill="#94A3B8">10-09</text>
+      <text x="60" y="76" textAnchor="middle" fontSize="10.5" fill="#64748B">PRD / 架构 / 数据库</text>
+      <text x="60" y="94" textAnchor="middle" fontSize="10.5" fill="#64748B">/ 原型，四份均过评审</text>
+
+      <line x1="260" y1="137" x2="260" y2="167" stroke="#CBD5E1" strokeWidth="1.2" />
+      <circle cx="260" cy="137" r="7" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="2.5" />
+      <text x="260" y="192" textAnchor="middle" fontSize="12.5" fontWeight="bold" fill="#0F172A">M2 数据与评测</text>
+      <text x="260" y="211" textAnchor="middle" fontSize="10.5" fill="#94A3B8">10-10</text>
+      <text x="260" y="234" textAnchor="middle" fontSize="10.5" fill="#64748B">90 素材 / 270 分块</text>
+      <text x="260" y="252" textAnchor="middle" fontSize="10.5" fill="#64748B">180 条评测集可重建</text>
+
+      <line x1="460" y1="103" x2="460" y2="137" stroke="#CBD5E1" strokeWidth="1.2" />
+      <circle cx="460" cy="137" r="7" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="2.5" />
+      <text x="460" y="30" textAnchor="middle" fontSize="12.5" fontWeight="bold" fill="#0F172A">M3 后端服务</text>
+      <text x="460" y="50" textAnchor="middle" fontSize="10.5" fill="#94A3B8">10-11</text>
+      <text x="460" y="76" textAnchor="middle" fontSize="10.5" fill="#64748B">19 路由 / SSE 流式</text>
+      <text x="460" y="94" textAnchor="middle" fontSize="10.5" fill="#64748B">/ 字段级加密</text>
+
+      <line x1="660" y1="137" x2="660" y2="167" stroke="#CBD5E1" strokeWidth="1.2" />
+      <circle cx="660" cy="137" r="7" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="2.5" />
+      <text x="660" y="192" textAnchor="middle" fontSize="12.5" fontWeight="bold" fill="#0F172A">M4 前端工作台</text>
+      <text x="660" y="211" textAnchor="middle" fontSize="10.5" fill="#94A3B8">10-12</text>
+      <text x="660" y="234" textAnchor="middle" fontSize="10.5" fill="#64748B">六页全链路 / 登录</text>
+      <text x="660" y="252" textAnchor="middle" fontSize="10.5" fill="#64748B">/ Mock 双模离线可跑</text>
+
+      <line x1="860" y1="103" x2="860" y2="137" stroke="#CBD5E1" strokeWidth="1.2" />
+      <circle cx="860" cy="137" r="7" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="2.5" />
+      <text x="860" y="30" textAnchor="middle" fontSize="12.5" fontWeight="bold" fill="#0F172A">M5 测试与文档</text>
+      <text x="860" y="50" textAnchor="middle" fontSize="10.5" fill="#94A3B8">10-13</text>
+      <text x="860" y="76" textAnchor="middle" fontSize="10.5" fill="#64748B">四项指标全达标</text>
+      <text x="860" y="94" textAnchor="middle" fontSize="10.5" fill="#64748B">/ 四份交付文档</text>
+
+      <line x1="1046" y1="137" x2="1046" y2="167" stroke="#06B6D4" strokeWidth="1.2" strokeDasharray="3 2" />
+      <circle cx="1046" cy="137" r="9" fill="#0F172A" stroke="#22D3EE" strokeWidth="2.5" />
+      <text x="1046" y="192" textAnchor="middle" fontSize="12.5" fontWeight="bold" fill="#0F172A">热点 V2 三期</text>
+      <text x="1046" y="211" textAnchor="middle" fontSize="10.5" fill="#06B6D4">10-22 — 10-26</text>
+      <text x="1046" y="234" textAnchor="middle" fontSize="10.5" fill="#64748B">三层模型 / 推荐流</text>
+      <text x="1046" y="252" textAnchor="middle" fontSize="10.5" fill="#64748B">/ 采纳漏斗度量</text>
+    </svg>
+  </Box>
+
+  <Box style={{ flexDirection: 'row', gap: 14, height: 206, marginTop: 14 }}>
+    <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '14px 18px', flexDirection: 'column', boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+      <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#0F172A' }}>交付物即证据链</Text>
+      <Text style={{ fontSize: 12.5, color: '#475569', lineHeight: 1.8, marginTop: 7 }}>
+        每阶段收尾必须留下可查的东西：设计文档、可重建的语料与评测集、与实现一一对应的接口文档、能点通的页面，以及记录偏差的实施清单。
       </Text>
-      <Text style={{ fontSize: 16, color: '#CBD5E1', marginTop: 14, lineHeight: 1.7 }}>
-        阈值 ≥ 90% ｜ 全量 180 条评测任务实测 180/180，五领域全部 100%。
-      </Text>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 18 }}>
-        <FAIcon name='check-circle' style={{ fill: '#06B6D4', width: 20, height: 20 }} />
-        <Text style={{ fontSize: 14, color: '#94A3B8' }}>消融：关闭重排仅 61.1% —— 重排贡献 +38.9pp</Text>
+      <Box style={{ marginTop: 'auto', flexDirection: 'row', gap: 6 }}>
+        <Text style={{ fontSize: 11, color: '#1E40AF', background: '#EFF6FF', borderRadius: 5, padding: '3px 8px' }}>设计文档 4 份</Text>
+        <Text style={{ fontSize: 11, color: '#1E40AF', background: '#EFF6FF', borderRadius: 5, padding: '3px 8px' }}>交付说明 5 份</Text>
+        <Text style={{ fontSize: 11, color: '#1E40AF', background: '#EFF6FF', borderRadius: 5, padding: '3px 8px' }}>偏差表 1 份</Text>
       </Box>
     </Box>
-
-    {/* 右侧三项指标 + 洞察 */}
-    <Box style={{ flex: 1, flexDirection: 'column', gap: 14 }}>
-      <Box style={{ flexDirection: 'row', background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '14px 20px', alignItems: 'center', gap: 18 }}>
-        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#3B82F6', width: 150 }}>100%</Text>
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>平台适配符合率</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>阈值 ≥90% ｜ 54/54 硬性规范（标题长度 / 标签格式 / 数量上限）</Text>
-        </Box>
-        <FAIcon name='check-circle' style={{ fill: '#06B6D4', width: 24, height: 24 }} />
-      </Box>
-      <Box style={{ flexDirection: 'row', background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '14px 20px', alignItems: 'center', gap: 18 }}>
-        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#3B82F6', width: 150 }}>100%</Text>
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>文案一次可用率</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>阈值 ≥80% ｜ 54/54 版本通过结构规则（离线回归基线）</Text>
-        </Box>
-        <FAIcon name='check-circle' style={{ fill: '#06B6D4', width: 24, height: 24 }} />
-      </Box>
-      <Box style={{ flexDirection: 'row', background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '14px 20px', alignItems: 'center', gap: 18 }}>
-        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#3B82F6', width: 150 }}>0.10s</Text>
-        <Box style={{ flex: 1 }}>
-          <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>单篇平均生成耗时</Text>
-          <Text style={{ fontSize: 14, color: '#64748B', marginTop: 2 }}>阈值 ≤15s ｜ 18 任务实测均值 0.10s、最大 0.17s</Text>
-        </Box>
-        <FAIcon name='check-circle' style={{ fill: '#06B6D4', width: 24, height: 24 }} />
-      </Box>
-      <Box style={{ background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.25)', borderRadius: 14, padding: '14px 20px', flex: 1, justifyContent: 'center' }}>
-        <Text style={{ fontSize: 15, color: '#334155', lineHeight: 1.7 }}>
-          数字背后是三次真实迭代：88.9% → 100% 的检索提升，来自补风格加权、召回池 20→40、索引签名自动重建——每个数字都可复现。
-        </Text>
+    <Box style={{ flex: 1, background: '#0F172A', borderRadius: 14, padding: '14px 18px', flexDirection: 'column' }}>
+      <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#FFFFFF' }}>验证方式可执行</Text>
+      <Text style={{ fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.8, marginTop: 7 }}>
+        不靠「我看过了」：表与索引由 init_db 自检断言，接口由端到端脚本串跑，评测基准由脚本重置，前端由 tsc 与构建卡口，界面由冒烟脚本留图。
+      </Text>
+      <Box style={{ marginTop: 'auto', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        <Text style={{ fontSize: 11, color: '#67E8F9' }}>最近一次全绿：init_db 14 表 / 20 索引，端到端 11 步全过</Text>
       </Box>
     </Box>
   </Box>
 
-  {/* C 区页脚 */}
   <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
     <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
       <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />

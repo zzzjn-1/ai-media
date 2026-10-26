@@ -122,9 +122,9 @@ const materials: any[] = [
 ]
 
 let persona: any = {
-  display_name: 'AI 效率观察',
-  positioning: '为内容创作者提供可用的 AI 效率工具与方法论',
-  tone: '专业、克制、有温度',
+  display_name: '一格观察',
+  positioning: '综合自媒体',
+  tone: '专业',
   domains: DOMAINS.join(','),
 }
 
@@ -324,6 +324,125 @@ function saveAdopted() {
 }
 let mockExposed = 0
 
+// 历史创作任务（内存态 + localStorage）：GET /api/copy/{id} 的数据源。
+// 少了这一层，刷新后 taskId 能恢复、版本却取不回来——提示条写着"已恢复"，卡片却是空的，
+// 比不恢复更迷惑。所以 Mock 生成完必须"落库"，而且必须落 localStorage：
+// 纯内存 Map 一刷新就没了，等于这条功能在离线演示下当场失效。
+const MOCK_TASK_KEY = 'mock:copyTasks:v1'
+const MOCK_SEQ_KEY = 'mock:copyTaskSeq:v1'
+const MOCK_TASK_CAP = 20 // 演示用，留最近 20 条够翻
+
+function loadMockTasks(): Map<number, any> {
+  try {
+    const raw = localStorage.getItem(MOCK_TASK_KEY)
+    if (!raw) return new Map()
+    const obj = JSON.parse(raw)
+    return new Map(Object.entries(obj).map(([k, v]) => [Number(k), v]))
+  } catch {
+    return new Map()
+  }
+}
+
+const mockCopyTasks: Map<number, any> = loadMockTasks()
+
+// 序号也要持久化：否则刷新后重新从 5000 起，新任务会覆盖掉上一轮的 id
+let mockTaskSeq = (() => {
+  try {
+    return Math.max(5000, Number(localStorage.getItem(MOCK_SEQ_KEY) || 0) || 0)
+  } catch {
+    return 5000
+  }
+})()
+
+function saveMockTasks() {
+  try {
+    // 超出上限时丢最旧的（Map 保持插入顺序）
+    while (mockCopyTasks.size > MOCK_TASK_CAP) {
+      const oldest = mockCopyTasks.keys().next().value
+      if (oldest === undefined) break
+      mockCopyTasks.delete(oldest)
+    }
+    localStorage.setItem(MOCK_TASK_KEY, JSON.stringify(Object.fromEntries(mockCopyTasks)))
+    localStorage.setItem(MOCK_SEQ_KEY, String(mockTaskSeq))
+  } catch {
+    /* 隐私模式禁用存储时退化成仅本次会话可用 */
+  }
+}
+
+const MOCK_LAYOUT: Record<string, string> = {
+  weixin: '图文长文',
+  xhs: '图文笔记',
+  douyin: '口播脚本',
+}
+const MOCK_NOTE: Record<string, string> = {
+  weixin: '发布备注：正文建议配 3 图，首段含关键词；原创声明可开启。',
+  xhs: '发布备注：首图竖版 3:4，标题含 2 个 emoji 与 1 个话题；正文末引导收藏。',
+  douyin: '发布备注：前 3 秒抛冲突钩子；口播脚本按句断行，配字幕更友好。',
+}
+
+/** 单平台适配结果（Mock）：生成落库与 POST /copy/{id}/adapt 共用，保证两边口径一致 */
+function mockPlatformVersions(platform: string, n: number) {
+  return Array.from({ length: n }).map((_, i) => ({
+    version_no: i + 1,
+    id: 1000 + i,
+    platform,
+    title: `【${platformLabel(platform)}】第 ${i + 1} 版标题`,
+    body: `这是针对${platformLabel(platform)}适配后的第 ${i + 1} 版正文。\n\n已按平台排版规范（${MOCK_LAYOUT[platform]}）调整结构，${
+      platform === 'douyin' ? '改为口语化分镜脚本。' : '保留图文可读性。'
+    }\n\n正文末附话题标签与互动引导，符合平台分发偏好。`,
+    tags: ['AI创作', '效率', platformLabel(platform)],
+    layout_style: MOCK_LAYOUT[platform],
+    export_format: 'txt',
+    truncated: false,
+    note: MOCK_NOTE[platform],
+  }))
+}
+
+// 历史选题（内存态）：真实后端 topics 表会累积历史，Mock 也必须能"记住"，
+// 否则刷新后列表归零，演示时会被当成「历史列表没做完」。
+// 字段与 GET /api/topics 契约一致（created_at 为本地时间字符串，后端已转 localtime）。
+const mockTopics: any[] = [
+  {
+    id: topicId++,
+    hotspot_id: 1,
+    hotspot_domain: '科技',
+    hotspot_signal_id: 1,
+    title: '端侧大模型本地跑起来，创作者真正能用的是哪几个场景',
+    angle: '从「能不能装」转到「装完能干活的场景」',
+    reason: '近期端侧部署讨论集中在跑分，缺可落地的使用场景拆解，适合做干货型内容。',
+    target_audience: '内容创作者、AI 工具爱好者',
+    status: 0,
+    created_at: minsAgo(26),
+    copy_task_id: null,
+  },
+  {
+    id: topicId++,
+    hotspot_id: null,
+    hotspot_domain: null,
+    hotspot_signal_id: null,
+    title: 'AI 写作会不会取代自媒体人？一线创作者访谈',
+    angle: '成本视角：把 AI 当同事而不是替身',
+    reason: '「AI 取代创作者」讨论度高，适合观点型内容建立立场。',
+    target_audience: '关注效率的职场人',
+    status: 1,
+    created_at: hoursAgo(5),
+    copy_task_id: null,
+  },
+  {
+    id: topicId++,
+    hotspot_id: null,
+    hotspot_domain: null,
+    hotspot_signal_id: null,
+    title: '多平台一键分发的坑：同一篇内容改写到不重样',
+    angle: '避坑清单',
+    reason: '跨平台分发是确定性需求，清单体适合新手收藏。',
+    target_audience: '个人成长型用户',
+    status: 0,
+    created_at: hoursAgo(27),
+    copy_task_id: null,
+  },
+]
+
 // ----------------- 路由分发 -----------------
 export const mockApi = {
   async get(path: string): Promise<any> {
@@ -395,6 +514,39 @@ export const mockApi = {
           ...h,
           adopted: adoptedIds.has(h.id),
         })),
+      })
+    }
+    if (path.startsWith('/copy/')) {
+      // 与后端 GET /api/copy/{id} 同契约：任务摘要 + 聚合版本 + 按平台分组。
+      // 找不到时返回 ok:false + 404，让前端走"清本地指针"的同一条分支。
+      const cid = Number(path.split('/')[2])
+      const rec = mockCopyTasks.get(cid)
+      if (!rec) return { ok: false, status: 404, msg: '任务不存在或无权访问' }
+      return ok(rec)
+    }
+    if (path.startsWith('/topics')) {
+      // 与后端 GET /api/topics 同契约：status 可选、q 模糊、按时间倒序、limit/offset 分页
+      const u = new URLSearchParams(path.split('?')[1] || '')
+      const st = u.get('status')
+      const kw = (u.get('q') || '').trim()
+      const limit = Math.max(1, Number(u.get('limit') || 12))
+      const offset = Math.max(0, Number(u.get('offset') || 0))
+      let list = [...mockTopics]
+      if (st !== null && st !== '') list = list.filter((t) => String(t.status) === st)
+      if (kw) {
+        list = list.filter(
+          (t) => (t.title || '').includes(kw) || (t.angle || '').includes(kw),
+        )
+      }
+      // 与后端一致：时间倒序；同一批（同一秒写入）内仍按生成顺序（id 升序）
+      list.sort((a, b) =>
+        a.created_at < b.created_at ? 1 : a.created_at > b.created_at ? -1 : a.id - b.id,
+      )
+      return ok({
+        total: list.length,
+        limit,
+        offset,
+        results: list.slice(offset, offset + limit),
       })
     }
     if (path.startsWith('/materials')) {
@@ -553,9 +705,25 @@ export const mockApi = {
         domain: domain || DOMAINS[i % DOMAINS.length],
       }))
       const topics = [...seeded, ...generic].slice(0, Math.max(3, count))
+      // 落进内存历史列表：真实后端会写 topics 表，Mock 不落就会被「历史列表」当场打脸
+      const now = localTime(new Date())
+      topics.forEach((t) => {
+        mockTopics.unshift({
+          ...t,
+          status: 0,
+          created_at: now,
+          hotspot_id: hot?.id ?? null,
+          hotspot_domain: hot?.domain ?? null,
+          hotspot_signal_id: hot?.signal_id ?? null,
+          copy_task_id: null,
+        })
+      })
       return ok({ domain, signal_id: body?.signal_id, topics })
     }
     if (path.startsWith('/topics/') && path.endsWith('/select')) {
+      const id = Number(path.split('/')[2])
+      const t = mockTopics.find((x) => x.id === id)
+      if (t) t.status = 1
       return ok({})
     }
     if (path.startsWith('/copy/') && path.endsWith('/optimize')) {
@@ -573,28 +741,7 @@ export const mockApi = {
       const taskId = Number(path.split('/')[2])
       const platform = body?.platform || 'weixin'
       const n = taskId ? 3 : 3
-      const layout: Record<string, string> = { weixin: '图文长文', xhs: '图文笔记', douyin: '口播脚本' }
-      const fmt: Record<string, string> = { weixin: 'txt', xhs: 'txt', douyin: 'txt' }
-      const note: Record<string, string> = {
-        weixin: '发布备注：正文建议配 3 图，首段含关键词；原创声明可开启。',
-        xhs: '发布备注：首图竖版 3:4，标题含 2 个 emoji 与 1 个话题；正文末引导收藏。',
-        douyin: '发布备注：前 3 秒抛冲突钩子；口播脚本按句断行，配字幕更友好。',
-      }
-      const versions = Array.from({ length: n }).map((_, i) => ({
-        version_no: i + 1,
-        id: 1000 + i,
-        platform,
-        title: `【${platformLabel(platform)}】第 ${i + 1} 版标题`,
-        body: `这是针对${platformLabel(platform)}适配后的第 ${i + 1} 版正文。\n\n已按平台排版规范（${layout[platform]}）调整结构，${
-          platform === 'douyin' ? '改为口语化分镜脚本。' : '保留图文可读性。'
-        }\n\n正文末附话题标签与互动引导，符合平台分发偏好。`,
-        tags: ['AI创作', '效率', platformLabel(platform)],
-        layout_style: layout[platform],
-        export_format: fmt[platform],
-        truncated: false,
-        note: note[platform],
-      }))
-      return ok({ versions })
+      return ok({ versions: mockPlatformVersions(platform, n) })
     }
     return ok({})
   },
@@ -608,7 +755,9 @@ export async function mockStreamGenerate(
 ): Promise<void> {
   const n = req?.n_versions || 3
   const plats: string[] = req?.target_platforms || ['weixin']
-  const taskId = Math.floor(Math.random() * 9000) + 1000
+  // 递增而不是随机：随机会和已"落库"的任务撞号，刷新后恢复出来是别人的内容
+  const taskId = ++mockTaskSeq
+  const collected: any[] = []
 
   onEvent({ type: 'start', task_id: taskId })
   await sleep(500)
@@ -626,17 +775,53 @@ export async function mockStreamGenerate(
     plats.forEach((p) => {
       adapted[p] = `【${platformLabel(p)}】${req?.topic_title || '选题'}·第${i + 1}版短标题`
     })
-    onEvent({
-      type: 'version',
+    const optimized_body = `这是第 ${i + 1} 个候选版本（共 ${n} 个）。\n\n围绕「${req?.topic_title || '选题'}」，本版本面向「${req?.audience || '关注效率的人群'}」，采用「${req?.tone || '专业'}」口吻，篇幅「${req?.length || '中'}」，创作意图为「${req?.intent || '干货科普'}」。\n\n正文逐段可编辑，并在下方给出平台适配标题与一致性评分，方便你横向对比择优。`
+    collected.push({
       version_no: i + 1,
       title: `版本 ${i + 1}：${req?.topic_title || 'AI 内容创作实战'}`,
-      optimized_body: `这是第 ${i + 1} 个候选版本（共 ${n} 个）。\n\n围绕「${req?.topic_title || '选题'}」，本版本面向「${req?.audience || '关注效率的人群'}」，采用「${req?.tone || '专业'}」口吻，篇幅「${req?.length || '中'}」，创作意图为「${req?.intent || '干货科普'}」。\n\n正文逐段可编辑，并在下方给出平台适配标题与一致性评分，方便你横向对比择优。`,
+      body: optimized_body,
       tags: ['AI', '效率', req?.intent || '干货'],
       adapted,
       style_consistency: ['高', '中高', '高'][i % 3],
       replacement_suggestions: { 非常: '尤为', 可能: '建议' },
     })
+    onEvent({
+      type: 'version',
+      version_no: i + 1,
+      title: collected[i].title,
+      optimized_body,
+      tags: collected[i].tags,
+      adapted,
+      style_consistency: collected[i].style_consistency,
+      replacement_suggestions: collected[i].replacement_suggestions,
+    })
   }
+
+  // "落库"：让刷新后的 GET /copy/{id} 能取回同一份结果
+  const now = new Date()
+  const pad = (x: number) => String(x).padStart(2, '0')
+  mockCopyTasks.set(taskId, {
+    task: {
+      id: taskId,
+      status: 'done',
+      topic_id: req?.topic_id ?? null,
+      topic_title: req?.topic_title || '',
+      target_platforms: plats,
+      target_audience: req?.audience || '',
+      creation_intent: req?.intent || '',
+      tone: req?.tone || '',
+      length: req?.length || '',
+      persona_voice: req?.persona_voice || '',
+      created_at: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(
+        now.getHours(),
+      )}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`,
+    },
+    platforms: plats,
+    versions: collected,
+    by_platform: Object.fromEntries(plats.map((p) => [p, mockPlatformVersions(p, n)])),
+  })
+  saveMockTasks()
+
   onEvent({
     type: 'done',
     task_id: taskId,

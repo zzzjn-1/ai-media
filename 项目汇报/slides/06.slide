@@ -1,18 +1,44 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+<Slide style={{ width: 1280, height: 720, padding: '0 84px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(circle at 18% 46%, rgba(59,130,246,0.20) 0%, rgba(15,23,42,0) 58%)' }} />
 
-<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
-  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(900px 520px at 82% 28%, rgba(6,182,212,0.14) 0%, rgba(15,23,42,0) 65%)' }} />
-
-  <Box style={{ position: 'absolute', left: 80, top: 0, width: 1280, height: 720, flexDirection: 'row', alignItems: 'center', gap: 56 }}>
-    <Text style={{ fontSize: 150, fontWeight: 'bold', lineHeight: 1.0, letterSpacing: -6, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
-      02
-    </Text>
-    <Box style={{ width: 640 }}>
-      <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#FFFFFF' }}>技术方案</Text>
-      <Box style={{ width: 72, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
-      <Text style={{ fontSize: 20, color: '#CBD5E1', marginTop: 22, lineHeight: 1.7 }}>
-        四层系统架构与四项关键技术：检索、编排、安全、流式各自闭环，合起来支撑「离线可跑、接 Key 即用」。
+  <Box style={{ position: 'relative', flexDirection: 'row', alignItems: 'center', gap: 56, height: 720 }}>
+    <Box style={{ width: 380 }}>
+      <Text style={{ fontSize: 15, color: '#67E8F9', letterSpacing: 5 }}>CHAPTER TWO</Text>
+      <Text style={{ fontSize: 210, fontWeight: 'bold', lineHeight: 0.9, letterSpacing: -10, marginTop: 6, backgroundImage: 'linear-gradient(160deg, #60A5FA 0%, #22D3EE 100%)', backgroundClip: 'text', color: 'transparent' }}>
+        02
       </Text>
+      <Box style={{ width: 52, height: 3, background: '#06B6D4', borderRadius: 2, marginTop: 18 }} />
+      <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#FFFFFF', marginTop: 22 }}>技术方案</Text>
+    </Box>
+
+    <Box style={{ flex: 1 }}>
+      <Text style={{ fontSize: 18, color: '#CBD5E1', lineHeight: 1.8 }}>
+        系统能跑起来靠的是三条技术主线，这一章逐条拆开：架构怎么分层、热榜怎么从六个来源变成可比的数据、推荐又怎么被度量。
+      </Text>
+
+      <Box style={{ flexDirection: 'column', gap: 14, marginTop: 34 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(148,163,184,0.22)', borderRadius: 12, padding: '16px 20px' }}>
+          <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#38BDF8', letterSpacing: -1, width: 44 }}>07</Text>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>分层架构与三条架构决策</Text>
+            <Text style={{ fontSize: 13.5, color: '#94A3B8', marginTop: 3 }}>五层职责边界 · 两阶段检索 · 字段加密 · 流式输出</Text>
+          </Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(148,163,184,0.22)', borderRadius: 12, padding: '16px 20px' }}>
+          <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#38BDF8', letterSpacing: -1, width: 44 }}>08</Text>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>热点采集的三层数据模型</Text>
+            <Text style={{ fontSize: 13.5, color: '#94A3B8', marginTop: 3 }}>原始层留证据 · 聚合层做可比 · 物化层保读性能</Text>
+          </Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(148,163,184,0.22)', borderRadius: 12, padding: '16px 20px' }}>
+          <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#38BDF8', letterSpacing: -1, width: 44 }}>09</Text>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>推荐流与采纳漏斗</Text>
+            <Text style={{ fontSize: 13.5, color: '#94A3B8', marginTop: 3 }}>五因子打分 · 命中不足不凑数 · 曝光到出题的三级度量</Text>
+          </Box>
+        </Box>
+      </Box>
     </Box>
   </Box>
 </Slide>

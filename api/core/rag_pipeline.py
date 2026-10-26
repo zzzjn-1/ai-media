@@ -22,8 +22,8 @@ import re
 from collections import Counter
 
 from ..config import RERANK_TOP_K, RECALL_TOP_K, RETRIEVAL_DOMAIN_FILTER
-from .embeddings import embed_one
-from .llm import get_llm
+from .embeddings import EmbeddingService
+from .llm import get_llm, clean_body
 from .platform_adapter import get_adapter
 from .prompts import build_optimize_prompt, build_generate_prompt
 from .rerank import rerank
@@ -50,21 +50,38 @@ def _load_langchain():
 
 def retrieve(query: str, domain: str | None = None, k: int = RERANK_TOP_K,
              style: str | None = None):
-    """两阶段检索：FAISS 粗排召回 → 重排取 Top-K（计划书 4.1.3 / 4.5）。
+    """两阶段检索：召回 → 重排取 Top-K（计划书 4.1.3 / 4.5）。
+
+    召回阶段分两种口径：
+      - bge 后端：FAISS 语义粗排 RECALL_TOP_K 条（真正的语义召回）。
+      - offline 后端：**直接全量召回**。offline 向量是「字符 2-gram 哈希 + 随机符号」
+        （dim=256），碰撞严重、不含语义，拿它做 Top-40 粗排等于给重排喂半个随机抽样，
+        把真正该入选的块挡在候选池外。语料只有几百块，全量交给重排的成本是可接受的
+        （实测单次 retrieve 仍在 10ms 量级），结果也更可解释。
+        ⚠️ 这一层不能解决「语料本身与选题无关」——那是语料质量问题，不是检索算法问题
+        （2026-10-26 实测：真实选题标题与合成语料的二元组重合率≈0）。
 
     style 为风格提示（专业/轻松/犀利），透传给重排做同风格加权；
     缺省时重排内部会尝试从 query 文本自动识别。
     """
     store = get_store()
     store.ensure_ready()
-    qv = embed_one(query)
-    recall_k = max(RECALL_TOP_K, k)
-    # 领域过滤仅在粗排阶段作为软约束；重排阶段会再做同领域加权
-    hits = store.search(qv, k=recall_k,
-                        domain=domain if RETRIEVAL_DOMAIN_FILTER else None)
-    if not hits and domain:
-        # 同领域无命中时放宽领域约束，避免检索直接落空
-        hits = store.search(qv, k=recall_k)
+    emb = EmbeddingService.get()
+    if emb.backend == "bge":
+        qv = emb.embed_one(query)
+        recall_k = max(RECALL_TOP_K, k)
+        # 领域过滤仅在召回阶段作为软约束；重排阶段会再做同领域加权
+        hits = store.search(qv, k=recall_k,
+                            domain=domain if RETRIEVAL_DOMAIN_FILTER else None)
+        if not hits and domain:
+            # 同领域无命中时放宽领域约束，避免检索直接落空
+            hits = store.search(qv, k=recall_k)
+    else:
+        ids, doms = list(store.chunk_ids), getattr(store, "domains", [])
+        if RETRIEVAL_DOMAIN_FILTER and domain:
+            same = [cid for cid, d in zip(ids, doms) if domain in (d or "")]
+            ids = same or ids          # 同领域为空时放宽，避免检索落空
+        hits = [(cid, 0.0) for cid in ids]
     chunks = store.fetch_chunks([h[0] for h in hits])
     return rerank(query, chunks, top_k=k, domain=domain, style=style)
 
@@ -94,10 +111,24 @@ def optimize_text(version: dict, spec: dict):
     length = spec.get("length") or "中"
     voice = spec.get("persona_voice") or spec.get("persona_positioning") or ""
     system, user = build_optimize_prompt(version, tone, length, voice)
+    raw_body = clean_body(version.get("body", "")) or (version.get("body") or "")
     if llm.backend == "mock":
-        opt_body = llm._mock_optimize(version.get("body", ""))
+        opt_body = llm._mock_optimize(raw_body)
     else:
-        opt_body = llm.complete(system, user, temperature=0.7)
+        # token 预算必须按入参长度给：默认 1200 只够重写 ~800 字，
+        # 900 字以上的正文会被截在半句上（实测出现过 25 字的"正文"）。
+        budget = max(1200, int(len(raw_body) * 1.8) + 400)
+        opt_body = clean_body(
+            llm.complete(system, user, temperature=0.7, max_tokens=budget))
+        if not (opt_body or "").strip():
+            # 优化返回空串（或清理后为空）时宁可回落原文，也不能把空正文交给 SSE/落库
+            print("[生成] 风格优化返回空内容，回落使用原文")
+            opt_body = raw_body
+        elif raw_body and opt_body[-1] not in "。！？!?…」』”\"'）)0123456789":
+            # 结尾没有句末标点且比原文短很多 → 判为截断，回落原文
+            if len(opt_body) < 0.8 * len(raw_body):
+                print(f"[生成] 优化结果疑似截断（{len(opt_body)}/{len(raw_body)} 字且结尾无标点），回落原文")
+                opt_body = raw_body
     consistency = _consistency_report(version, spec)
     suggestions = _homogeneity_suggestions(opt_body)
     return opt_body, consistency, suggestions
@@ -155,12 +186,20 @@ def _compose_versions(spec: dict, retrieved_texts: list) -> list:
     return llm.generate_versions(gen_spec)
 
 
-def generate(spec: dict) -> dict:
-    """主链路：检索 → 重排 → 多版本生成 → 风格优化 → 多平台适配。"""
+def generate(spec: dict, on_event=None) -> dict:
+    """主链路：检索 → 重排 → 多版本生成 → 风格优化 → 多平台适配。
+
+    on_event(dict)：可选进度回调。传了就在关键节点吐出 SSE 事件，
+    让前端能"边生成边显示"，而不是等整批跑完才一次性出现（实测整批 40–70s）。
+    不传时行为与改造前完全一致（eval 脚本仍按批调用）。
+    """
     query = f"{spec.get('topic_title','')} {spec.get('domain','')} {spec.get('intent','')}"
     chunks = retrieve(query, domain=spec.get("domain"), style=spec.get("style"),
                       k=RERANK_TOP_K)
     retrieved_texts = [c["content"] for c in chunks]
+    if on_event:
+        on_event({"type": "retrieved", "chunk_count": len(chunks),
+                  "snippets": [c["content"][:60] for c in chunks][:3]})
 
     raw_versions = _compose_versions(spec, retrieved_texts)
     n_versions = max(3, len(raw_versions))
@@ -171,6 +210,13 @@ def generate(spec: dict) -> dict:
     versions = []
     for i, v in enumerate(raw_versions):
         opt_body, consistency, suggestions = optimize_text(v, spec)
+        # 双保险：优化层已回落到原文；这里再兜一次，空正文的版本一律不入列，
+        # 否则前端会出现一张"只有标题、正文空白"的卡片（2026-10-26 实际出现）
+        if not (opt_body or "").strip():
+            opt_body = (v.get("body") or "").strip()
+        if not opt_body:
+            print(f"[生成] 第 {i + 1} 版正文为空，已跳过（不计入版本数）")
+            continue
         adapted = {}
         for p in target_platforms:
             if not p:
@@ -186,6 +232,21 @@ def generate(spec: dict) -> dict:
             "replacement_suggestions": suggestions,
             "adapted": adapted,
         })
+        if on_event:
+            # 逐版推送：前端第 1 版可以先读起来，不用干等后面两版
+            on_event({
+                "type": "version",
+                "version_no": i + 1,
+                "title": v.get("title", ""),
+                "optimized_body": opt_body,
+                "tags": v.get("tags", []),
+                "adapted": {p: ad.get("title") for p, ad in adapted.items()},
+                "style_consistency": consistency,
+                "replacement_suggestions": suggestions,
+            })
+    # 跳版后重新编号，保证前端卡片顺序是 版本1..N（不留空洞）
+    for idx, v in enumerate(versions):
+        v["version_no"] = idx + 1
     return {"retrieved": retrieved_texts, "chunks": chunks, "versions": versions}
 
 

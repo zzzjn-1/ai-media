@@ -108,6 +108,61 @@ def generate(req: GenerateReq, user=Depends(get_current_user)):
     return {"ok": True, "domain": domain, "signal_id": req.signal_id, "topics": created}
 
 
+_LIST_COLS = """
+    t.id, t.hotspot_id, t.title, t.angle, t.reason, t.target_audience,
+    t.status,
+    datetime(t.created_at, 'localtime') AS created_at,
+    h.domain AS hotspot_domain,
+    h.signal_id AS hotspot_signal_id,
+    (SELECT MAX(c.id) FROM copy_tasks c WHERE c.topic_id = t.id) AS copy_task_id
+"""
+
+
+@router.get("")
+def list_topics(status: int | None = None, q: str | None = None,
+                limit: int = 12, offset: int = 0,
+                user=Depends(get_current_user)):
+    """历史选题列表（F2 补齐）。
+
+    改造前只有 `POST /topics/generate`，页面刷新即空 —— 库里几十上百条历史选题
+    没有任何入口，「一键选用」也只是一次性的。这里按创建时间倒序分页返回。
+
+    - `status`：0=待选用 / 1=已选用；不传=全部
+    - `q`：标题或切入角度关键词（LIKE，与素材列表同口径）
+    - `created_at` 统一转本地时间：库里 `datetime('now')` 存的是 **UTC**，
+      直接回给前端会比本地时间早 8 小时（刚生成的选题显示成 8 小时前）
+    """
+    limit = max(1, min(int(limit or 12), 100))
+    offset = max(0, int(offset or 0))
+
+    where = ["t.user_id = ?"]
+    args: list = [user["id"]]
+    if status in (0, 1):
+        where.append("t.status = ?")
+        args.append(status)
+    kw = (q or "").strip()
+    if kw:
+        where.append("(t.title LIKE ? OR t.angle LIKE ?)")
+        args += [f"%{kw}%", f"%{kw}%"]
+
+    w = " AND ".join(where)
+    conn = get_conn()
+    try:
+        total = conn.execute(
+            f"SELECT COUNT(*) AS c FROM topics t WHERE {w}", tuple(args)
+        ).fetchone()["c"]
+        rows = conn.execute(
+            f"SELECT {_LIST_COLS} FROM topics t "
+            f"LEFT JOIN hotspots h ON h.id = t.hotspot_id "
+            f"WHERE {w} ORDER BY t.created_at DESC, t.id ASC LIMIT ? OFFSET ?",
+            tuple(args) + (limit, offset),
+        ).fetchall()
+    finally:
+        conn.close()
+    return {"ok": True, "total": total, "limit": limit, "offset": offset,
+            "results": [dict(r) for r in rows]}
+
+
 @router.post("/{topic_id}/select")
 def select_topic(topic_id: int, user=Depends(get_current_user)):
     conn = get_conn()

@@ -96,6 +96,12 @@ export interface Topic {
   angle?: string
   reason?: string
   target_audience?: string
+  status?: number // 0=待选用 1=已选用
+  created_at?: string // 后端已转本地时间
+  hotspot_id?: number | null
+  hotspot_domain?: string | null
+  hotspot_signal_id?: number | null
+  copy_task_id?: number | null
 }
 
 export interface Persona {

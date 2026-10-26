@@ -21,7 +21,8 @@
 
 **核心设计原则（落实计划书 2.2.5「配置项外置」与 7.4「API 限流→降级」）：**
 - **可插拔 Provider**：LLM（`MockLLM` 离线 / `OpenAILLM` OpenAI 兼容）、Embedding（`BGE` 语义 / `offline` 确定性哈希）。无 API Key、无模型权重时后端**离线可运行、可被评测**。
-- **两阶段检索**（4.1.3 / 4.5）：FAISS 粗排召回 `RECALL_TOP_K`（默认 20）→ 重排取 `RERANK_TOP_K`（默认 5）。重排策略由 `RERANK_STRATEGY` 控制：`lexical`（默认，零依赖确定性）/ `cross`（cross-encoder，失败自动降级）/ `off`（消融用）。
+- **两阶段检索**（4.1.3 / 4.5）：FAISS 粗排召回 `RECALL_TOP_K`（默认 40）→ 重排取 `RERANK_TOP_K`（默认 5）。重排策略由 `RERANK_STRATEGY` 控制：`lexical`（默认，零依赖确定性）/ `cross`（cross-encoder，失败自动降级）/ `off`（消融用）。
+  - **offline 后端不做哈希粗排**（2026-10-26）：offline 向量是「字符 2-gram 哈希 + 随机符号」（dim=256），碰撞严重且不含语义，用它取 Top-40 等于给重排喂半个随机抽样（只覆盖 270 块语料的 15%）。故 `rag_pipeline.retrieve()` 在 `embedding_backend != bge` 时**直接全量召回**（实测量级 ~9ms），候选池不再是运气的产物。`bge` 后端仍走 FAISS 粗排。
 - **字段级加密**：素材标题/正文经 `db/security.py`（Fernet + 派生密钥）加密存储，密钥来自环境变量 `DB_FIELD_KEY`。
 - **JWT 鉴权**：`pyjwt` HS256，默认 72h 过期，Bearer 令牌经 `api/deps.py` 校验。
 
@@ -96,7 +97,7 @@ data/（M2 交付，本阶段刷新）
 
 ---
 
-## 四、API 端点对照（计划书 4.3 基线 14 端点 / 15 方法；V2 热点改造后当前 18 路由）
+## 四、API 端点对照（计划书 4.3 基线 14 端点 / 15 方法；当前实测 21 路由 / 22 方法）
 
 > 实测：`/openapi.json` 暴露 **15 个路径 / 16 个 HTTP 方法**。其中 `/api/health` 为运维存活探针（不计入计划书 14 端点）；功能端点恰为 **14 个**，且 `/api/persona` 含 GET+POST 两方法，合计 **15 个 HTTP 方法**，与计划书完全一致。所有 `copy/generate` 为 **SSE 流式**。
 
@@ -106,23 +107,25 @@ data/（M2 交付，本阶段刷新）
 | 2 | POST | `/api/auth/login` | F6 | 登录（签发 JWT） |
 | 3 | GET | `/api/health` | 运维 | 存活 + 后端状态 + 各表计数（额外，不入 14） |
 | 4 | GET | `/api/hotspots` | F1 | 热点推荐流（`view=feed\|all`、`domain`/`platform`/`new_only`/`limit`；带 token 时个性化排序） |
-| 5 | POST | `/api/topics/generate` | F2 | 选题生成（≥3 条） |
-| 6 | POST | `/api/topics/{topic_id}/select` | F2 | 选用选题 |
-| 7 | GET | `/api/materials` | F1 | 素材列表 / 语义+关键词检索 |
-| 8 | POST | `/api/materials/import` | F1 | 素材导入（自动分块入库） |
-| 9 | POST | `/api/materials/{id}/tag` | F1 | 素材打标（平台/领域/风格/标签） |
-| 10 | POST | `/api/materials/{id}/embed` | F1 | 重建 FAISS 向量索引 |
-| 11 | POST | `/api/copy/generate` | F3 | 文案生成（SSE，≥3 版本） |
-| 12 | POST | `/api/copy/{task_id}/optimize` | F4 | 风格优化 |
-| 13 | POST | `/api/copy/{task_id}/adapt` | F5 | 平台适配（支持生成后追加新平台） |
-| 14 | GET/POST | `/api/persona` | F6 | 人设配置（**1 端点 2 方法**） |
-| 15 | POST | `/api/export` | F5 | 导出 txt / docx（含发布备注） |
-| 16 | GET | `/api/materials/{id}/chunks` | F1 | 素材分块预览（M4 新增，解密正文） |
-| 17 | POST | `/api/hotspots/refresh` | F1 | 加速刷新（**需鉴权** + 最小间隔 + 来源数上限 + 批次复用） |
-| 18 | GET | `/api/hotspots/status` | F1 | 采集健康状态 + 近 7 天成功率与 P95 + **采纳漏斗**（**需鉴权**） |
-| 19 | POST | `/api/hotspots/events` | F1 | 推荐流事件上报 `expose`/`adopt`（**需鉴权**，采纳率的分母与分子） |
+| 5 | GET | `/api/topics` | F2 | 历史选题列表（`status`/`q`/`limit`/`offset` 分页，**新增**） |
+| 6 | POST | `/api/topics/generate` | F2 | 选题生成（≥3 条） |
+| 7 | POST | `/api/topics/{topic_id}/select` | F2 | 选用选题 |
+| 8 | GET | `/api/materials` | F1 | 素材列表 / 语义+关键词检索 |
+| 9 | POST | `/api/materials/import` | F1 | 素材导入（自动分块入库） |
+| 10 | POST | `/api/materials/{id}/tag` | F1 | 素材打标（平台/领域/风格/标签） |
+| 11 | POST | `/api/materials/{id}/embed` | F1 | 重建 FAISS 向量索引 |
+| 12 | POST | `/api/copy/generate` | F3 | 文案生成（SSE，≥3 版本） |
+| 13 | GET | `/api/copy/{task_id}` | F3 | 历史创作任务读取（摘要 + 聚合版本 + 按平台分组，**新增**，供刷新恢复） |
+| 14 | POST | `/api/copy/{task_id}/optimize` | F4 | 风格优化 |
+| 15 | POST | `/api/copy/{task_id}/adapt` | F5 | 平台适配（支持生成后追加新平台） |
+| 16 | GET/POST | `/api/persona` | F6 | 人设配置（**1 端点 2 方法**） |
+| 17 | POST | `/api/export` | F5 | 导出 txt / docx（含发布备注） |
+| 18 | GET | `/api/materials/{id}/chunks` | F1 | 素材分块预览（M4 新增，解密正文） |
+| 19 | POST | `/api/hotspots/refresh` | F1 | 加速刷新（**需鉴权** + 最小间隔 + 来源数上限 + 批次复用） |
+| 20 | GET | `/api/hotspots/status` | F1 | 采集健康状态 + 近 7 天成功率与 P95 + **采纳漏斗**（**需鉴权**） |
+| 21 | POST | `/api/hotspots/events` | F1 | 推荐流事件上报 `expose`/`adopt`（**需鉴权**，采纳率的分母与分子） |
 
-> **口径校准（V2 热点改造 + P2-7 埋点后）**：计划书 4.3 基线为 M3 完成时实测「14 端点 / 15 方法」；M4 新增素材分块预览、选题选用、创作优化等；**V2 热点采集改造新增 `POST /api/hotspots/refresh` 与 `GET /api/hotspots/status`**；**P2-7 新增 `POST /api/hotspots/events`**。截至当前代码实装共 **19 路由 / 20 HTTP 方法**（含 `/api/health` 探针），**18 个功能端点**（persona 含 GET+POST 计为 1 端点 2 方法）。`api/main.py` 注释已同步更新。
+> **口径校准（V2 热点改造 + P2-7 埋点 + 选题历史列表 + 流程恢复后）**：计划书 4.3 基线为 M3 完成时实测「14 端点 / 15 方法」；M4 新增素材分块预览、选题选用、创作优化等；**V2 热点采集改造新增 `POST /api/hotspots/refresh` 与 `GET /api/hotspots/status`**；**P2-7 新增 `POST /api/hotspots/events`**；**P2-8 新增 `GET /api/topics`**（此前选题只有「生成」没有「读回」，页面刷新即空，库里历史选题无任何入口）；**P2-9 新增 `GET /api/copy/{task_id}`**（此前创作任务也只能写不能读，刷新丢 taskId 后适配页直接回空态）。截至当前代码实装共 **21 路由 / 22 HTTP 方法**（含 `/api/health` 探针），**20 个功能端点**（persona 含 GET+POST 计为 1 端点 2 方法）。`api/main.py` 注释已同步更新。
 
 ---
 
@@ -172,6 +175,15 @@ data/（M2 交付，本阶段刷新）
   响应：`{ok, action, recorded, deduped?}`
 
 ### 5.3 选题 F2
+- **GET `/api/topics?status=0&q=折叠屏&limit=12&offset=0`**（P2-8 新增，需鉴权）  
+  历史选题列表。改造前 F2 只有「生成」没有「读回」：`POST /topics/generate` 的响应只存在页面内存里，**刷新即空**，库里累积的历史选题没有任何入口。
+  - `status`：`0` 待选用 / `1` 已选用；不传 = 全部（非法值忽略，不报错）
+  - `q`：`title` 或 `angle` 模糊匹配（与素材列表同口径）
+  - `limit` 默认 12、上限 100；`offset` 越界返回空数组
+  - 排序：`created_at DESC, id ASC`。**同一批生成的多条共用一个 `created_at`（秒级）**，用 `id ASC` 保证批内顺序与生成响应一致
+  - `created_at` 已用 `datetime(created_at,'localtime')` 转成本地时间——库里 `DEFAULT (datetime('now'))` 存的是 **UTC**，直接回给前端会早 8 小时（刚生成的选题显示成"8 小时前"）
+  响应：`{ok, total, limit, offset, results:[{id, hotspot_id, title, angle, reason, target_audience, status, created_at, hotspot_domain, hotspot_signal_id, copy_task_id}]}`  
+  > `copy_task_id` = 该选题已产出文案的最近一次任务（`MAX(copy_tasks.id)`）；`hotspot_*` 来自 `LEFT JOIN hotspots`，非热点出题为 `null`。
 - **POST `/api/topics/generate`**  
   请求：`{domain?:str, count:int=3, signal_id?:int}`  
   - `signal_id`（V2.1 二期新增，**可选**）：热点看板「用它做选题」直传。传了就以该热点为主输入——标题进 prompt（并要求至少 1 条选题围绕它）、其**主领域覆盖** `domain`、且 `topics.hotspot_id` 落地外键。
@@ -206,6 +218,10 @@ data/（M2 交付，本阶段刷新）
   请求：`{platform:str}`  
   响应：`{ok, task_id, platform, versions:[{version_no,id,platform,title,body,tags,layout_style,export_format,truncated,note}]}`（`note` 为平台发布备注，M4 新增）  
   说明：若该平台尚无适配行，自动从已有版本补建（支持生成后追加新平台分发）。
+
+- **GET `/api/copy/{task_id}`**（P2-9 新增，**需鉴权**）  
+  响应：`{ok, task:{id,status,topic_id,topic_title,target_platforms,target_audience,creation_intent,tone,length,persona_voice,created_at}, platforms:[str], versions:[{version_no,title,body,tags,style_consistency,replacement_suggestions,adapted}], by_platform:{平台码:[{id,version_no,title,body,tags,style_consistency,replacement_suggestions,layout_style,export_format,truncated,note}]}}`  
+  说明：**只读不重算**——不调优化、不调适配，避免"刷新一次白烧一次 LLM"。`versions` 按 `target_platforms[0]` 的正文聚合（供生成页恢复），`by_platform` 供适配页直接复用已落库的适配结果。`layout_style`/`export_format`/`truncated`/`note` 因表中无对应列，按 `platform_rules` 现算以保持与 `adapt` 响应同构。任务不存在或不属于当前用户 → **404**。`created_at` 已转本地时间。
 
 ### 5.6 人设 F6
 - **GET `/api/persona`** → `{ok, persona:{display_name,positioning,tone,domains}}`
@@ -257,6 +273,10 @@ event: error    {type:"error", task_id, msg}   （异常时；任务状态置 fa
 |---|---|---|---|
 | 离线哈希（`offline`） | 70.4% | 97.2% | **+26.8pp** |
 | **BGE 语义（`bge`，dim=1024）** | 93.5% | **100.0%** | **+6.5pp** |
+
+> **2026-10-26 复测（V1.2.0 评测集 180 条 / 当前库）**：先发现评测集 gold 素材 id 与重建后的库完全对不上（152–241 vs 2–91），命中率恒为 **0%**——这是评测集漂移的假故障，不是检索坏了；`data/build_eval_set.py` 重建后 offline + 重排 = **180/180 = 100%**。`api/eval_retrieval.py` 已内置漂移自检（gold 在库中不存在的任务数 > 0 即告警）。
+>
+> **BGE 是否默认开：暂不**。本机 `sentence-transformers` 已装、`BAAI/bge-large-zh` 权重已在 HF 缓存，实测加载 27.9s、编码 270 块 59.2s（CPU）、dim=1024，但对同一批查询的 Top-5 关键指标（查询二元组覆盖率 / 同领域占比 / 重排分）**与 offline 完全一致**（真实选题标题 kw 均 ≈0.00–0.04，评测集查询 kw 均 0.28）。原因是**语料侧没有可检索的语义**：90 篇语料是「大模型 / 算力 / 端侧推理」这类模板句，与真实热点标题二元组重合≈0。结论：检索相关性的瓶颈在语料质量，不在向量后端；要提升请换真实往期文案语料。另：加载时若无 `HF_HUB_OFFLINE=1` 会被出站代理打成 502，`EmbeddingService` 已加「BGE 失败自动回落 offline」保护。
 
 **结论：**
 1. **BGE 已实测跑通**（`sentence-transformers` 6.1.0 + `BAAI/bge-large-zh`，dim=1024，加载 22.6s，索引 168 向量重建 23.9s），T3.1「BGE 向量化」不再是未验证代码分支。

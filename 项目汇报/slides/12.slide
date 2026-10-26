@@ -1,18 +1,103 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-
-<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
-  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(880px 500px at 80% 26%, rgba(6,182,212,0.15) 0%, rgba(15,23,42,0) 66%)' }} />
-
-  <Box style={{ position: 'absolute', left: 80, top: 0, width: 1280, height: 720, flexDirection: 'row', alignItems: 'center', gap: 56 }}>
-    <Text style={{ fontSize: 150, fontWeight: 'bold', lineHeight: 1.0, letterSpacing: -6, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
-      04
-    </Text>
-    <Box style={{ width: 640 }}>
-      <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#FFFFFF' }}>难点与应对</Text>
-      <Box style={{ width: 72, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
-      <Text style={{ fontSize: 20, color: '#CBD5E1', marginTop: 22, lineHeight: 1.7 }}>
-        四个真实难点：词表不一致、索引陈旧、口径漂移、凭证失真——每个都有根因拆解与可验证的修复证据。
-      </Text>
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', background: '#F8FAFC' }}>
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
+      <Box>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>数据与评测成果</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>计划书四项指标阈值 vs 实测，全部达标；热点侧给真实刷新与命中率</Text>
+      </Box>
     </Box>
+  </Box>
+
+  <Box style={{ flexDirection: 'row', gap: 24, height: 396 }}>
+    <Box style={{ width: 404, background: '#0F172A', borderRadius: 18, padding: '30px 30px 26px', flexDirection: 'column' }}>
+      <Text style={{ fontSize: 14, color: '#67E8F9', letterSpacing: 2 }}>素材检索 Top-5 命中率</Text>
+      <Text style={{ fontSize: 104, fontWeight: 'bold', lineHeight: 1.02, letterSpacing: -5, marginTop: 8, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
+        100%
+      </Text>
+      <Text style={{ fontSize: 15, color: '#CBD5E1', marginTop: 12, lineHeight: 1.7 }}>
+        阈值 ≥ 90%｜全量 180 条任务实测 180/180，五个领域各自 100%。
+      </Text>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 14 }}>
+        <Box style={{ width: 16, height: 16, borderRadius: 8, background: '#06B6D4', alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: 10, color: '#0F172A', fontWeight: 'bold' }}>✓</Text>
+        </Box>
+        <Text style={{ fontSize: 12.5, color: '#94A3B8' }}>消融：关闭重排仅 61.1%，重排贡献 +38.9pp</Text>
+      </Box>
+      <Box style={{ marginTop: 'auto', borderTop: '1px solid rgba(148,163,184,0.25)', paddingTop: 14 }}>
+        <Text style={{ fontSize: 12.5, color: '#94A3B8', lineHeight: 1.7 }}>
+          从 88.9% 到 100% 的三次迭代：补风格加权、召回池 20→40、索引签名自动重建。
+        </Text>
+      </Box>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'column', gap: 12 }}>
+      <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20, boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+        <Text style={{ fontSize: 42, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -2, width: 142 }}>100%</Text>
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 16.5, fontWeight: 'bold', color: '#0F172A' }}>平台适配符合率</Text>
+          <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 3 }}>阈值 ≥90%｜54/54 通过标题长度、标签格式、数量上限等硬性规范</Text>
+        </Box>
+        <Text style={{ fontSize: 12, color: '#06B6D4', fontWeight: 'bold' }}>达标</Text>
+      </Box>
+      <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20, boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+        <Text style={{ fontSize: 42, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -2, width: 142 }}>100%</Text>
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 16.5, fontWeight: 'bold', color: '#0F172A' }}>文案一次可用率</Text>
+          <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 3 }}>阈值 ≥80%｜54/54 版本通过结构规则校验（离线回归基线口径）</Text>
+        </Box>
+        <Text style={{ fontSize: 12, color: '#06B6D4', fontWeight: 'bold' }}>达标</Text>
+      </Box>
+      <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 22px', flexDirection: 'row', alignItems: 'center', gap: 20, boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+        <Text style={{ fontSize: 42, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -2, width: 142 }}>0.10s</Text>
+        <Box style={{ flex: 1 }}>
+          <Text style={{ fontSize: 16.5, fontWeight: 'bold', color: '#0F172A' }}>单篇平均生成耗时</Text>
+          <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 3 }}>阈值 ≤15s｜18 个任务实测均值 0.10s、最大 0.17s（离线口径）</Text>
+        </Box>
+        <Text style={{ fontSize: 12, color: '#06B6D4', fontWeight: 'bold' }}>达标</Text>
+      </Box>
+    </Box>
+  </Box>
+
+  <Box style={{ height: 108, marginTop: 12, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 24px', flexDirection: 'row', alignItems: 'center', boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+    <Box style={{ width: 168 }}>
+      <Text style={{ fontSize: 12, color: '#94A3B8', letterSpacing: 1 }}>HOTSPOT V2</Text>
+      <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#0F172A', marginTop: 3 }}>热点侧实测</Text>
+      <Text style={{ fontSize: 11.5, color: '#64748B', marginTop: 2 }}>真实网络，非模拟数据</Text>
+    </Box>
+    <Box style={{ width: 1, height: 56, background: '#E2E8F0' }} />
+    <Box style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around' }}>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#0F172A' }}>100</Text>
+        <Text style={{ fontSize: 11.5, color: '#64748B', marginTop: 1 }}>条 / 次刷新</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#0F172A' }}>1.98s</Text>
+        <Text style={{ fontSize: 11.5, color: '#64748B', marginTop: 1 }}>全量采集耗时</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#0F172A' }}>5 / 6</Text>
+        <Text style={{ fontSize: 11.5, color: '#64748B', marginTop: 1 }}>来源可用</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#0F172A' }}>25.7%</Text>
+        <Text style={{ fontSize: 11.5, color: '#64748B', marginTop: 1 }}>垂类命中率（扩词后）</Text>
+      </Box>
+      <Box style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#F59E0B' }}>1.1%</Text>
+        <Text style={{ fontSize: 11.5, color: '#64748B', marginTop: 1 }}>单日最低命中率</Text>
+      </Box>
+    </Box>
+    <Text style={{ fontSize: 11.5, color: '#94A3B8', width: 150, lineHeight: 1.6 }}>
+      命中率日间波动极大，产品按「可能只有一两条」设计
+    </Text>
+  </Box>
+
+  <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>AI 自媒体内容创作助手 · 项目汇报</Text>
+    </Box>
+    <Text style={{ fontSize: 14, color: '#94A3B8' }}>12 / 14</Text>
   </Box>
 </Slide>

@@ -1,17 +1,25 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-
-<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+<Slide style={{ width: 1280, height: 720, padding: '0 84px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
   <Image src="assets/section_visual.png" style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, objectFit: 'cover' }} />
-  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'linear-gradient(90deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.55) 55%, rgba(15,23,42,0.30) 100%)' }} />
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'linear-gradient(95deg, rgba(15,23,42,0.93) 0%, rgba(15,23,42,0.62) 52%, rgba(15,23,42,0.30) 100%)' }} />
 
-  <Box style={{ position: 'absolute', left: 80, top: 216, width: 900 }}>
-    <Text style={{ fontSize: 120, fontWeight: 'bold', lineHeight: 1.0, letterSpacing: -4, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
-      01
-    </Text>
-    <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#FFFFFF', marginTop: 10 }}>项目概况</Text>
-    <Box style={{ width: 72, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
-    <Text style={{ fontSize: 20, color: '#CBD5E1', marginTop: 22, lineHeight: 1.6 }}>
-      产品定位、五步核心闭环与六大功能模块全景
+  <Box style={{ position: 'relative', height: 720, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+      <Box style={{ width: 8, height: 8, borderRadius: 4, background: '#06B6D4' }} />
+      <Text style={{ fontSize: 15, color: '#67E8F9', letterSpacing: 5 }}>CHAPTER ONE</Text>
+    </Box>
+
+    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 34, marginTop: 10 }}>
+      <Text style={{ fontSize: 190, fontWeight: 'bold', lineHeight: 0.92, letterSpacing: -8, backgroundImage: 'linear-gradient(135deg, #60A5FA 0%, #22D3EE 100%)', backgroundClip: 'text', color: 'transparent' }}>
+        01
+      </Text>
+      <Box style={{ paddingBottom: 26 }}>
+        <Text style={{ fontSize: 62, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.15 }}>项目概况</Text>
+        <Box style={{ width: 56, height: 3, background: '#06B6D4', borderRadius: 2, marginTop: 16 }} />
+      </Box>
+    </Box>
+
+    <Text style={{ fontSize: 19, color: '#CBD5E1', marginTop: 30, lineHeight: 1.8, width: 720 }}>
+      先回答三个问题：为谁解决什么、闭环怎么串起来、现在已经做到多大规模。
     </Text>
   </Box>
 </Slide>

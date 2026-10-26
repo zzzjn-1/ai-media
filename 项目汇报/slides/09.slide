@@ -1,18 +1,105 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-
-<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
-  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(820px 480px at 78% 72%, rgba(59,130,246,0.16) 0%, rgba(15,23,42,0) 66%)' }} />
-
-  <Box style={{ position: 'absolute', left: 80, top: 0, width: 1280, height: 720, flexDirection: 'row', alignItems: 'center', gap: 56 }}>
-    <Text style={{ fontSize: 150, fontWeight: 'bold', lineHeight: 1.0, letterSpacing: -6, backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', backgroundClip: 'text', color: 'transparent' }}>
-      03
-    </Text>
-    <Box style={{ width: 640 }}>
-      <Text style={{ fontSize: 54, fontWeight: 'bold', color: '#FFFFFF' }}>实现过程</Text>
-      <Box style={{ width: 72, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
-      <Text style={{ fontSize: 20, color: '#CBD5E1', marginTop: 22, lineHeight: 1.7 }}>
-        五个里程碑、每阶段「文档先行 → 实现 → 评审 → 修复」闭环，全部结论有评测数据背书。
-      </Text>
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', background: '#F8FAFC' }}>
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
+      <Box>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>推荐流与采纳漏斗</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>推荐得准不准，不能靠感觉——三级埋点把它变成可读的数字</Text>
+      </Box>
     </Box>
+  </Box>
+
+  <Box style={{ flexDirection: 'row', gap: 20, height: 520 }}>
+    <Box style={{ width: 512, flexDirection: 'column', gap: 12 }}>
+      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: 12, boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
+        <Image src="assets/shots/p3_real_feed.png" style={{ width: 488, height: 339, borderRadius: 10, objectFit: 'cover', border: '1px solid #E2E8F0' }} />
+        <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 10, lineHeight: 1.65 }}>
+          真实界面：当天仅 4 条命中垂类，卡片上依次是可用的领域、归一化热度、建议角度、来源与榜内名次，以及「用它做选题」入口。
+        </Text>
+      </Box>
+      <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 12, padding: '10px 14px', justifyContent: 'center' }}>
+        <Text style={{ fontSize: 12.5, color: '#0F172A', fontWeight: 'bold' }}>推荐打分五因子（权重和 1.0）</Text>
+        <Box style={{ flexDirection: 'row', gap: 6, marginTop: 7 }}>
+          <Box style={{ flex: 3, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)', borderRadius: 6, padding: '5px 0', alignItems: 'center' }}>
+            <Text style={{ fontSize: 11, color: '#FFFFFF' }}>领域 .30</Text>
+          </Box>
+          <Box style={{ flex: 2.5, background: '#EFF6FF', borderRadius: 6, padding: '5px 0', alignItems: 'center' }}>
+            <Text style={{ fontSize: 11, color: '#1E40AF' }}>新颖 .25</Text>
+          </Box>
+          <Box style={{ flex: 2, background: '#EFF6FF', borderRadius: 6, padding: '5px 0', alignItems: 'center' }}>
+            <Text style={{ fontSize: 11, color: '#1E40AF' }}>覆盖 .20</Text>
+          </Box>
+          <Box style={{ flex: 1.5, background: '#EFF6FF', borderRadius: 6, padding: '5px 0', alignItems: 'center' }}>
+            <Text style={{ fontSize: 11, color: '#1E40AF' }}>热度 .15</Text>
+          </Box>
+          <Box style={{ flex: 1, background: '#EFF6FF', borderRadius: 6, padding: '5px 0', alignItems: 'center' }}>
+            <Text style={{ fontSize: 11, color: '#1E40AF' }}>可写 .10</Text>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'column', gap: 12 }}>
+      <Box style={{ height: 272, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 16px', boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
+        <svg width="588" height="248" viewBox="0 0 588 248">
+          <defs>
+            <linearGradient id="gF" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#3B82F6" />
+              <stop offset="100%" stopColor="#06B6D4" />
+            </linearGradient>
+          </defs>
+
+          <rect x="6" y="8" width="404" height="56" rx="9" fill="#0F172A" />
+          <text x="24" y="32" fontSize="13.5" fontWeight="bold" fill="#FFFFFF">曝光 EXPOSE</text>
+          <text x="24" y="52" fontSize="11" fill="#94A3B8">前端渲染完成后上报，按屏记条数 —— 这就是分母</text>
+
+          <rect x="6" y="80" width="256" height="56" rx="9" fill="url(#gF)" />
+          <text x="24" y="104" fontSize="13.5" fontWeight="bold" fill="#FFFFFF">采纳 ADOPT</text>
+          <text x="24" y="124" fontSize="11" fill="#E0F2FE">点「用它做选题」，带上点在第几名</text>
+
+          <rect x="6" y="152" width="150" height="56" rx="9" fill="#0F172A" />
+          <text x="24" y="176" fontSize="13" fontWeight="bold" fill="#FFFFFF">出题 GENERATE</text>
+          <text x="24" y="196" fontSize="10.5" fill="#94A3B8">仅服务端写入</text>
+
+          <text x="278" y="104" fontSize="11.5" fontWeight="bold" fill="#0F172A">ctr = 采纳 ÷ 曝光</text>
+          <text x="278" y="120" fontSize="10.5" fill="#64748B">推荐得准不准</text>
+
+          <text x="172" y="176" fontSize="11.5" fontWeight="bold" fill="#0F172A">转化 = 出题 ÷ 采纳</text>
+          <text x="172" y="192" fontSize="10.5" fill="#64748B">选题好不好用</text>
+
+          <line x1="6" y1="224" x2="582" y2="224" stroke="#E2E8F0" strokeWidth="1" />
+          <text x="6" y="242" fontSize="10.5" fill="#94A3B8">无曝光时 ctr 返回空值而不是 0 —— 0 会被读成「没人点」，结论正好相反</text>
+        </svg>
+      </Box>
+
+      <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '14px 16px', flexDirection: 'column', boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+        <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#0F172A' }}>两个指标必须一起看</Text>
+        <Box style={{ flexDirection: 'row', gap: 10, marginTop: 8 }}>
+          <Box style={{ flex: 1, background: '#F8FAFC', borderRadius: 8, padding: '8px 10px' }}>
+            <Text style={{ fontSize: 12, color: '#334155', lineHeight: 1.65 }}>
+              <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#3B82F6' }}>ctr 低于 5%</Text>
+              ：推荐本身不准，该调五因子权重与领域词表。
+            </Text>
+          </Box>
+          <Box style={{ flex: 1, background: '#F8FAFC', borderRadius: 8, padding: '8px 10px' }}>
+            <Text style={{ fontSize: 12, color: '#334155', lineHeight: 1.65 }}>
+              <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#3B82F6' }}>转化低于 50%</Text>
+              ：推荐准了但题不好用，问题在选题质量而非排序。
+            </Text>
+          </Box>
+        </Box>
+        <Text style={{ fontSize: 12, color: '#64748B', lineHeight: 1.7, marginTop: 'auto' }}>
+          只看 ctr 会把推荐调成标题党，只看转化会误判成排序问题。命中不足时我们不拿综合类补数——补进来的往往是时政与体育。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+
+  <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>AI 自媒体内容创作助手 · 项目汇报</Text>
+    </Box>
+    <Text style={{ fontSize: 14, color: '#94A3B8' }}>09 / 14</Text>
   </Box>
 </Slide>

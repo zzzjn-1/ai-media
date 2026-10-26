@@ -21,7 +21,17 @@ async function request<T = ApiResult>(path: string, options: RequestInit = {}): 
   // Mock 模式：直接走前端 Mock 数据层（无需后端）
   if (USE_MOCK) {
     const method = (options.method || 'GET').toUpperCase()
-    return (method === 'GET' ? mockApi.get(path) : mockApi.post(path, options.body ? JSON.parse(options.body as string) : undefined)) as Promise<T>
+    const r: any =
+      method === 'GET'
+        ? await mockApi.get(path)
+        : await mockApi.post(path, options.body ? JSON.parse(options.body as string) : undefined)
+    // 与真实链路同口径：ok:false 必须抛错，否则"任务不存在"会被当成成功、前端拿到 undefined
+    if (r && r.ok === false) {
+      const err = new Error(r.msg || 'Mock 请求失败')
+      ;(err as any).status = r.status || 400
+      throw err
+    }
+    return r as T
   }
 
   const headers = new Headers(options.headers)
@@ -38,7 +48,11 @@ async function request<T = ApiResult>(path: string, options: RequestInit = {}): 
         setToken()
         window.dispatchEvent(new Event('auth:unauthorized'))
       }
-      throw new Error(data?.msg || `请求失败 (${res.status})`)
+      // detail 是 FastAPI HTTPException 的标准字段（如 404 任务不存在）：
+      // 只读 msg 会退化成「请求失败 (404)」，用户看不出是任务没了还是服务挂了。
+      const err = new Error(data?.msg || data?.detail || `请求失败 (${res.status})`)
+      ;(err as any).status = res.status
+      throw err
     }
     return data as T
   }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Skeleton, Button } from 'antd'
 import { api, downloadExport } from '../api/client'
@@ -19,7 +19,7 @@ const filterBtn = (active: boolean) =>
 
 export default function Adapt() {
   const navigate = useNavigate()
-  const { taskId, targetPlatforms } = useFlow()
+  const { taskId, targetPlatforms, setTask } = useFlow()
   const message = useMessage()
   const [active, setActive] = useState<string>(targetPlatforms[0] || 'weixin')
   const [data, setData] = useState<Record<string, CopyVersion[]>>({})
@@ -39,10 +39,58 @@ export default function Adapt() {
     }
   }
 
+  // React.StrictMode 在 dev 下会把 effect 跑两遍 → 每个平台被适配两次（白烧一次 LLM 调用）。
+  // 用 ref 记住已适配过的 taskId，第二次进入直接跳过。
+  // ⚠️ 必须配 cleanup 复位：StrictMode 的第一次 mount 会在请求飞行途中被卸载，
+  // 那次结果会被 alive 守卫丢掉；若 ref 还在开头就置位，第二次 mount 直接被挡住，
+  // 页面就永远停在骨架屏（2026-10-26 实测踩到）。
+  const adaptedTaskRef = useRef<number | null>(null)
+  const [restoring, setRestoring] = useState(false)
+
   useEffect(() => {
-    if (taskId) {
-      targetPlatforms.forEach((c) => loadPlatform(c))
-      setActive(targetPlatforms[0] || 'weixin')
+    if (!taskId) return
+    if (adaptedTaskRef.current === taskId) return
+    adaptedTaskRef.current = taskId
+
+    let alive = true
+    setRestoring(true)
+
+    // 恢复优先：刷新后先去后端取"已经适配好的"版本。
+    // 之前是无条件重跑一遍所有平台的适配——纯规则虽不烧 LLM，但页面每次刷新都要等，
+    // 而且会重写库里的行。这里只对「后端还没有」的平台补适配。
+    api
+      .get<any>(`/copy/${taskId}`)
+      .then((r) => {
+        if (!alive) return
+        const bp: Record<string, CopyVersion[]> = r.by_platform || {}
+        if (Object.keys(bp).length) setData((prev) => ({ ...bp, ...prev }))
+        targetPlatforms
+          .filter((p) => !(bp[p] || []).length)
+          .forEach((p) => loadPlatform(p))
+        // 默认落在第一个有内容的平台，否则恢复后可能停在"该平台暂无适配结果"
+        const withData = targetPlatforms.filter((p) => (bp[p] || []).length)
+        setActive(withData[0] || targetPlatforms[0] || 'weixin')
+      })
+      .catch((e: any) => {
+        if (!alive) return
+        if (e?.status === 404) {
+          // 任务被清理或换了账号：清掉本地指针，别让用户对着一个永远空白的页面猜
+          setTask(null)
+          message.warning('上次的创作任务已不存在，已清除本地记录')
+          return
+        }
+        // 读接口失败（网络抖动等）时退回老行为：直接逐个平台适配
+        targetPlatforms.forEach((p) => loadPlatform(p))
+        setActive(targetPlatforms[0] || 'weixin')
+      })
+      .finally(() => {
+        if (alive) setRestoring(false)
+      })
+
+    return () => {
+      alive = false
+      // 本轮的请求结果已作废（StrictMode 卸载 / 切换任务），把标记还回去让下一次能跑
+      if (adaptedTaskRef.current === taskId) adaptedTaskRef.current = null
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taskId])
@@ -100,7 +148,7 @@ export default function Adapt() {
         ))}
       </div>
 
-      {loading && !versions.length ? (
+      {(loading || restoring) && !versions.length ? (
         <div className="space-y-4">
           {Array.from({ length: 2 }).map((_, i) => (
             <div key={i} className="bg-white border border-line rounded-card p-4 shadow-card">

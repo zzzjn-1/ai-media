@@ -1,90 +1,39 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+<Slide style={{ width: 1280, height: 720, padding: '0 84px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(circle at 78% 30%, rgba(6,182,212,0.16) 0%, rgba(15,23,42,0) 60%)' }} />
 
-<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
-  {/* A 区标题块 */}
-  <Box style={{ height: 100, justifyContent: 'center' }}>
-    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
+  <Box style={{ position: 'relative', height: 720, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 15, color: '#67E8F9', letterSpacing: 5 }}>CHAPTER THREE</Text>
+
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 36, marginTop: 8 }}>
+      <Text style={{ fontSize: 168, fontWeight: 'bold', lineHeight: 0.95, letterSpacing: -8, backgroundImage: 'linear-gradient(135deg, #93C5FD 0%, #22D3EE 100%)', backgroundClip: 'text', color: 'transparent' }}>
+        03
+      </Text>
       <Box>
-        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>M1 – M5 里程碑</Text>
-        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>五阶段推进节奏：需求设计 → 数据 → 后端 → 前端 → 测试优化</Text>
+        <Text style={{ fontSize: 58, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.1 }}>实现与验证</Text>
+        <Text style={{ fontSize: 17, color: '#94A3B8', marginTop: 10 }}>从计划到可复现的数字</Text>
       </Box>
     </Box>
-  </Box>
 
-  {/* B 区：上时间轴 + 下两卡 */}
-  <Box style={{ flexDirection: 'column', gap: 20, height: 520 }}>
-    {/* 时间轴（上 58%） */}
-    <Box style={{ height: 300, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 16, padding: '20px 24px', boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
-      <svg width="1104" height="256" viewBox="0 0 1104 256">
-        <defs>
-          <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#06B6D4" />
-          </linearGradient>
-        </defs>
-        {/* 主轴 */}
-        <line x1="60" y1="86" x2="1044" y2="86" stroke="url(#tlGrad)" strokeWidth="3" />
-        {/* 节点 */}
-        <g>
-          <circle cx="130" cy="86" r="12" fill="#3B82F6" />
-          <text x="130" y="60" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#0F172A">M1</text>
-          <text x="130" y="122" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0F172A">需求与设计</text>
-          <text x="130" y="146" textAnchor="middle" fontSize="12.5" fill="#64748B">PRD / 架构 / 数据库</text>
-        </g>
-        <g>
-          <circle cx="328" cy="86" r="12" fill="#3B82F6" />
-          <text x="328" y="60" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#0F172A">M2</text>
-          <text x="328" y="122" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0F172A">数据工程</text>
-          <text x="328" y="146" textAnchor="middle" fontSize="12.5" fill="#64748B">90 语料 / 270 分块</text>
-        </g>
-        <g>
-          <circle cx="526" cy="86" r="12" fill="#3B82F6" />
-          <text x="526" y="60" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#0F172A">M3</text>
-          <text x="526" y="122" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0F172A">后端服务</text>
-          <text x="526" y="146" textAnchor="middle" fontSize="12.5" fill="#64748B">14 端点 + SSE + 加密</text>
-        </g>
-        <g>
-          <circle cx="724" cy="86" r="12" fill="#3B82F6" />
-          <text x="724" y="60" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#0F172A">M4</text>
-          <text x="724" y="122" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0F172A">前端工作台</text>
-          <text x="724" y="146" textAnchor="middle" fontSize="12.5" fill="#64748B">六页 + Mock 演示</text>
-        </g>
-        <g>
-          <circle cx="922" cy="86" r="12" fill="#06B6D4" />
-          <text x="922" y="60" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#0F172A">M5</text>
-          <text x="922" y="122" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0F172A">测试与优化</text>
-          <text x="922" y="146" textAnchor="middle" fontSize="12.5" fill="#64748B">四指标达标 + 拆包</text>
-        </g>
-        {/* 底部注释条 */}
-        <rect x="60" y="182" width="984" height="52" rx="10" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1" />
-        <text x="552" y="214" textAnchor="middle" fontSize="13.5" fill="#64748B">每个阶段结束均有评审报告与可复现验证记录（M1–M4 审查报告 + M5 测试报告）</text>
-      </svg>
-    </Box>
+    <svg width="1112" height="132" viewBox="0 0 1112 132" style={{ marginTop: 30 }}>
+      <line x1="4" y1="26" x2="1108" y2="26" stroke="rgba(148,163,184,0.32)" strokeWidth="1.5" />
+      <circle cx="10" cy="26" r="6" fill="#3B82F6" />
+      <circle cx="556" cy="26" r="6" fill="#06B6D4" />
+      <circle cx="1102" cy="26" r="6" fill="#22D3EE" />
+      <text x="4" y="58" fontSize="12" fill="#64748B" letterSpacing="1">起点</text>
+      <text x="4" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">计划书 M1–M5</text>
+      <text x="4" y="104" fontSize="11.5" fill="#94A3B8">需求 → 数据 → 后端 → 前端 → 测试</text>
 
-    {/* 下方两卡 */}
-    <Box style={{ flexDirection: 'row', gap: 20, flex: 1 }}>
-      <Box style={{ flex: 1, background: '#0F172A', borderRadius: 14, padding: '18px 22px' }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>交付纪律</Text>
-        <Text style={{ fontSize: 15, color: '#CBD5E1', marginTop: 8, lineHeight: 1.7 }}>
-          文档先行再落码，每轮「生成 → 自审 → 人类评审 → 按 P0–P3 分级修复」；文档随代码同步升版，杜绝「代码走了、文档没走」。
-        </Text>
-      </Box>
-      <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '18px 22px' }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>验证方式</Text>
-        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 8, lineHeight: 1.7 }}>
-          类型检查 + 构建门禁、180 条评测集全量复跑、真实后端冒烟（登录 / 检索 / 选题 / 生成 SSE）、浏览器截图取证——每项结论可复现。
-        </Text>
-      </Box>
-    </Box>
-  </Box>
+      <text x="490" y="58" fontSize="12" fill="#64748B" letterSpacing="1">验收</text>
+      <text x="490" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">四项指标全部达标</text>
+      <text x="490" y="104" fontSize="11.5" fill="#94A3B8">检索 / 适配 / 可用率 / 耗时</text>
 
-  {/* C 区页脚 */}
-  <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-      <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
-      <Text style={{ fontSize: 14, color: '#94A3B8' }}>AI 自媒体内容创作助手 · 项目汇报</Text>
-    </Box>
-    <Text style={{ fontSize: 14, color: '#94A3B8' }}>10 / 14</Text>
+      <text x="880" y="58" fontSize="12" fill="#64748B" letterSpacing="1">当前</text>
+      <text x="880" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">热点采集三期重构</text>
+      <text x="880" y="104" fontSize="11.5" fill="#94A3B8">真实采集 → 推荐流 → 漏斗度量</text>
+    </svg>
+
+    <Text style={{ fontSize: 18, color: '#CBD5E1', marginTop: 26, lineHeight: 1.8, width: 900 }}>
+      这一章只讲两件事：交付过程是不是有纪律，以及指标能不能被独立复现。顺手把踩过的坑一起摊开。
+    </Text>
   </Box>
 </Slide>

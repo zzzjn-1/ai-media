@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Select, Skeleton, Spin } from 'antd'
 import { api, streamGenerate } from '../api/client'
@@ -20,10 +20,16 @@ const filterBtn = (active: boolean) =>
 
 export default function Generate() {
   const navigate = useNavigate()
-  const { topicTitle, targetPlatforms, setTask, setTopic, setPlatforms } = useFlow()
+  // taskId 只从 FlowContext 取：它才是被持久化的那个指针。
+  // ⚠️ 这里曾经另有一个同名局部 state（useState(null)），恢复 effect 读的是局部值（永远是
+  // null），于是刷新后恢复一次都没真正发起过，页面看起来像「什么都没恢复」（2026-10-26 实测）。
+  const { taskId, topicTitle, topicId, targetPlatforms, setTask, setTopic, setPlatforms } = useFlow()
   const message = useMessage()
 
   const [topic, setTopicTitle] = useState(topicTitle)
+  // 选题来源：从选题列表带进来的 topic.id。用户一旦手改标题就解除关联，
+  // 免得把这次文案挂到一条不相干的选题上（copy_tasks.topic_id 是外键）。
+  const [linkTopicId, setLinkTopicId] = useState<number | null>(topicId)
   const [plats, setPlats] = useState<string[]>(targetPlatforms.length ? targetPlatforms : ['weixin'])
   const [audience, setAudience] = useState('关注效率的人群')
   const [intent, setIntent] = useState('干货科普')
@@ -37,9 +43,75 @@ export default function Generate() {
   const [snippets, setSnippets] = useState<string[]>([])
   const [generating, setGenerating] = useState(false)
   const [genSeconds, setGenSeconds] = useState<number | null>(null)
-  const [taskId, setTaskId] = useState<number | null>(null)
   const [optimizing, setOptimizing] = useState(false)
   const [error, setError] = useState('')
+  const [restoring, setRestoring] = useState(false)
+  const [restoredAt, setRestoredAt] = useState('')
+
+  // 刷新后恢复：FlowContext 已把 taskId 持久化，这里据此把上次的版本从后端读回来。
+  //
+  // ⚠️ 这里踩过一个坑：最初把「已恢复」标记在 effect 开头就置位，配合 alive 守卫，在
+  // StrictMode（dev 下 mount→unmount→mount）里变成——第一次请求发出后被 cleanup 判为
+  // alive=false、结果丢弃；第二次 mount 看到标记又直接 return。两边都不干活，页面永远空白。
+  // 现在改成「成功/失败之后才置位」，第二次 mount 会正当地再请求一次（GET 幂等，很便宜）。
+  const restoredRef = useRef(false)
+
+  useEffect(() => {
+    if (restoredRef.current) return
+    if (!taskId) {
+      restoredRef.current = true
+      return
+    }
+    let alive = true
+    setRestoring(true)
+    api
+      .get<any>(`/copy/${taskId}`)
+      .then((r) => {
+        if (!alive) return
+        restoredRef.current = true
+        const vs: CopyVersion[] = r.versions || []
+        if (vs.length) setVersions(vs)
+        if (r.task?.target_platforms?.length) {
+          setPlats(r.task.target_platforms)
+          setPlatforms(r.task.target_platforms)
+        }
+        // 输入框为空时才回填（用户可能已经在框里改过标题了）
+        if (r.task?.topic_title && !topic.trim()) {
+          setTopicTitle(r.task.topic_title)
+          setTopic(r.task.topic_title, r.task.topic_id)
+          setLinkTopicId(r.task.topic_id ?? null)
+        }
+        setRestoredAt(r.task?.created_at || '')
+        if (vs.length && r.task?.status === 'running') {
+          message.warning('上次生成似乎被中断了，只恢复了已产出的版本')
+        }
+      })
+      .catch((e: any) => {
+        if (!alive) return
+        restoredRef.current = true
+        // 只有"任务确实没了"才清指针；网络抖动不该把用户的上次进度抹掉
+        if (e?.status === 404) {
+          setTask(null)
+          message.warning('上次的创作任务已不存在，已清除本地记录')
+        }
+      })
+      .finally(() => {
+        if (alive) setRestoring(false)
+      })
+    return () => {
+      alive = false
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function clearRestored() {
+    setVersions([])
+    setEdits({})
+    setSnippets([])
+    setGenSeconds(null)
+    setRestoredAt('')
+    setTask(null)
+  }
 
   async function onGenerate() {
     if (!topic.trim()) {
@@ -52,9 +124,10 @@ export default function Generate() {
     setEdits({})
     setSnippets([])
     setGenSeconds(null)
-    setTaskId(null)
+    setTask(null)
 
     const req = {
+      topic_id: linkTopicId ?? undefined,
       topic_title: topic,
       target_platforms: plats,
       audience,
@@ -67,7 +140,7 @@ export default function Generate() {
 
     const onEvent = (e: SSEEvent) => {
       if (e.type === 'start') {
-        setTaskId(e.task_id ?? null)
+        setTask(e.task_id ?? null)
       } else if (e.type === 'retrieved') {
         setSnippets(e.snippets || [])
       } else if (e.type === 'version') {
@@ -86,7 +159,6 @@ export default function Generate() {
       } else if (e.type === 'done') {
         setGenerating(false)
         setGenSeconds(e.generation_seconds ?? null)
-        setTaskId(e.task_id ?? null)
         setPlatforms(e.target_platforms || plats)
         setTask(e.task_id ?? null)
       } else if (e.type === 'error') {
@@ -139,6 +211,18 @@ export default function Generate() {
     return edits[v.version_no] !== undefined ? edits[v.version_no] : v.body
   }
 
+  // 替换建议可能是字符串 / 数组 / {原词: 建议词} 三种形状（Mock 与真实后端不同），
+  // 直接 JSON.stringify 会把引号和花括号显示给用户（实测截图里就是 ["「首发阶段」…"]）。
+  function suggestionText(s: any): string {
+    if (!s) return ''
+    if (typeof s === 'string') return s
+    if (Array.isArray(s)) return s.map((x) => String(x)).join('；')
+    if (typeof s === 'object') {
+      return Object.entries(s).map(([k, v]) => `${k} → ${v}`).join('；')
+    }
+    return String(s)
+  }
+
   const toneOpts = ['专业', '轻松', '犀利', '温暖', '幽默']
   const lenOpts = ['短', '中', '长']
 
@@ -159,7 +243,8 @@ export default function Generate() {
             value={topic}
             onChange={(e) => {
               setTopicTitle(e.target.value)
-              setTopic(e.target.value)
+              setTopic(e.target.value) // 不带 id：手改标题即与选题解除关联
+              setLinkTopicId(null)
             }}
             className={`${inputCls} mb-3`}
             placeholder="如：AI 写作会不会取代自媒体人？"
@@ -265,7 +350,30 @@ export default function Generate() {
             </div>
           )}
 
-          {versions.length === 0 && !generating && (
+          {restoredAt && versions.length > 0 && (
+            <div className="bg-brand-soft text-brand rounded-lg p-3 mb-3 text-[13px] flex flex-wrap items-center justify-between gap-2">
+              <span>
+                已恢复上次生成结果 · 任务 ID {taskId}
+                {restoredAt ? ` · ${restoredAt}` : ''}
+              </span>
+              <button
+                onClick={clearRestored}
+                className="text-[12px] underline underline-offset-2 hover:opacity-70"
+              >
+                清空重来
+              </button>
+            </div>
+          )}
+
+          {restoring && versions.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-20 border border-dashed border-line-strong rounded-card bg-white/60">
+              <Spin tip="正在恢复上次生成…" size="large">
+                <div className="w-24 h-24" />
+              </Spin>
+            </div>
+          )}
+
+          {versions.length === 0 && !generating && !restoring && (
             <div className="text-muted text-center py-20 border border-dashed border-line-strong rounded-card bg-white/60">
               点击「一键生成」查看多版本结果（SSE 流式逐条产出）
             </div>
@@ -318,9 +426,9 @@ export default function Generate() {
                   </div>
                 )}
 
-                {v.replacement_suggestions && (
+                {suggestionText(v.replacement_suggestions) && (
                   <div className="mt-2 text-[12px] text-warn">
-                    替换建议：{JSON.stringify(v.replacement_suggestions)}
+                    替换建议：{suggestionText(v.replacement_suggestions)}
                   </div>
                 )}
               </div>

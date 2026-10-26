@@ -1,33 +1,24 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
+<Slide style={{ width: 1280, height: 720, padding: '0 120px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(circle at 50% 42%, rgba(59,130,246,0.20) 0%, rgba(15,23,42,0) 62%)' }} />
 
-<Slide style={{ width: 1280, height: 720, padding: 0, fontFamily: FONT, position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
-  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(760px 420px at 50% 34%, rgba(59,130,246,0.20) 0%, rgba(15,23,42,0) 68%)' }} />
-  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, background: 'radial-gradient(620px 340px at 50% 96%, rgba(6,182,212,0.14) 0%, rgba(15,23,42,0) 70%)' }} />
+  <Box style={{ position: 'relative', height: 720, alignItems: 'center', justifyContent: 'center' }}>
+    <Text style={{ fontSize: 14, color: '#67E8F9', letterSpacing: 6 }}>SUMMARY</Text>
 
-  <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 720, alignItems: 'center', justifyContent: 'center', padding: '0 160px' }}>
-    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 30 }}>
-      <Box style={{ width: 8, height: 8, borderRadius: 4, background: '#06B6D4' }} />
-      <Text style={{ fontSize: 16, color: '#67E8F9', letterSpacing: 4 }}>结语 · CLOSING</Text>
+    <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center', lineHeight: 1.45, marginTop: 26 }}>
+      能演示 · 能复现 · 能度量
+    </Text>
+
+    <Box style={{ width: 64, height: 3, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 30 }} />
+
+    <Text style={{ fontSize: 17, color: '#CBD5E1', textAlign: 'center', lineHeight: 2, marginTop: 30, width: 820 }}>
+      计划书四项量化指标全部达成，热点采集从接入真实数据到度量推荐效果也已闭环。
+      接下来不做无数据支撑的优化——先把真实使用攒起来，再让数字决定改什么。
+    </Text>
+
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 18, marginTop: 46 }}>
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>项目组</Text>
+      <Box style={{ width: 1, height: 12, background: '#475569' }} />
+      <Text style={{ fontSize: 14, color: '#94A3B8' }}>2026-10-26</Text>
     </Box>
-    <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center', lineHeight: 1.4 }}>
-      指标全部达成，<br />方法可以复用。
-    </Text>
-    <Text style={{ fontSize: 18, color: '#CBD5E1', textAlign: 'center', marginTop: 26, lineHeight: 1.75 }}>
-      计划书 6.2 四项量化指标全部达标；「文档先行、唯一真源、证据交付」的协作方法，可复用于任何 AI 辅助工程项目。
-    </Text>
-    <Box style={{ flexDirection: 'row', gap: 14, marginTop: 34 }}>
-      <Box style={{ background: 'rgba(59,130,246,0.14)', border: '1px solid rgba(59,130,246,0.4)', borderRadius: 999, padding: '8px 20px' }}>
-        <Text style={{ fontSize: 15, color: '#BAE6FD' }}>检索命中率 100%</Text>
-      </Box>
-      <Box style={{ background: 'rgba(59,130,246,0.14)', border: '1px solid rgba(59,130,246,0.4)', borderRadius: 999, padding: '8px 20px' }}>
-        <Text style={{ fontSize: 15, color: '#BAE6FD' }}>适配符合率 100%</Text>
-      </Box>
-      <Box style={{ background: 'rgba(59,130,246,0.14)', border: '1px solid rgba(59,130,246,0.4)', borderRadius: 999, padding: '8px 20px' }}>
-        <Text style={{ fontSize: 15, color: '#BAE6FD' }}>一次可用率 100%</Text>
-      </Box>
-    </Box>
-    <Text style={{ fontSize: 14, color: '#475569', marginTop: 44 }}>
-      AI 自媒体内容创作助手 · 项目汇报 ｜ 2026-10-12 ｜ 感谢评审
-    </Text>
   </Box>
 </Slide>

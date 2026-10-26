@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Select, Skeleton, Button } from 'antd'
+import { Select, Skeleton, Button, Input, Tag } from 'antd'
 import { api } from '../api/client'
 import type { Topic } from '../api/types'
 import { DOMAINS } from '../api/types'
@@ -18,20 +18,79 @@ interface HotspotSeed {
   suggestion?: string
 }
 
+const PAGE = 12
+
+const chip = (active: boolean) =>
+  `px-3 py-1.5 rounded-full text-[13px] border transition-colors duration-200 ${
+    active
+      ? 'bg-brand text-white border-brand shadow-sm'
+      : 'bg-white text-ink/70 border-line hover:border-brand/40 hover:text-brand'
+  }`
+
+const STATUS_TABS: { key: string; label: string; value?: number }[] = [
+  { key: 'all', label: '全部' },
+  { key: 'pending', label: '待选用', value: 0 },
+  { key: 'selected', label: '已选用', value: 1 },
+]
+
 export default function Topics() {
   const navigate = useNavigate()
   const location = useLocation()
   const { setTopic } = useFlow()
   const message = useMessage()
+
   const [topics, setTopics] = useState<Topic[]>([])
+  const [total, setTotal] = useState(0)
   const [domain, setDomain] = useState<string | undefined>(undefined)
   const [count, setCount] = useState(3)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false) // 生成中（LLM，慢）
+  const [listLoading, setListLoading] = useState(true) // 历史列表首屏
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [statusTab, setStatusTab] = useState('all')
+  const [keyword, setKeyword] = useState('')
   const [seed, setSeed] = useState<HotspotSeed | null>(null)
+  // 刚生成的这一批：给卡片挂「新生成」标记，方便在一堆历史里认出来
+  const [freshIds, setFreshIds] = useState<number[]>([])
+
   // 严格模式（dev 下 React.StrictMode）会把 effect 跑两遍。这里是**昂贵的**副作用
   // （一次真实 LLM 出题，十几秒 + 真金白银），跑两遍还会让「出题数」翻倍，
   // 把采纳漏斗的第三级直接污染。用 location.key 做幂等键：同一次跳转只出一批题。
   const seededKey = useRef('')
+
+  function tabValue(key: string): number | undefined {
+    return STATUS_TABS.find((t) => t.key === key)?.value
+  }
+
+  /** 拉历史选题（服务端分页）。reset=true 时从头替换，否则追加。 */
+  async function loadHistory(opts?: { reset?: boolean; statusKey?: string; kw?: string }) {
+    const reset = opts?.reset !== false
+    const key = opts?.statusKey ?? statusTab
+    const kw = opts?.kw ?? keyword
+    const offset = reset ? 0 : topics.length
+    if (reset) setListLoading(true)
+    else setLoadingMore(true)
+    try {
+      const qs = new URLSearchParams({ limit: String(PAGE), offset: String(offset) })
+      const sv = tabValue(key)
+      if (sv !== undefined) qs.set('status', String(sv))
+      if (kw.trim()) qs.set('q', kw.trim())
+      const r: any = await api.get(`/topics?${qs.toString()}`)
+      const rows: Topic[] = r.results || []
+      setTotal(r.total || 0)
+      setTopics((prev) => (reset ? rows : [...prev, ...rows]))
+    } catch (e: any) {
+      message.error(e?.message || '加载选题失败')
+    } finally {
+      if (reset) setListLoading(false)
+      else setLoadingMore(false)
+    }
+  }
+
+  useEffect(() => {
+    loadHistory({ reset: true })
+    // 首屏只跑一次；筛选/搜索由各自的交互触发
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   async function generate(opts?: { signalId?: number; domain?: string }) {
     setLoading(true)
@@ -43,7 +102,12 @@ export default function Topics() {
         // 热点直传：后端会以该热点为主输入，并用它的主领域覆盖这里的 domain
         signal_id: opts?.signalId,
       })
-      setTopics(r.topics || [])
+      const created: Topic[] = r.topics || []
+      setFreshIds(created.map((t) => t.id))
+      // 统一以服务端列表为准：新生成的选题已落库，重新拉一次既能看到全部历史，
+      // 也不会和本地状态产生分叉（此前是直接 setTopics，刷新即丢）。
+      setStatusTab('all')
+      await loadHistory({ reset: true, statusKey: 'all' })
     } catch (e: any) {
       message.error(e?.message || '生成失败')
     } finally {
@@ -71,13 +135,21 @@ export default function Topics() {
     } catch {
       /* 选用失败不阻断跳转 */
     }
-    setTopic(t.title)
+    setTopic(t.title, t.id)
     navigate('/generate')
   }
 
+  function onFilterChange(key: string) {
+    setStatusTab(key)
+    loadHistory({ reset: true, statusKey: key })
+  }
+
+  const filtered = statusTab !== 'all' || keyword.trim() !== ''
+  const hasMore = topics.length < total
+
   return (
     <div>
-      <PageHeader title="选题列表" subtitle="结合热点趋势 + 素材库 + 账号定位生成" />
+      <PageHeader title="选题列表" subtitle="结合热点趋势 + 素材库 + 账号定位生成，历史选题可随时重取" />
 
       {seed && (
         <div className="mb-4 px-4 py-3 rounded-card bg-brand-soft/60 border border-brand/20 flex items-start gap-3">
@@ -100,7 +172,7 @@ export default function Topics() {
         </div>
       )}
 
-      <div className="bg-white border border-line rounded-card shadow-card p-4 mb-5 flex flex-wrap items-end gap-4">
+      <div className="bg-white border border-line rounded-card shadow-card p-4 mb-4 flex flex-wrap items-end gap-4">
         <div className="w-[180px]">
           <label className="block text-[12px] text-muted mb-1.5">领域（可选）</label>
           <Select
@@ -124,9 +196,31 @@ export default function Topics() {
         <Button type="primary" onClick={() => generate()} loading={loading} className="h-[38px]">
           {loading ? '生成中…' : '生成选题'}
         </Button>
+        <div className="flex-1" />
+        <Input.Search
+          allowClear
+          placeholder="搜索标题 / 切入角度"
+          defaultValue={keyword}
+          onSearch={(v) => {
+            setKeyword(v)
+            loadHistory({ reset: true, kw: v })
+          }}
+          className="w-[220px]"
+        />
       </div>
 
-      {loading ? (
+      <div className="flex items-center gap-2 mb-3.5">
+        {STATUS_TABS.map((t) => (
+          <button key={t.key} className={chip(statusTab === t.key)} onClick={() => onFilterChange(t.key)}>
+            {t.label}
+          </button>
+        ))}
+        <span className="text-[12px] text-muted ml-1">
+          {listLoading ? '加载中…' : `共 ${total} 条${filtered ? '（已筛选）' : ''}`}
+        </span>
+      </div>
+
+      {loading || listLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="bg-white border border-line rounded-card p-4 shadow-card">
@@ -137,37 +231,65 @@ export default function Topics() {
       ) : topics.length === 0 ? (
         <EmptyState
           icon={<SparkIcon className="w-10 h-10" />}
-          title="还没有选题"
-          hint="设置领域与数量后点击「生成选题」，系统将结合热点与素材为你产出候选选题。"
+          title={filtered ? '没有符合条件的选题' : '还没有选题'}
+          hint={
+            filtered
+              ? '换个状态或关键词试试，也可以直接生成一批新的选题。'
+              : '设置领域与数量后点击「生成选题」，系统将结合热点与素材为你产出候选选题。'
+          }
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {topics.map((t) => (
-            <div
-              key={t.id}
-              className="group bg-white border border-line rounded-card p-4 shadow-card hover:shadow-soft hover:border-brand/30 transition duration-200"
-            >
-              <div className="font-semibold text-[15px] text-ink mb-2 leading-snug">{t.title}</div>
-              <div className="text-[13px] text-muted mb-1.5 leading-relaxed">
-                <span className="text-ink font-medium">推荐理由：</span>
-                {t.reason || '—'}
-              </div>
-              <div className="text-[13px] text-muted mb-1.5 leading-relaxed">
-                <span className="text-ink font-medium">目标受众：</span>
-                {t.target_audience || '—'}
-              </div>
-              {t.angle && (
-                <div className="text-[13px] text-muted mb-2.5 leading-relaxed">
-                  <span className="text-ink font-medium">切入角度：</span>
-                  {t.angle}
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            {topics.map((t) => (
+              <div
+                key={t.id}
+                className="group bg-white border border-line rounded-card p-4 shadow-card hover:shadow-soft hover:border-brand/30 transition duration-200 flex flex-col"
+              >
+                <div className="flex items-start gap-2 mb-2">
+                  <div className="font-semibold text-[15px] text-ink leading-snug flex-1">{t.title}</div>
+                  {freshIds.includes(t.id) && <Tag color="blue" className="shrink-0 mt-0.5">新生成</Tag>}
                 </div>
-              )}
-              <Button type="primary" size="small" onClick={() => selectTopic(t)} className="mt-1">
-                一键选用 →
+                <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                  <Tag color={t.status === 1 ? 'green' : 'default'}>
+                    {t.status === 1 ? '已选用' : '待选用'}
+                  </Tag>
+                  {t.hotspot_domain && <Tag>热点 · {t.hotspot_domain}</Tag>}
+                  {t.copy_task_id && <Tag color="gold">已出过文案</Tag>}
+                  {t.created_at && (
+                    <span className="text-[12px] text-muted">{t.created_at.slice(5, 16)}</span>
+                  )}
+                </div>
+                <div className="text-[13px] text-muted mb-1.5 leading-relaxed">
+                  <span className="text-ink font-medium">推荐理由：</span>
+                  {t.reason || '—'}
+                </div>
+                <div className="text-[13px] text-muted mb-1.5 leading-relaxed">
+                  <span className="text-ink font-medium">目标受众：</span>
+                  {t.target_audience || '—'}
+                </div>
+                {t.angle && (
+                  <div className="text-[13px] text-muted mb-2.5 leading-relaxed">
+                    <span className="text-ink font-medium">切入角度：</span>
+                    {t.angle}
+                  </div>
+                )}
+                <div className="mt-auto pt-1">
+                  <Button type="primary" size="small" onClick={() => selectTopic(t)}>
+                    {t.status === 1 ? '再次创作 →' : '一键选用 →'}
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+          {hasMore && (
+            <div className="mt-4 text-center">
+              <Button loading={loadingMore} onClick={() => loadHistory({ reset: false })}>
+                加载更多（还有 {total - topics.length} 条）
               </Button>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
     </div>
   )

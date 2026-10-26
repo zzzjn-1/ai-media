@@ -61,7 +61,14 @@ def main():
     recall_k = max(RECALL_TOP_K, args.k)
     use_rerank = not args.no_rerank
     print(f"  embedding backend = {emb.backend}  (dim={emb.dim})")
-    print(f"  两阶段检索 = {'on (粗排%d→重排%d)' % (recall_k, args.k) if use_rerank else 'off (纯向量Top-%d)' % args.k}")
+    if not use_rerank:
+        mode = f"off (纯向量Top-{args.k})"
+    elif emb.backend == "bge":
+        mode = f"on (FAISS 粗排{recall_k}→重排{args.k})"
+    else:
+        # offline 哈希向量不做粗排（见 rag_pipeline.retrieve 注释）
+        mode = f"on (offline 全量召回→重排{args.k})"
+    print(f"  检索口径 = {mode}")
 
     eval_set = json.loads(EVAL_PATH.read_text(encoding="utf-8"))
     tasks = eval_set["tasks"]
@@ -70,6 +77,19 @@ def main():
 
     conn = sqlite3.connect(str(ROOT / "db" / "app.db"))
     conn.row_factory = sqlite3.Row
+
+    # 评测集漂移自检：eval_set.json 里的 gold_material_ids 是快照 id，
+    # 库一旦重建（素材 id 从 1 重排）就全部对不上 → 命中率恒为 0%，
+    # 看起来像「检索彻底坏了」，实际是评测集过期（2026-10-26 实际踩到）。
+    db_mids = {r[0] for r in conn.execute("SELECT id FROM materials")}
+    stale = [t["id"] for t in tasks
+             if not (set(t["gold_material_ids"]) & db_mids)]
+    if stale:
+        print(f"\n⚠️  评测集与当前库不一致：{len(stale)}/{len(tasks)} 条任务的 gold 素材在库中不存在"
+              f"（例：{stale[:5]}）")
+        print("    原因：库被重建后素材 id 变了，而 eval_set.json 仍是旧快照。")
+        print("    处理：先跑 data/build_eval_set.py 重建评测集，再评测。")
+        print("    否则命中率恒为 0%，会被误判成检索算法故障。\n")
 
     hits = 0
     total = 0

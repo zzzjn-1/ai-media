@@ -84,6 +84,29 @@ def main():
         tid = topics[0]["id"]
         c.post(f"/api/topics/{tid}/select", headers=H)
 
+        # 4a) 历史选题列表（GET /api/topics）：页面刷新后历史选题必须还能取到
+        lst = c.get("/api/topics", params={"limit": 5}, headers=H).json()
+        ids = [t["id"] for t in lst["results"]]
+        print("[4a] topics list:", lst["total"], "条 | 首条 id:", ids[0] if ids else None,
+              "| 含本次新建:", tid in ids)
+        assert lst["total"] >= 3, "历史选题列表为空"
+        assert ids and ids[0] == tid, "新生成的选题没排在最前（排序应为 created_at DESC, id ASC）"
+        assert lst["results"][0]["status"] == 1, "select 之后 status 未变 1"
+        sel = c.get("/api/topics", params={"status": 1, "limit": 50}, headers=H).json()
+        assert all(t["status"] == 1 for t in sel["results"]), "status 过滤失效"
+        kw = c.get("/api/topics", params={"q": topics[0]["title"][:6]}, headers=H).json()
+        assert kw["total"] >= 1, "关键词搜索没命中刚生成的选题"
+        pg1 = c.get("/api/topics", params={"limit": 2, "offset": 0}, headers=H).json()
+        pg2 = c.get("/api/topics", params={"limit": 2, "offset": 2}, headers=H).json()
+        assert not ({t["id"] for t in pg1["results"]} & {t["id"] for t in pg2["results"]}), \
+            "分页 offset 失效（两页出现重复行）"
+        # created_at 必须是本地时间：库里 datetime('now') 是 UTC，不转就会早 8 小时
+        from datetime import datetime as _dt
+        _row = pg1["results"][0]
+        _diff = abs((_dt.now() - _dt.strptime(_row["created_at"], "%Y-%m-%d %H:%M:%S")).total_seconds())
+        print("     created_at:", _row["created_at"], "| 与本地时间差 %ds" % _diff)
+        assert _diff < 600, f"created_at 未转本地时间（差 {_diff / 3600:.1f} 小时）"
+
         # 4b) 热点直传选题（P2-2）：领域必须跟随热点，而不是沿用请求里的领域
         hot = next((h for h in page["hotspots"]
                     if h.get("signal_id") and h.get("domain") not in (None, "综合")), None)
@@ -151,11 +174,16 @@ def main():
         txt = r.text
         print("[9] export txt bytes:", len(txt), "| 含版本标记:", "===== 版本" in txt)
 
-        # 10) 人设配置
+        # 10) 人设配置（改完必须还原：此前每跑一次就把 demo 账号口吻永久改成「犀利」，
+        #     演示时人设与 clean_chunk 种子不一致，属测试污染）
         r = c.get("/api/persona", headers=H)
-        print("[10] persona GET:", r.json()["persona"])
+        persona_before = r.json()["persona"]
+        print("[10] persona GET:", persona_before)
         r = c.post("/api/persona", json={"tone": "犀利"}, headers=H)
         print("     persona POST:", r.json()["persona"])
+        restore_tone = persona_before.get("tone") or "专业"
+        c.post("/api/persona", json={"tone": restore_tone}, headers=H)
+        print("     persona 还原口吻 ->", restore_tone)
 
         # 11) 素材导入 + 向量化
         r = c.post("/api/materials/import", json={"title": "测试素材A", "content": "大模型正在改变创作方式。\n\n端侧推理降低成本。\n\n向量数据库支撑检索增强。"},
@@ -164,6 +192,29 @@ def main():
         print("[11] import material:", mid, "| chunks:", r.json()["chunk_count"])
         r = c.post(f"/api/materials/{mid}/embed", headers=H)
         print("     embed rebuild vectors:", r.json().get("rebuilt_vectors"))
+
+        # 12) 清理：删掉本次（及历史遗留）导入的测试素材
+        # 以前每跑一次就永久往素材库丢一条「测试素材A」，四次跑完首屏四行垃圾。
+        import sqlite3
+        db = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "db", "app.db")
+        con = sqlite3.connect(db)
+        ids = [row[0] for row in con.execute(
+            "SELECT id FROM materials WHERE title LIKE '测试素材%'")]
+        if ids:
+            qs = ",".join("?" * len(ids))
+            con.execute(f"DELETE FROM material_chunks WHERE material_id IN ({qs})", ids)
+            con.execute(f"DELETE FROM materials WHERE id IN ({qs})", ids)
+            con.commit()
+        left = con.execute("SELECT COUNT(*) FROM materials").fetchone()[0]
+        con.close()
+        print(f"[12] 清理测试素材：删除 {len(ids)} 条 | 剩余素材 {left} 条")
+
+        # 删行后 FAISS 里还留着死向量，按现有分块重建一次
+        r = c.get("/api/materials?limit=1", headers=H).json()
+        if r.get("results"):
+            other = r["results"][0]["id"]
+            rb = c.post(f"/api/materials/{other}/embed", headers=H).json()
+            print("     重建向量:", rb.get("rebuilt_vectors"))
 
         print("\n✅ E2E 冒烟测试完成")
 

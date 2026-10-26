@@ -50,7 +50,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 路由注册（18 路由：16 功能端点 + /api/health 探针；V2 新增 hotspots/refresh 与 hotspots/status）
+# 路由注册（21 路由 / 22 方法：20 功能端点 + /api/health 探针；persona 含 GET+POST）
+# 详见 docs/M3交付说明与API文档.md 第四节（含每次增量的口径校准）
 app.include_router(auth.router, prefix="/api")
 app.include_router(materials.router, prefix="/api")
 app.include_router(hotspots.router, prefix="/api")

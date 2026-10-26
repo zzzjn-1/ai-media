@@ -1,54 +1,75 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-
-<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
-  <Box style={{ flexDirection: 'row', gap: 28, height: 620 }}>
-    {/* 左侧深色标题栏 */}
-    <Box style={{ width: 330, height: 620, background: '#0F172A', borderRadius: 16, padding: 44, justifyContent: 'space-between' }}>
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', background: '#F8FAFC' }}>
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
       <Box>
-        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-          <Box style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(59,130,246,0.16)', justifyContent: 'center', alignItems: 'center' }}>
-            <FAIcon name='wrench' style={{ fill: '#67E8F9', width: 28, height: 28 }} />
-          </Box>
-          <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3 }}>难点拆解与修复证据</Text>
-        </Box>
-        <Box style={{ width: 56, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 26 }} />
-        <Text style={{ fontSize: 16, color: '#94A3B8', lineHeight: 1.8, marginTop: 24 }}>
-          不停留在「遇到困难」，每条都追到根因，并给出可复跑的验证结果。
-        </Text>
-      </Box>
-      <Text style={{ fontSize: 13, color: '#475569' }}>现象 → 根因 → 修复 → 验证</Text>
-    </Box>
-
-    {/* 右侧四条难点链 */}
-    <Box style={{ flex: 1, height: 620, justifyContent: 'space-between' }}>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
-        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>① 领域词表跨模块不一致</Text>
-        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
-          前端 / Mock / 种子数据各写一份，筛选点选空白。修复：DOMAINS 唯一真源 + Mock 自动补全。验证：五领域筛选全量有数据，Mock 与真实后端一致。
-        </Text>
-      </Box>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
-        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>② 索引陈旧致检索命中率 0%</Text>
-        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
-          重建数据库后复用旧 FAISS 索引（169 vs 270 向量），chunk 整体错位。修复：索引签名（数量 / 最大 id / 维度）校验，过期自动重建。验证：重启后 270 向量、命中率恢复。
-        </Text>
-      </Box>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
-        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>③ 评测与生产口径漂移</Text>
-        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
-          评测脚本内嵌参数、自行拼装检索逻辑，数字失去证明力。修复：评测直接调用生产检索函数，参数同源。验证：全量 180 条 100%，消融 61.1% → 100%。
-        </Text>
-      </Box>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '13px 18px' }}>
-        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0F172A' }}>④ 演示凭证三处不一致</Text>
-        <Text style={{ fontSize: 14, color: '#64748B', marginTop: 5, lineHeight: 1.6 }}>
-          「INSERT OR IGNORE」使新口令常量从未生效，代码 / 页面 / 文档三个值。修复：常量对齐数据库并注明仅新库生效，口令哈希程序化核验。验证：代码 / 登录页 / 文档 / 数据库四端一致。
-        </Text>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>五个真实难点与下一步</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>每条都写成「难点 — 根因 — 修复与证据」，能验证的才写进来</Text>
       </Box>
     </Box>
   </Box>
 
-  {/* C 区页脚 */}
+  <Box style={{ height: 26, flexDirection: 'row', alignItems: 'center', gap: 14, paddingLeft: 4 }}>
+    <Text style={{ fontSize: 11.5, color: '#94A3B8', letterSpacing: 1, width: 42 }}>序</Text>
+    <Text style={{ fontSize: 11.5, color: '#94A3B8', letterSpacing: 1, width: 206 }}>难点</Text>
+    <Text style={{ fontSize: 11.5, color: '#94A3B8', letterSpacing: 1, width: 292 }}>根因</Text>
+    <Text style={{ fontSize: 11.5, color: '#94A3B8', letterSpacing: 1 }}>修复与验证证据</Text>
+  </Box>
+
+  <Box style={{ flexDirection: 'column', gap: 6, height: 334 }}>
+    <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 10, padding: '0 16px' }}>
+      <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#3B82F6', width: 42 }}>01</Text>
+      <Text style={{ fontSize: 13.5, fontWeight: 'bold', color: '#0F172A', width: 206 }}>领域词表三处各写一份</Text>
+      <Text style={{ fontSize: 12, color: '#64748B', width: 292, lineHeight: 1.6 }}>前端下拉、人设默认、Mock 数据各自维护</Text>
+      <Text style={{ fontSize: 12, color: '#334155', flex: 1, lineHeight: 1.6 }}>收敛为唯一领域常量，下拉与 Mock 自动派生；新增领域只改一处，五端同步</Text>
+    </Box>
+    <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 10, padding: '0 16px' }}>
+      <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#3B82F6', width: 42 }}>02</Text>
+      <Text style={{ fontSize: 13.5, fontWeight: 'bold', color: '#0F172A', width: 206 }}>索引陈旧，命中率掉到 0%</Text>
+      <Text style={{ fontSize: 12, color: '#64748B', width: 292, lineHeight: 1.6 }}>索引与语料版本不匹配，程序仍加载旧索引</Text>
+      <Text style={{ fontSize: 12, color: '#334155', flex: 1, lineHeight: 1.6 }}>建索引时记签名，启动校验不一致即自动重建，恢复后重回 100%</Text>
+    </Box>
+    <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 10, padding: '0 16px' }}>
+      <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#3B82F6', width: 42 }}>03</Text>
+      <Text style={{ fontSize: 13.5, fontWeight: 'bold', color: '#0F172A', width: 206 }}>评测口径与生产不一致</Text>
+      <Text style={{ fontSize: 12, color: '#64748B', width: 292, lineHeight: 1.6 }}>评测脚本自建检索路径，分数虚高</Text>
+      <Text style={{ fontSize: 12, color: '#334155', flex: 1, lineHeight: 1.6 }}>评测直接调用生产函数，同一代码路径出分，重跑后再无口径差异</Text>
+    </Box>
+    <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 10, padding: '0 16px' }}>
+      <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#3B82F6', width: 42 }}>04</Text>
+      <Text style={{ fontSize: 13.5, fontWeight: 'bold', color: '#0F172A', width: 206 }}>生成结果被截断后静默降级</Text>
+      <Text style={{ fontSize: 12, color: '#64748B', width: 292, lineHeight: 1.6 }}>超输出上限被截成非法结构，兜底吞掉错误，接口仍返回成功</Text>
+      <Text style={{ fontSize: 12, color: '#334155', flex: 1, lineHeight: 1.6 }}>提高上限 + 限制字段长度 + 抢救已完整对象；降级必留日志，不再无声无息</Text>
+    </Box>
+    <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 10, padding: '0 16px' }}>
+      <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#3B82F6', width: 42 }}>05</Text>
+      <Text style={{ fontSize: 13.5, fontWeight: 'bold', color: '#0F172A', width: 206 }}>时区错位与埋点口径灌水</Text>
+      <Text style={{ fontSize: 12, color: '#64748B', width: 292, lineHeight: 1.6 }}>库默认时间为 UTC 致频控永不触发；曝光挂在查询接口上被二次请求重复计数</Text>
+      <Text style={{ fontSize: 12, color: '#334155', flex: 1, lineHeight: 1.6 }}>显式写本地时间；曝光改到渲染完成后上报，并按内容去重</Text>
+    </Box>
+  </Box>
+
+  <Box style={{ height: 130, marginTop: 16, background: '#0F172A', borderRadius: 14, padding: '16px 22px', flexDirection: 'column' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+      <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#FFFFFF' }}>下一步</Text>
+      <Text style={{ fontSize: 11.5, color: '#94A3B8' }}>按优先级排列，不做无数据的优化</Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', gap: 12, marginTop: 12 }}>
+      <Box style={{ flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(148,163,184,0.22)', borderRadius: 10, padding: '10px 14px' }}>
+        <Text style={{ fontSize: 12.5, color: '#67E8F9', fontWeight: 'bold' }}>先攒两周真实数据</Text>
+        <Text style={{ fontSize: 11.5, color: '#CBD5E1', marginTop: 4, lineHeight: 1.6 }}>指标面板随后再做，样本不足时调权重等于掷骰子</Text>
+      </Box>
+      <Box style={{ flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(148,163,184,0.22)', borderRadius: 10, padding: '10px 14px' }}>
+        <Text style={{ fontSize: 12.5, color: '#67E8F9', fontWeight: 'bold' }}>权重按周做 A/B</Text>
+        <Text style={{ fontSize: 11.5, color: '#CBD5E1', marginTop: 4, lineHeight: 1.6 }}>有了 ctr 才有对照前提，改一档跑一周再比</Text>
+      </Box>
+      <Box style={{ flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(148,163,184,0.22)', borderRadius: 10, padding: '10px 14px' }}>
+        <Text style={{ fontSize: 12.5, color: '#67E8F9', fontWeight: 'bold' }}>检索与端侧补齐</Text>
+        <Text style={{ fontSize: 11.5, color: '#CBD5E1', marginTop: 4, lineHeight: 1.6 }}>BGE 向量权重接入，移动端交互专项优化</Text>
+      </Box>
+    </Box>
+  </Box>
+
   <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
     <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
       <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />

@@ -1,52 +1,130 @@
-const FONT = '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-
-<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: FONT, background: '#F8FAFC' }}>
-  <Box style={{ flexDirection: 'row', gap: 28, height: 620 }}>
-    {/* 左侧深色标题栏 */}
-    <Box style={{ width: 366, height: 620, background: '#0F172A', borderRadius: 16, padding: 44, justifyContent: 'space-between' }}>
+<Slide style={{ width: 1280, height: 720, padding: '20px 64px', fontFamily: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif', background: '#F8FAFC' }}>
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <Box style={{ width: 6, height: 34, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 3 }} />
       <Box>
-        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3 }}>四项关键技术</Text>
-        <Box style={{ width: 56, height: 4, background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', borderRadius: 2, marginTop: 24 }} />
-        <Text style={{ fontSize: 16, color: '#94A3B8', lineHeight: 1.8, marginTop: 24 }}>
-          每项技术都回答「是什么」与「解决什么」——不为技术而技术，指标可复测。
-        </Text>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0F172A' }}>热点采集：三层数据模型</Text>
+        <Text style={{ fontSize: 18, color: '#64748B', marginTop: 4 }}>真实热榜进得来、比得动、读得起——三个问题拆成三层各自解决</Text>
       </Box>
-      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-        <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
-        <Text style={{ fontSize: 13, color: '#475569' }}>计划书 4.1 / 4.5 落地</Text>
+    </Box>
+  </Box>
+
+  <Box style={{ height: 202, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 16, padding: '10px 20px', justifyContent: 'center', boxShadow: '0 4px 20px rgba(15,23,42,0.06)' }}>
+    <svg width="1096" height="182" viewBox="0 0 1096 182">
+      <defs>
+        <linearGradient id="gN" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#3B82F6" />
+          <stop offset="100%" stopColor="#06B6D4" />
+        </linearGradient>
+        <marker id="arG" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0 0 L9 4.5 L0 9 z" fill="#93C5FD" />
+        </marker>
+      </defs>
+
+      <text x="106" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">采 集</text>
+      <text x="392" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">适 配</text>
+      <text x="678" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">三 层 存 储</text>
+
+      <g>
+        <rect x="8" y="34" width="196" height="112" rx="12" fill="#FFFBEB" stroke="#FDE68A" strokeWidth="1.5" />
+        <text x="106" y="62" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#92400E">六源真实热榜</text>
+        <text x="106" y="88" textAnchor="middle" fontSize="11.5" fill="#B45309">微博 · 知乎 · 百度</text>
+        <text x="106" y="108" textAnchor="middle" fontSize="11.5" fill="#B45309">抖音 · B站 · 头条</text>
+        <text x="106" y="130" textAnchor="middle" fontSize="10.5" fill="#A16207">实测 5 / 6 可用（知乎需登录态）</text>
+      </g>
+
+      <path d="M208 90 L 232 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
+
+      <g>
+        <rect x="238" y="34" width="196" height="112" rx="12" fill="#EFF6FF" stroke="#BFDBFE" strokeWidth="1.5" />
+        <text x="336" y="62" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1E40AF">适配器链</text>
+        <text x="336" y="88" textAnchor="middle" fontSize="11.5" fill="#3B82F6">dailyhot → official</text>
+        <text x="336" y="108" textAnchor="middle" fontSize="11.5" fill="#3B82F6">→ vvhan → tenapi</text>
+        <text x="336" y="130" textAnchor="middle" fontSize="10.5" fill="#60A5FA">单源失败即熔断降级</text>
+      </g>
+
+      <path d="M438 90 L 462 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
+
+      <g>
+        <rect x="468" y="34" width="196" height="112" rx="12" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
+        <text x="566" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0F172A">hot_raw_items</text>
+        <text x="566" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#334155">原始层</text>
+        <text x="566" y="106" textAnchor="middle" fontSize="11.5" fill="#64748B">追加式，跨平台同名</text>
+        <text x="566" y="124" textAnchor="middle" fontSize="11.5" fill="#64748B">各自保留，留证据链</text>
+        <text x="566" y="142" textAnchor="middle" fontSize="10.5" fill="#94A3B8">按天清理</text>
+      </g>
+
+      <path d="M668 90 L 692 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
+
+      <g>
+        <rect x="698" y="34" width="196" height="112" rx="12" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
+        <text x="796" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0F172A">hot_signals</text>
+        <text x="796" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#334155">聚合层</text>
+        <text x="796" y="106" textAnchor="middle" fontSize="11.5" fill="#64748B">同话题跨源合并</text>
+        <text x="796" y="124" textAnchor="middle" fontSize="11.5" fill="#64748B">热度归一化到 0–100</text>
+        <text x="796" y="142" textAnchor="middle" fontSize="10.5" fill="#94A3B8">24h 生命周期</text>
+      </g>
+
+      <path d="M898 90 L 922 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
+
+      <g>
+        <rect x="928" y="34" width="160" height="112" rx="12" fill="url(#gN)" />
+        <text x="1008" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#E0F2FE">hotspots</text>
+        <text x="1008" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">物化层</text>
+        <text x="1008" y="106" textAnchor="middle" fontSize="11.5" fill="#E0F2FE">feed 打分与过滤</text>
+        <text x="1008" y="124" textAnchor="middle" fontSize="11.5" fill="#E0F2FE">前端直接读</text>
+        <text x="1008" y="142" textAnchor="middle" fontSize="10.5" fill="#BAE6FD">保留原表名兼容外键</text>
+      </g>
+    </svg>
+  </Box>
+
+  <Box style={{ flexDirection: 'row', gap: 14, height: 302, marginTop: 16 }}>
+    <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 18px', flexDirection: 'column', boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        <Text style={{ fontSize: 12, color: '#94A3B8', letterSpacing: 1 }}>LAYER 1</Text>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>原始层为什么不能合并</Text>
+      </Box>
+      <Text style={{ fontSize: 13, color: '#475569', lineHeight: 1.75, marginTop: 8 }}>
+        每个平台每次抓取整条追加，跨平台同名各自保留。同一条热点在微博第 5 名、在百度第 6 名，这两个事实都要能查到——一旦在写入时就合并，证据链就断了，事后无法判断是谁先上榜。
+      </Text>
+      <Box style={{ marginTop: 'auto', background: '#F8FAFC', borderRadius: 8, padding: '10px 12px' }}>
+        <Text style={{ fontSize: 12, color: '#64748B', lineHeight: 1.7 }}>
+          取舍：冗余换可追溯。原始层按天清理，不参与任何读路径。
+        </Text>
       </Box>
     </Box>
 
-    {/* 右侧四项技术 */}
-    <Box style={{ flex: 1, height: 620, justifyContent: 'space-between' }}>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 20px', borderLeft: '4px solid #3B82F6' }}>
-        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0F172A' }}>RAG 两阶段检索</Text>
-        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 6, lineHeight: 1.65 }}>
-          FAISS 粗排召回 40 条，规则重排叠加同领域 / 同风格先验取 Top-5 进入提示词。解决「素材找不准」：离线口径全量 180 条命中率 100%，消融显示重排贡献 +38.9pp。
+    <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 18px', flexDirection: 'column', boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        <Text style={{ fontSize: 12, color: '#94A3B8', letterSpacing: 1 }}>LAYER 2</Text>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>聚合层为什么必须合并</Text>
+      </Box>
+      <Text style={{ fontSize: 13, color: '#475569', lineHeight: 1.75, marginTop: 8 }}>
+        六个来源的热度口径完全不同，直接展示没法比较。这一层按标题相似度把同话题并成一条，热度归一到 0–100，同时记下榜内名次与覆盖来源数。
+      </Text>
+      <Box style={{ marginTop: 'auto', background: 'rgba(245,158,11,0.10)', border: '1px solid rgba(245,158,11,0.30)', borderRadius: 8, padding: '10px 12px' }}>
+        <Text style={{ fontSize: 12, color: '#92400E', lineHeight: 1.7 }}>
+          踩过的坑：分源调度下每批只有一个来源，若按批次聚合，覆盖来源数恒为 1。必须取各源最新快照再聚合。
         </Text>
       </Box>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 20px', borderLeft: '4px solid #3B82F6' }}>
-        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0F172A' }}>LangChain LCEL 编排</Text>
-        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 6, lineHeight: 1.65 }}>
-          提示词模板化组装与多版本解析走标准 Runnable，向量检索与重排保留自研以保证可控与离线可跑。解决「链路不可复现」：离线 Mock 与生产走同一条编排路径。
-        </Text>
+    </Box>
+
+    <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 18px', flexDirection: 'column', boxShadow: '0 4px 20px rgba(15,23,42,0.05)' }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        <Text style={{ fontSize: 12, color: '#94A3B8', letterSpacing: 1 }}>LAYER 3</Text>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0F172A' }}>物化层为什么保留</Text>
       </Box>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 20px', borderLeft: '4px solid #3B82F6' }}>
-        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0F172A' }}>字段级加密（Fernet）</Text>
-        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 6, lineHeight: 1.65 }}>
-          素材正文 / 分块加密落库，密钥经环境变量与数据分离；用户口令 PBKDF2 哈希。解决「素材资产安全」：数据库文件外泄不泄露正文，且不影响检索与分块预览。
-        </Text>
-      </Box>
-      <Box style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 20px', borderLeft: '4px solid #3B82F6' }}>
-        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0F172A' }}>SSE 流式生成</Text>
-        <Text style={{ fontSize: 15, color: '#64748B', marginTop: 6, lineHeight: 1.65 }}>
-          生成进度、逐版本、完成事件实时推送，前端边收边渲染。解决「长任务等待焦虑」：离线链路单篇平均 0.10s，接真实 LLM 后同一协议可观测每一步耗时。
+      <Text style={{ fontSize: 13, color: '#475569', lineHeight: 1.75, marginTop: 8 }}>
+        理论上可以每次查询时现算，但前端首屏要按领域过滤再打分排序，现算撑不住。这层把聚合结果落成宽表，feed 打分与「剔除综合」都在这里完成。
+      </Text>
+      <Box style={{ marginTop: 'auto', background: '#F8FAFC', borderRadius: 8, padding: '10px 12px' }}>
+        <Text style={{ fontSize: 12, color: '#64748B', lineHeight: 1.7 }}>
+          保留原表名不是为了省事：选题表的 hotspot_id 外键指向它，改名要动全部历史数据。
         </Text>
       </Box>
     </Box>
   </Box>
 
-  {/* C 区页脚 */}
   <Box style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
     <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
       <Box style={{ width: 10, height: 10, borderRadius: 2, background: 'linear-gradient(135deg, #3B82F6, #06B6D4)' }} />
