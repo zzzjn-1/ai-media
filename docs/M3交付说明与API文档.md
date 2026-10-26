@@ -11,7 +11,7 @@
 | 计划书任务 | 内容 | M3 交付物（落代码） | 状态 |
 |---|---|---|---|
 | T3.1 数据接入与向量化 | 素材分块入库 + BGE 向量化 + FAISS 主存储 | `api/core/embeddings.py`（`_BgeEmbedding` 加载 BAAI/bge-large-zh，`sentence-transformers`）、`api/core/vector_store.py`、`api/routers/materials.py`（import/tag/embed/检索）、`db/security.py` 复用 | ✅ |
-| T3.2 热点采集调度 | APScheduler 定时采集 + 去重 | `api/core/hotspot_collector.py`（采集源为可配置占位，结构就绪）、`api/routers/hotspots.py`、`api/main.py` lifespan 启动调度 | ✅ |
+| T3.2 热点采集调度 | 分源调度 + 跨源聚合 + 退榜 + 熔断 | `api/core/hotspot_collector.py`（采集调度/熔断/清理）、`hot_sources.py`（多适配器）、`hot_signal.py`（聚合与物化）、`hot_rank.py`（相关性）、`domain_keywords.py`、`hot_metrics.py`（事件/采纳率）、`api/routers/hotspots.py`、`api/main.py` lifespan 启动 | ✅ |
 | T3.3 选题策划 | 基于热点+人设生成选题，≥3 条 | `api/core/rag_pipeline.py:generate_topics()`、`api/routers/topics.py` | ✅ |
 | T3.4 RAG 文案生成 | **LangChain 编排**：检索→**重排**→提示词组装→≥3 版本→风格优化 | `api/core/rag_pipeline.py:generate()`（LCEL Runnable 编排）、**`api/core/rerank.py`（重排）**、`api/core/prompts.py`、`api/core/llm.py`、`api/routers/copy.py`（SSE） | ✅ |
 | T3.5 多平台适配 | 规则引擎按平台规范适配 | `api/core/platform_adapter.py`、`api/routers/copy.py:/adapt`、`db/platform_rules` 种子 | ✅ |
@@ -70,7 +70,7 @@ api/
   eval_retrieval.py        检索 Top-5 命中率评测（两阶段检索 / --no-rerank 消融；offline / bge 双后端）
   eval_adapt.py            平台适配硬性规范符合率自检
 db/
-  schema.sql               9 张表；platform_rules 种子（hashtag_format 修正为 #{}# 模板）
+  schema.sql               14 张表（V2 新增热点三层 + 来源状态 + 采集日志；P2-7 新增推荐流事件）；platform_rules 种子
   init_db.py               建库 + 自检（外键/索引/级联/去重约束实测）
 data/（M2 交付，本阶段刷新）
   eval_set.json            评测集（180 条，V1.2.0，8:1:1 划分；本次按当前库重对齐 gold 素材）
@@ -85,8 +85,8 @@ data/（M2 交付，本阶段刷新）
 
 | 计划书功能模块 | 端点/能力 | 代码落点 |
 |---|---|---|
-| F1 素材库与热点 | 素材导入/打标/向量化/检索、热点看板 | `materials.py`、`hotspots.py`、`vector_store.py`、`embeddings.py`、`hotspot_collector.py` |
-| F2 选题策划 | 选题生成、一键选用 | `topics.py`、`rag_pipeline.generate_topics` |
+| F1 素材库与热点 | 素材导入/打标/向量化/检索、热点推荐流、切入建议角度 | `materials.py`、`hotspots.py`、`vector_store.py`、`embeddings.py`、`hotspot_collector.py`、`hot_sources.py`、`hot_signal.py`、`hot_rank.py`、`hot_suggestion.py`、`hot_metrics.py`（采纳漏斗） |
+| F2 选题策划 | 选题生成、一键选用、热点直传出题 | `topics.py`、`rag_pipeline.generate_topics` |
 | F3 文案生成(RAG) | 检索增强、≥3 版本、SSE 流式 | `copy.py:/generate`、`rag_pipeline.generate`、`llm.py`、`prompts.py` |
 | F4 风格优化 | 语气/篇幅/人设参数化重写 + 同质化抑制 | `copy.py:/optimize`、`rag_pipeline.optimize_text` |
 | F5 多平台适配 | 规则引擎适配 + 发布备注 | `copy.py:/adapt`、`platform_adapter.py`、`export.py` |
@@ -96,7 +96,7 @@ data/（M2 交付，本阶段刷新）
 
 ---
 
-## 四、API 端点对照（计划书 4.3 基线 14 端点 / 15 方法；M4 扩充后当前 16 路由）
+## 四、API 端点对照（计划书 4.3 基线 14 端点 / 15 方法；V2 热点改造后当前 18 路由）
 
 > 实测：`/openapi.json` 暴露 **15 个路径 / 16 个 HTTP 方法**。其中 `/api/health` 为运维存活探针（不计入计划书 14 端点）；功能端点恰为 **14 个**，且 `/api/persona` 含 GET+POST 两方法，合计 **15 个 HTTP 方法**，与计划书完全一致。所有 `copy/generate` 为 **SSE 流式**。
 
@@ -105,7 +105,7 @@ data/（M2 交付，本阶段刷新）
 | 1 | POST | `/api/auth/register` | F6 | 注册（pbkdf2 口令哈希） |
 | 2 | POST | `/api/auth/login` | F6 | 登录（签发 JWT） |
 | 3 | GET | `/api/health` | 运维 | 存活 + 后端状态 + 各表计数（额外，不入 14） |
-| 4 | GET | `/api/hotspots` | F1 | 热点看板（可按 domain 过滤） |
+| 4 | GET | `/api/hotspots` | F1 | 热点推荐流（`view=feed\|all`、`domain`/`platform`/`new_only`/`limit`；带 token 时个性化排序） |
 | 5 | POST | `/api/topics/generate` | F2 | 选题生成（≥3 条） |
 | 6 | POST | `/api/topics/{topic_id}/select` | F2 | 选用选题 |
 | 7 | GET | `/api/materials` | F1 | 素材列表 / 语义+关键词检索 |
@@ -118,8 +118,11 @@ data/（M2 交付，本阶段刷新）
 | 14 | GET/POST | `/api/persona` | F6 | 人设配置（**1 端点 2 方法**） |
 | 15 | POST | `/api/export` | F5 | 导出 txt / docx（含发布备注） |
 | 16 | GET | `/api/materials/{id}/chunks` | F1 | 素材分块预览（M4 新增，解密正文） |
+| 17 | POST | `/api/hotspots/refresh` | F1 | 加速刷新（**需鉴权** + 最小间隔 + 来源数上限 + 批次复用） |
+| 18 | GET | `/api/hotspots/status` | F1 | 采集健康状态 + 近 7 天成功率与 P95 + **采纳漏斗**（**需鉴权**） |
+| 19 | POST | `/api/hotspots/events` | F1 | 推荐流事件上报 `expose`/`adopt`（**需鉴权**，采纳率的分母与分子） |
 
-> **口径校准（M4 扩充后）**：上表原计划书 4.3 基线为 M3 完成时实测「14 端点 / 15 方法」；M4 在素材库新增 `GET /api/materials/{id}/chunks`（分块预览）等端点，并补全选题选用、创作优化等。截至当前代码实装共 **16 路由 / 16 HTTP 方法**（含 `/api/health` 探针），**15 个功能端点**（persona 含 GET+POST 计为 1 端点 2 方法）。`api/main.py` 注释已同步更新。
+> **口径校准（V2 热点改造 + P2-7 埋点后）**：计划书 4.3 基线为 M3 完成时实测「14 端点 / 15 方法」；M4 新增素材分块预览、选题选用、创作优化等；**V2 热点采集改造新增 `POST /api/hotspots/refresh` 与 `GET /api/hotspots/status`**；**P2-7 新增 `POST /api/hotspots/events`**。截至当前代码实装共 **19 路由 / 20 HTTP 方法**（含 `/api/health` 探针），**18 个功能端点**（persona 含 GET+POST 计为 1 端点 2 方法）。`api/main.py` 注释已同步更新。
 
 ---
 
@@ -134,14 +137,47 @@ data/（M2 交付，本阶段刷新）
   响应：`{ok, access_token, token_type:"bearer", user_id}`（失败：`{ok:false, msg}`）
 - 其余端点均需在 Header 带 `Authorization: Bearer <token>`。
 
-### 5.2 热点 F1
-- **GET `/api/hotspots?domain=科技&limit=50`**  
-  响应：`{ok, count, hotspots:[{id,title,summary,source,url,domain,heat,trend,collected_at}]}`
+### 5.2 热点 F1（V2 三层模型）
+
+- **GET `/api/hotspots`**（公开可读；带 token 时按账号领域个性化）
+  参数：`view=feed|all`（默认 `feed`）、`domain`、`platform`（热榜来源码 `weibo/zhihu/...`）、`new_only`、`limit`（默认 20，上限 100）、`include_misc`（是否含「综合」条目：**feed 默认 false / all 默认 true**）  
+  响应：`{ok, count, view, personalized, include_misc, freshness:{updated_at,age_minutes,degraded,sources_ok,sources_total}, hotspots:[{id,signal_id,title,summary,source,platform,url,domain,heat,norm_heat,source_count,best_rank,trend,first_seen_at,is_new,suggestion,adopted,collected_at, relevance?, reason?}]}`  
+  - `relevance` / `reason` **仅 `view=feed` 且已登录**时返回；`view=all` 不返回，避免误以为全榜也做过个性化。
+  - `adopted`（P2-7 新增，布尔）：**当前账号是否已用这条出过选题**（来自 `hot_feed_event`）。未登录恒为 `false`，字段始终存在（前端不写分支）。
+  - **展示口径（V2.1 二期起）**：前端展示 `norm_heat`（0-100，跨源可比）+ `best_rank`（该话题在最优来源榜内的名次）；`heat` 仅作兼容保留，跨源不可比，不再参与展示与排序。
+  - `suggestion`（切入建议角度，≤40 字）由后端**惰性生成**：仅对本次要返回、且尚无建议的条目补齐，单次最多 `HOTSPOT_SUGGESTION_MAX_PER_REQUEST` 条（默认 5，一次批量 LLM 调用），并回写 `hotspots.suggestion`。`HOTSPOT_SUGGESTION_ENABLED=false` 时该字段恒为空，前端不展示该行。
+  - **推荐流默认剔除 `domain='综合'`**：真实热榜实测 105 条里 78 条是时政/体育/娱乐/社会新闻（5 个垂类命不中），对创作者不可用且时政内容有合规风险。要看全量用 `view=all` 或 `include_misc=true`；若剔除后一条不剩，会自动放开一次以保证不空屏（响应里 `include_misc` 会如实回显最终取值）。
+  - **命中过少不"凑数"**：剔除「综合」后可能只剩 1–2 条（2026-10-26 实测某天 93 条在榜仅 1 条命中垂类）。后端**不会**用「综合」补足（那等于把刚过滤掉的时政/体育换个位置塞回来），改由前端提示条说明并给「全部」入口，由用户决定。
+  - 全源不可达时仍返回库内数据，并以 `freshness.degraded=true` 标注（空屏率 0）。
+- **POST `/api/hotspots/refresh`**（**需鉴权**）  
+  请求：`{sources?:[str], force?:bool}`  
+  - `sources` 超过 `HOTSPOT_MAX_SOURCES_PER_REFRESH` → 400；未知来源 → 400
+  - 距上次成功采集 < `HOTSPOT_MIN_REFRESH_INTERVAL` 且 `force=false` → 429，`msg` 内直接给出剩余秒数（如「刷新过于频繁，请 56 秒后再试」），同时保留 `retry_after_seconds`
+  - 已有批次在跑 → 复用该批次并返回 `reused=true`，不新开批次  
+  响应：`{ok, batch_id, reused, collected, by_source, failed, skipped, degraded, elapsed_ms}`
+- **GET `/api/hotspots/status`**（**需鉴权**）  
+  响应：`{ok, freshness, sources:[{source_code,last_ok_at,last_error,fail_streak,backoff_until,total_fetched}], window_days:7, total_runs, success_rate, p95_elapsed_ms, adoption:{...}}`  
+  成功率的唯一数据来源是 `hot_collect_log`，不是估算值。  
+  `adoption`（P2-7 新增，近 7 天采纳漏斗）：`{window_days, impressions, adopts, generates, ctr, adopt_to_generate, active_users, top_adopted:[{hotspot_id,signal_id,title,domain,adopts}], note}`  
+  - `ctr = adopts / impressions`，**无曝光数据时返回 `null` 而不是 0**（0 会被误读成"没人点"）；`adopt_to_generate = generates / adopts`。
+  - 两个比率必须一起看：只盯 `ctr` 会把推荐调成标题党；`adopt_to_generate` 偏低说明"点了却写不出来"，问题在选题质量。
+  - 采集健康（数据新不新）与采纳漏斗（推荐准不准）放同一入口，因为源全挂时 `ctr` 暴跌并不代表推荐变差。
+- **POST `/api/hotspots/events`**（**需鉴权**，P2-7 新增）  
+  请求：`{action:"expose"|"adopt", surface?:"feed"|"all"|"platform", count?, hotspot_id?, position?}`  
+  - `expose`：前端**真正渲染出一屏**时上报一次，`count` = 本屏条数（上限 100，`0` 直接不记）→ **分母**。
+  - `adopt`：点「用它做选题」时上报，`hotspot_id` 必填（不存在 → 404），`position` = 点击时名次（用于看位置偏差）→ **分子**。
+  - `generate`（第三级·强信号）**不接受客户端上报**（传了返回 400）：由 `/topics/generate` 带 `signal_id` 成功后在服务端写入，客户端伪造不了。
+  - 短窗去重：同一用户对同一热点的 `adopt` / `generate` 在 `HOTSPOT_ADOPT_DEDUPE_SECONDS`（默认 30s）内只记一次，重复请求返回 `{recorded:0, deduped:true}` 且仍是 200（前端不该因此弹错误）。
+  - **曝光为什么不由 `GET /hotspots` 计数**：GET 是只读接口，一次请求不代表真的渲染（前端补建议角度会再取一轮、Mock 也会重取），按请求计数等于给分母灌水。
+  响应：`{ok, action, recorded, deduped?}`
 
 ### 5.3 选题 F2
 - **POST `/api/topics/generate`**  
-  请求：`{domain?:str, count:int=3}`  
-  响应：`{ok, topics:[{id,title,angle,reason,target_audience, domain?}]}`（落库 topics）
+  请求：`{domain?:str, count:int=3, signal_id?:int}`  
+  - `signal_id`（V2.1 二期新增，**可选**）：热点看板「用它做选题」直传。传了就以该热点为主输入——标题进 prompt（并要求至少 1 条选题围绕它）、其**主领域覆盖** `domain`、且 `topics.hotspot_id` 落地外键。
+  - 兼容：也接受 `hotspots.id`（前端传错一种 id 也不至于整条链路断掉）；热点不存在/已删除 → 404。
+  - **不传时行为与改造前完全一致**（向后兼容，`_e2e_test.py` 的 T-13 守着这条）。
+  响应：`{ok, domain, signal_id, topics:[{id,title,angle,reason,target_audience, domain?}]}`（落库 topics）
 - **POST `/api/topics/{topic_id}/select`**  
   响应：`{ok, topic:{id,title,angle,reason,target_audience}}`（置 status=1）
 
@@ -272,7 +308,7 @@ $PY -m pip install -r api/requirements.txt
 
 ### 8.2 初始化数据库（仅需一次 / 重置时）
 ```bash
-$PY db/init_db.py --reset     # 建 9 表 + platform_rules 种子
+$PY db/init_db.py --reset     # 建 13 表 + platform_rules 种子
 $PY data/clean_chunk.py       # 导入语料 → 90 素材 / 270 分块 + 10 热点 + demo_seed 账号（5 领域）
 $PY data/build_eval_set.py    # 构建评测集（对齐当前库）
 ```
@@ -292,7 +328,15 @@ $PY -m uvicorn api.main:app --host 127.0.0.1 --port 8000
 | BGE 镜像 | `HF_ENDPOINT` | 默认 `https://hf-mirror.com` |
 | LLM | `LLM_API_KEY` / `LLM_BASE_URL` / `LLM_MODEL` | 留空→Mock；填入→OpenAI 兼容接口 |
 | JWT | `JWT_SECRET` | 生产务必改为强随机 ≥32 字节 |
-| 热点调度 | `HOTSPOT_ENABLED` / `HOTSPOT_INTERVAL_MINUTES` | 默认开启 / 60 分钟 |
+| 热点调度 | `HOTSPOT_SCHED_ENABLED` | 默认 `true`（旧键 `HOTSPOT_ENABLED` 已废弃） |
+| 热点来源 | `HOT_SOURCES_ENABLED` | 默认 `weibo,zhihu,baidu,douyin,bilibili,toutiao`（热榜来源码，非发布平台码） |
+| 热点实例 | `HOTSPOT_API_BASE` | 自托管 DailyHot 地址；留空用内置免费源 |
+| 热点节奏 | 每源间隔在 `api/core/hot_sources.py` 的 `SOURCES` 注册表 | 10–20 分钟/源（旧键 `HOTSPOT_INTERVAL_MINUTES` 已废弃） |
+| 退榜/新颖度 | `HOTSPOT_SIGNAL_TTL_HOURS` / `HOTSPOT_NEW_WINDOW_HOURS` | 24 / 24 |
+| 保留策略 | `HOTSPOT_RAW_RETENTION_DAYS` / `HOTSPOT_LOG_RETENTION_DAYS` | 7 / 30 天 |
+| 推荐权重 | `HOTSPOT_FEED_WEIGHTS` | `0.30,0.25,0.20,0.15,0.10`（和须为 1.0，非法则告警回落默认） |
+| 切入建议 | `HOTSPOT_SUGGESTION_ENABLED` / `HOTSPOT_SUGGESTION_MAX_PER_REQUEST` | `true` / `5`（单次请求最多惰性生成几条，批量 1 次 LLM 调用） |
+| 采纳埋点 | `HOTSPOT_ADOPT_DEDUPE_SECONDS` / `HOTSPOT_EVENT_RETENTION_DAYS` | `30`（同热点重复采纳/出题的合并窗口）/ `90`（事件表保留天数） |
 
 ### 8.5 自测与评测命令
 ```bash
@@ -315,7 +359,9 @@ $PY -m api.eval_adapt --samples 4           # 平台适配硬性规范符合率
 
 1. **默认仍是离线 Embedding**：本交付以 `EMBEDDING_BACKEND=offline` 为默认启动（启动快、无 1.3GB 依赖），Top-5 可达 97.2%；**BGE 语义后端已实测可用（100%）**，正式部署建议设 `EMBEDDING_BACKEND=bge`。BGE 进程内加载约 22.6s、索引重建约 23.9s，批量导入素材时需预留。
 2. **Mock LLM 非真实文案**：离线模式生成的是结构化模板文案，用于打通链路与演示，不代表真实生成质量；真实文案需配置 `LLM_API_KEY`。
-3. **热点采集源为占位**：`hotspot_collector.py` 调度与去重机制就绪，但采集源（RSS/平台 API）为可配置占位，需在 M5 对接真实数据源。
+3. **热点采集已接真实源（5/6 源实测可用）**：适配器链为 `dailyhot → official → vvhan → tenapi`。其中 `official` 直连**平台官方接口**（百度 `top.baidu.com/api/board`、B站 `search/square`、抖音 `hot/search/list`、头条 `hot-event/hot-board`、微博 `ajax/side/hotSearch`），无需部署、最实时；`vvhan`/`tenapi` 仅作兜底（限频、结构变更、间歇 502）。实测一次采集 5 源 100 条、1.9s、`degraded=false`。
+3.1 **知乎仍无官方适配**：`zhihu.com` 的 API 需登录态签名，暂只能走聚合源（部分网络环境不可达）→ 该源会失败并进入退避，不影响其他源。
+3.1 **热点领域判定基于关键词表**（`api/core/domain_keywords.py`）：未命中任何领域关键词的条目落「综合」，且不进入 5 个官方领域的筛选结果。词表覆盖不全时会表现为"某领域热点偏少"，调词表即可，无需改代码。
 4. **BGE 权重体积大**：`EMBEDDING_BACKEND=bge` 首次需下载约 1.3GB 权重（经 `HF_ENDPOINT` 镜像，本机实测约 27 分钟），且国内镜像对小文件偶发 0 字节空文件（详见 7.2 踩坑记录）。建议在网络稳定时段预热。cross-encoder 重排（`RERANK_STRATEGY=cross`）另需 `BAAI/bge-reranker-large`。
 5. **计划书口径待统一**：4.1.3 将「重排」列为链路必备环节，4.5 则表述为「可选重排」。本实现按**必备**处理（默认开启 lexical 重排），并提供 `--no-rerank` 做消融，建议评审时明确以哪一处为准。
 6. **数据库累积测试数据**：反复运行 `_e2e_test.py` 会追加测试素材/任务；如需干净库，按 8.2 重置即可。

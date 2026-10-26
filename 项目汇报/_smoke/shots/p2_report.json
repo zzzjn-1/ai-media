@@ -1,0 +1,46 @@
+{
+  "all_pass": true,
+  "shots": [
+    {
+      "page": "p2_hotspots_feed",
+      "size": "1440x1000",
+      "marker": "为你推荐",
+      "marker_found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p2_hotspots_all",
+      "size": "1440x1000",
+      "marker": "按来源",
+      "marker_found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p2_hotspots_source",
+      "size": "1440x1000",
+      "marker": "按来源",
+      "marker_found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p2_topics_from_hotspot",
+      "size": "1440x1000",
+      "marker": "来自热点",
+      "marker_found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p2_hotspots_adopted",
+      "size": "1440x1000",
+      "marker": "为你推荐",
+      "marker_found": true,
+      "errors": [],
+      "pass": true
+    }
+  ],
+  "md5_unique": true
+}

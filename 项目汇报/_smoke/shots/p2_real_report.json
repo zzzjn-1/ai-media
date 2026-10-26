@@ -1,0 +1,29 @@
+{
+  "all_pass": true,
+  "shots": [
+    {
+      "page": "p2_real_hotspots",
+      "size": "1440x1000",
+      "marker": "为你推荐",
+      "found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p2_real_all",
+      "size": "1440x1000",
+      "marker": "按来源",
+      "found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p2_real_topics",
+      "size": "1440x1000",
+      "marker": "来自热点",
+      "found": true,
+      "errors": [],
+      "pass": true
+    }
+  ]
+}

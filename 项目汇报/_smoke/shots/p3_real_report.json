@@ -1,0 +1,45 @@
+{
+  "all_pass": true,
+  "shots": [
+    {
+      "page": "p3_real_feed",
+      "size": "1440x1000",
+      "marker": "为你推荐",
+      "found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "曝光上报",
+      "size": "-",
+      "marker": "impressions 增量>0",
+      "found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p3_real_topics",
+      "size": "1440x1000",
+      "marker": "来自热点",
+      "found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "采纳+出题落库",
+      "size": "-",
+      "marker": "adopts/generates 增量",
+      "found": true,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "page": "p3_real_adopted",
+      "size": "1440x1000",
+      "marker": "已用过",
+      "found": true,
+      "errors": [],
+      "pass": true
+    }
+  ]
+}

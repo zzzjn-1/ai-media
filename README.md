@@ -1,6 +1,6 @@
 # AI 自媒体内容创作助手
 
-> 面向自媒体创作者的智能内容生产平台：素材库 → 热点看板 → 选题策划 → 多平台文案生成 → 平台适配预览，覆盖「科技 / 生活 / 财经 / 美妆 / 教育」五大领域。
+> 面向自媒体创作者的智能内容生产平台：素材库 → 热点推荐流（按账号领域排序）→ 选题策划 → 多平台文案生成 → 平台适配预览，覆盖「科技 / 生活 / 财经 / 美妆 / 教育」五大领域。
 
 - 后端：Python + FastAPI + SQLite（SQLAlchemy 风格原生 SQL）+ JWT 鉴权 + 字段级加密（Fernet）
 - 前端：React + TypeScript + Vite + Tailwind（公开站点）+ Ant Design（业务组件）
@@ -19,7 +19,7 @@ ai-media/
 │   ├── routers/          # 路由：auth/materials/hotspots/topics/copy/persona/export
 │   └── requirements.txt  # 后端依赖（核心必需 + 语义增强可选）
 ├── db/                   # 数据库层
-│   ├── schema.sql        # 9 张表 + 索引 + 外键 + 平台规则种子
+│   ├── schema.sql        # 14 张表 + 索引 + 外键 + 平台规则种子（热点为三层模型 + 推荐流事件）
 │   ├── init_db.py        # 建库 / 重建 / --check 自检
 │   ├── security.py       # 字段级加密(Fernet) + 口令哈希(pbkdf2)
 │   └── app.db            # 运行时数据库（被 .gitignore 排除，不入库）
@@ -101,10 +101,31 @@ JWT_SECRET=<任意足够长的随机串>
 > - `DB_FIELD_KEY` 未设置时自动读取根目录 `.env`；都没有则生成一次性内存密钥并告警，仅限离线演示（重启后历史密文不可解密）。
 > - `JWT_SECRET` 未设置时使用硬编码开发默认值 `m3-dev-secret-please-change-32b+`，生产必须覆盖。
 
+**热点采集相关配置**（全部可选，完整清单见根目录 `.env.example`）：
+
+```ini
+# 热榜来源码（注意：不是发布平台码 weixin/xhs/douyin）
+HOT_SOURCES_ENABLED=weibo,zhihu,baidu,douyin,bilibili,toutiao
+# 自托管 DailyHot 实例；留空则用内置免费 JSON 源（vvhan / tenapi）
+HOTSPOT_API_BASE=
+# 定时采集总开关（旧键 HOTSPOT_ENABLED 已废弃）
+HOTSPOT_SCHED_ENABLED=true
+# raw 层与采集日志保留天数（不清会无限膨胀）
+HOTSPOT_EVENT_RETENTION_DAYS=90   # 推荐流事件（曝光/采纳/出题）保留天数
+HOTSPOT_ADOPT_DEDUPE_SECONDS=30   # 同热点重复采纳/出题的合并窗口（秒）
+HOTSPOT_RAW_RETENTION_DAYS=7
+HOTSPOT_LOG_RETENTION_DAYS=30
+# 「建议角度」惰性生成：单次请求最多补几条（批量 1 次 LLM 调用）
+HOTSPOT_SUGGESTION_ENABLED=true
+HOTSPOT_SUGGESTION_MAX_PER_REQUEST=5
+```
+
+> 每源采集间隔不在此配置，而在 `api/core/hot_sources.py` 的 `SOURCES` 注册表（间隔与适配器、权重是一组内聚信息）。
+
 ### 4. 初始化数据库
 
 ```bash
-# 建 9 张表 + 索引 + 外键 + 平台规则种子（公众号/小红书/抖音）
+# 建 14 张表 + 索引 + 外键 + 平台规则种子（公众号/小红书/抖音）
 python db/init_db.py --reset
 
 # 校验 schema.sql 是否可建库（用临时库，不落盘）——可选
@@ -170,7 +191,9 @@ npm run dev
 
 > 演示账号由 `data/clean_chunk.py` 的 `SEED_USER_NAME` / `SEED_USER_PASSWORD` 播种。生产环境请禁用或强制改密（见 `docs/` 相关部署文档）。
 
-功能链路：登录 → 素材库（可搜「美妆」「教育」等新领域）→ 热点看板 → 选题策划（一键生成）→ 文案生成（多版本 SSE）→ 平台适配 → 账号人设配置。
+功能链路：登录 → 素材库（可搜「美妆」「教育」等新领域）→ 热点看板（默认「为你推荐」，每条带**建议切入角度**，可一键「用它做选题」直传选题页；用过的会打「已用过」标记，按钮变「再写一版」）→ 选题策划（一键生成）→ 文案生成（多版本 SSE）→ 平台适配 → 账号人设配置。
+
+> 采纳漏斗：`expose`（渲染即上报）→ `adopt`（点「用它做选题」）→ `generate`（真出了选题，服务端写）。`GET /api/hotspots/status` 的 `adoption` 段直接给 `ctr` 与 `adopt_to_generate`——这是判断「推荐准不准」的唯一依据，没有它只能靠感觉调权重。
 
 ---
 
@@ -202,6 +225,10 @@ export HF_ENDPOINT=https://hf-mirror.com
 | 检索时「分块数」显示 0 | 走的是关键词检索分支；属历史缺陷已修复（见 `docs/产物审查报告.md` 3.8） |
 | 提交 `topics`/`copy_*` 残留数据 | `clean_chunk.py` 只重建素材，生成类表需手动清理 |
 | CORS 报错 | 默认 `CORS_ORIGINS=*`，必要时在 `api/config.py` 或环境变量指定前端源 |
+| 热点看板显示"数据为 X 小时前" | 免费热榜源不可达或限频，此时降级展示库内数据（`freshness.degraded=true`），非故障；配 `HOTSPOT_API_BASE` 指向自托管实例可根治 |
+| 热点看板「为你推荐」只剩一两条 | 当天热榜多是时政/体育/娱乐，命不中 5 个垂类（实测某天 93 条仅 1 条命中）。推荐流默认不推「综合」，页面会给提示与「全部」入口；要全量看切「全部」 |
+| 建议角度显示"生成中"却一直不变 | 建议角度按请求惰性生成、单次上限 5 条（`HOTSPOT_SUGGESTION_MAX_PER_REQUEST`）。页面会自动补两轮；未接 LLM Key 时走规则兜底文案 |
+| 热点看板某领域为空 | 该领域无条目命中关键词表（落「综合」不入领域筛选），补 `api/core/domain_keywords.py` 词表即可 |
 
 ---
 
