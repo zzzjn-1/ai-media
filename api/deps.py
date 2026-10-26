@@ -23,3 +23,19 @@ def get_current_user(creds: HTTPAuthorizationCredentials = Depends(_bearer)) -> 
     if not row or row["status"] != 1:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="用户不存在或已停用")
     return {"id": row["id"], "username": row["username"]}
+
+
+def get_current_user_optional(
+    creds: HTTPAuthorizationCredentials = Depends(_bearer),
+) -> dict | None:
+    """读接口的可选鉴权：带 token 就识别用户（用于个性化排序），不带头像也照常返回。
+
+    热点看板必须公开可读（api/_demo.py 与 api/_e2e_test.py 都无 token 调用），
+    但 feed 视图需要知道"这个账号关注哪些领域"，所以这里不能强制 401。
+    """
+    if not creds or not creds.credentials:
+        return None
+    try:
+        return get_current_user(creds)
+    except HTTPException:
+        return None

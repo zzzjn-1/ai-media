@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Select, Skeleton, Button } from 'antd'
 import { api } from '../api/client'
 import type { Topic } from '../api/types'
@@ -10,21 +10,38 @@ import PageHeader from '../components/PageHeader'
 import EmptyState from '../components/EmptyState'
 import { SparkIcon } from '../components/icons'
 
+// 从热点看板「用它做选题」跳转过来时携带的上下文
+interface HotspotSeed {
+  signalId?: number
+  title?: string
+  domain?: string
+  suggestion?: string
+}
+
 export default function Topics() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { setTopic } = useFlow()
   const message = useMessage()
   const [topics, setTopics] = useState<Topic[]>([])
   const [domain, setDomain] = useState<string | undefined>(undefined)
   const [count, setCount] = useState(3)
   const [loading, setLoading] = useState(false)
+  const [seed, setSeed] = useState<HotspotSeed | null>(null)
+  // 严格模式（dev 下 React.StrictMode）会把 effect 跑两遍。这里是**昂贵的**副作用
+  // （一次真实 LLM 出题，十几秒 + 真金白银），跑两遍还会让「出题数」翻倍，
+  // 把采纳漏斗的第三级直接污染。用 location.key 做幂等键：同一次跳转只出一批题。
+  const seededKey = useRef('')
 
-  async function generate() {
+  async function generate(opts?: { signalId?: number; domain?: string }) {
     setLoading(true)
     try {
+      const d = opts?.domain ?? domain
       const r: any = await api.post('/topics/generate', {
-        domain: domain || undefined,
+        domain: d || undefined,
         count,
+        // 热点直传：后端会以该热点为主输入，并用它的主领域覆盖这里的 domain
+        signal_id: opts?.signalId,
       })
       setTopics(r.topics || [])
     } catch (e: any) {
@@ -33,6 +50,20 @@ export default function Topics() {
       setLoading(false)
     }
   }
+
+  // 带热点上下文进来：自动按该热点出一批选题，用户不用再点一次「生成」
+  useEffect(() => {
+    const st = (location.state || {}) as HotspotSeed
+    if (!st.signalId) return
+    if (seededKey.current === location.key) return
+    seededKey.current = location.key
+    setSeed(st)
+    const d = st.domain && DOMAINS.includes(st.domain) ? st.domain : undefined
+    setDomain(d)
+    generate({ signalId: st.signalId, domain: d })
+    // location.key 变化才重新触发，避免 count 改动把直传上下文重置
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.key])
 
   async function selectTopic(t: Topic) {
     try {
@@ -47,6 +78,27 @@ export default function Topics() {
   return (
     <div>
       <PageHeader title="选题列表" subtitle="结合热点趋势 + 素材库 + 账号定位生成" />
+
+      {seed && (
+        <div className="mb-4 px-4 py-3 rounded-card bg-brand-soft/60 border border-brand/20 flex items-start gap-3">
+          <span className="text-[12px] text-brand font-medium shrink-0 mt-0.5">来自热点</span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[13px] text-ink leading-snug">{seed.title}</div>
+            {seed.suggestion && (
+              <div className="text-[12px] text-muted mt-1 leading-relaxed">
+                建议角度 · {seed.suggestion}
+              </div>
+            )}
+          </div>
+          <button
+            onClick={() => setSeed(null)}
+            className="text-[12px] text-muted hover:text-ink shrink-0"
+            aria-label="清除热点上下文"
+          >
+            清除
+          </button>
+        </div>
+      )}
 
       <div className="bg-white border border-line rounded-card shadow-card p-4 mb-5 flex flex-wrap items-end gap-4">
         <div className="w-[180px]">
@@ -69,7 +121,7 @@ export default function Topics() {
             className="w-full"
           />
         </div>
-        <Button type="primary" onClick={generate} loading={loading} className="h-[38px]">
+        <Button type="primary" onClick={() => generate()} loading={loading} className="h-[38px]">
           {loading ? '生成中…' : '生成选题'}
         </Button>
       </div>

@@ -32,6 +32,18 @@ from pathlib import Path
 
 import httpx
 
+# 让项目根 .env（含 LLM_API_KEY/LLM_BASE_URL/LLM_MODEL）在运行本脚本时也能被
+# 加载，与 api/config.py 的离线 .env 解析保持一致（仅注入尚未导出的同名变量）。
+_PROJ_ENV = Path(__file__).resolve().parent.parent / ".env"
+if _PROJ_ENV.exists():
+    for _line in _PROJ_ENV.read_text(encoding="utf-8").splitlines():
+        _line = _line.strip()
+        if _line and not _line.startswith("#") and "=" in _line:
+            _k, _v = _line.split("=", 1)
+            _k, _v = _k.strip(), _v.strip().strip('"').strip("'")
+            if _k and _k not in os.environ:
+                os.environ[_k] = _v
+
 BASE = os.environ.get("DEMO_BASE", "http://127.0.0.1:8000")
 DEMO = ("demo_seed", "Demo@2026")
 HERE = Path(__file__).resolve().parent

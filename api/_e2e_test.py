@@ -9,7 +9,8 @@ BASE = os.environ.get("DEMO_BASE", "http://127.0.0.1:8000")
 
 
 def main():
-    with httpx.Client(base_url=BASE, timeout=30) as c:
+    # 超时放宽：接真实 LLM 后单次选题/生成可能到几十秒，30s 会把"慢"误判成"挂"
+    with httpx.Client(base_url=BASE, timeout=120) as c:
         # 1) health
         r = c.get("/api/health")
         h = r.json()
@@ -33,6 +34,49 @@ def main():
         hs = r.json()
         print("[3] hotspots:", hs["count"], "条 | 示例:", hs["hotspots"][0]["title"] if hs["hotspots"] else "无")
 
+        # 3b) 二期字段：归一化热度 / 榜内名次 / 建议角度（P2-1）
+        sample = hs["hotspots"][0] if hs["hotspots"] else {}
+        print("[3b] 扩展字段:", {k: sample.get(k) for k in
+                                ("signal_id", "norm_heat", "best_rank", "source_count", "is_new")})
+        assert sample.get("norm_heat") is not None, "缺 norm_heat（展示口径未切换）"
+        r = c.get("/api/hotspots", params={"view": "feed", "limit": 5}, headers=H)
+        page = r.json()
+        sug = [h for h in page["hotspots"] if h.get("suggestion")]
+        print("     建议角度:", f"{len(sug)}/{page['count']}",
+              "| 示例:", (sug[0]["suggestion"] if sug else "无"))
+        assert sug, "建议角度未生成（HOTSPOT_SUGGESTION_ENABLED 是否关闭？）"
+        assert all(len(h["suggestion"]) <= 40 for h in sug), "建议角度超过 40 字"
+
+        # 3c) 采纳漏斗（P2-7）：曝光 → 采纳 → 标记已用过 → 状态可见
+        # 优先挑一条"还没用过"的：短窗去重会把重复采纳吞掉，用已采过的会让断言假失败
+        target = next((h for h in page["hotspots"] if not h.get("adopted")),
+                      page["hotspots"][0])
+        assert "adopted" in target, "缺 adopted 字段（未登录也该是 false，不能缺）"
+        r = c.post("/api/hotspots/events",
+                   json={"action": "expose", "surface": "feed", "count": page["count"]}, headers=H)
+        assert r.status_code == 200 and r.json()["recorded"] == 1, "曝光上报失败"
+        r = c.post("/api/hotspots/events",
+                   json={"action": "adopt", "hotspot_id": target["id"],
+                         "surface": "feed", "position": 1}, headers=H)
+        r2 = c.post("/api/hotspots/events",
+                    json={"action": "adopt", "hotspot_id": target["id"],
+                          "surface": "feed", "position": 1}, headers=H)
+        assert r.json()["recorded"] == 1, f"采纳未记录：{r.text}"
+        assert r2.json().get("deduped") is True, "同一热点短窗内重复采纳未去重（会灌水分母）"
+        r = c.post("/api/hotspots/events", json={"action": "generate"}, headers=H)
+        assert r.status_code == 400, "generate 不应允许客户端直接写（最强信号必须服务端产生）"
+        print("[3c] 采纳事件: 曝光 1 / 采纳 1 / 重复采纳已去重 / 客户端写 generate 被拒")
+
+        # 3d) 采纳后回看板应带 adopted=true（"已用过"记忆）
+        r = c.get("/api/hotspots", params={"view": "feed", "limit": 5}, headers=H)
+        marked = {h["id"] for h in r.json()["hotspots"] if h.get("adopted")}
+        assert target["id"] in marked, "采纳后未被标记为已用过"
+        r = c.get("/api/hotspots/status", headers=H)
+        ad = r.json()["adoption"]
+        print("[3d] 采纳漏斗:", {k: ad[k] for k in
+                                ("impressions", "adopts", "generates", "ctr", "adopt_to_generate")})
+        assert ad["impressions"] >= 1 and ad["adopts"] >= 1, "漏斗计数未落库"
+
         # 4) 选题生成
         r = c.post("/api/topics/generate", json={"domain": "科技", "count": 3}, headers=H)
         topics = r.json()["topics"]
@@ -40,11 +84,37 @@ def main():
         tid = topics[0]["id"]
         c.post(f"/api/topics/{tid}/select", headers=H)
 
+        # 4b) 热点直传选题（P2-2）：领域必须跟随热点，而不是沿用请求里的领域
+        hot = next((h for h in page["hotspots"]
+                    if h.get("signal_id") and h.get("domain") not in (None, "综合")), None)
+        if hot:
+            rr = c.post("/api/topics/generate",
+                        json={"signal_id": hot["signal_id"], "count": 3}, headers=H)
+            tp = rr.json()
+            print("[4b] 直传 signal_id:", hot["signal_id"], "| 热点领域:", hot["domain"],
+                  "-> 生成 domain:", tp["domain"])
+            print("     选题:", [t["title"][:18] for t in tp["topics"]])
+            assert tp["domain"] == hot["domain"], "热点主领域未覆盖请求领域"
+            import sqlite3
+            db = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "db", "app.db")
+            con = sqlite3.connect(db)
+            linked = con.execute(
+                "SELECT COUNT(*) FROM topics WHERE hotspot_id IS NOT NULL").fetchone()[0]
+            con.close()
+            print("     已关联热点的选题数:", linked)
+            assert linked > 0, "topics.hotspot_id 未落地（选题→热点外键仍是空）"
+            # 强信号：带 signal_id 出题成功，服务端应自动写一条 generate 事件
+            st = c.get("/api/hotspots/status", headers=H).json()["adoption"]
+            print("     出题事件 generates =", st["generates"])
+            assert st["generates"] >= 1, "出题（generate）事件未记录，漏斗第三级断了"
+        else:
+            print("[4b] 跳过：无带 signal_id 的垂类热点")
+
         # 5) 文案生成（SSE）
         with c.stream("POST", "/api/copy/generate",
                       json={"topic_id": tid, "topic_title": topics[0]["title"],
                             "target_platforms": ["weixin", "xhs"], "intent": "干货科普",
-                            "tone": "专业", "length": "中"}, headers=H) as resp:
+                            "tone": "专业", "length": "中"}, headers=H, timeout=300) as resp:
             events = []
             task_id = None
             versions = 0

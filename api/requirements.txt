@@ -10,6 +10,7 @@ cryptography
 python-multipart
 apscheduler
 pyjwt
+httpx
 
 # ---- 语义增强：T3.1「BGE 向量化」与 T3.3「LangChain 编排」的落地依赖 ----
 # 已实测安装并验证：torch 2.14.1 / transformers 5.19.0 / sentence-transformers 6.1.0 / langchain 1.4.4

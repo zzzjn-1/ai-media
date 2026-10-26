@@ -10,7 +10,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import CORS_ORIGINS, HOTSPOT_ENABLED
+from .config import CORS_ORIGINS, HOTSPOT_SCHED_ENABLED
 from .core.embeddings import EmbeddingService
 from .core.hotspot_collector import shutdown_scheduler, start_scheduler
 from .core.llm import get_llm
@@ -28,9 +28,11 @@ async def lifespan(app: FastAPI):
         print(f"  [向量] FAISS 就绪：{n} 向量，backend={EmbeddingService.get().backend}")
     except Exception as e:  # noqa: BLE001
         print(f"  [向量] 构建跳过：{e}（请先运行 data/clean_chunk.py 入库素材）")
-    # 2) 热点采集调度
-    if HOTSPOT_ENABLED:
+    # 2) 热点采集调度（V2：每源独立节奏 + 每日清理）
+    if HOTSPOT_SCHED_ENABLED:
         start_scheduler()
+    else:
+        print("  [调度] 热点采集已关闭（HOTSPOT_SCHED_ENABLED=false）")
     yield
     shutdown_scheduler()
     print("← M3 后端已关闭")
@@ -48,7 +50,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 路由注册（当前 16 路由：15 功能端点 + /api/health 探针；M4 扩充后口径，详见 M3 交付说明第四节）
+# 路由注册（18 路由：16 功能端点 + /api/health 探针；V2 新增 hotspots/refresh 与 hotspots/status）
 app.include_router(auth.router, prefix="/api")
 app.include_router(materials.router, prefix="/api")
 app.include_router(hotspots.router, prefix="/api")
@@ -62,8 +64,10 @@ app.include_router(export.router, prefix="/api")
 def health():
     conn = get_conn()
     counts = {}
-    for t in ["users", "materials", "material_chunks", "hotspots", "topics",
-              "copy_tasks", "copy_versions", "platform_rules"]:
+    for t in ["users", "materials", "material_chunks",
+              "hot_raw_items", "hot_signals", "hot_source_state", "hot_collect_log",
+              "hot_feed_event",
+              "hotspots", "topics", "copy_tasks", "copy_versions", "platform_rules"]:
         try:
             counts[t] = conn.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
         except Exception:

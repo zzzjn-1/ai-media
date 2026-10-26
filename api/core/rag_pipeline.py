@@ -189,18 +189,31 @@ def generate(spec: dict) -> dict:
     return {"retrieved": retrieved_texts, "chunks": chunks, "versions": versions}
 
 
-def generate_topics(hotspots: list, persona: dict, domain: str | None = None, count: int = 3) -> list:
-    """选题策划（F2）：结合热点趋势与账号定位产出 ≥3 条选题（计划书 2.1.2 / 4.1.2）。"""
+def generate_topics(hotspots: list, persona: dict, domain: str | None = None,
+                    count: int = 3, focus: dict | None = None) -> list:
+    """选题策划（F2）：结合热点趋势与账号定位产出 ≥3 条选题（计划书 2.1.2 / 4.1.2）。
+
+    focus：从热点看板点「用它做选题」直传的那条热点（P2-2）。传了就保证它被点名使用；
+    不传时行为与改造前完全一致（向后兼容）。
+    """
     llm = get_llm()
     filt = [h for h in hotspots if (not domain or h.get("domain") == domain)] or hotspots
+    if focus:
+        # focus 必须留在候选里：领域过滤 + 兜底之后它有可能被剔掉
+        filt = [h for h in filt if h.get("id") != focus.get("id")]
+        filt.insert(0, {**focus})
     if llm.backend == "mock":
-        return _mock_topics(filt, persona, count)
+        return _mock_topics(filt, persona, count, focus=focus)
     from .prompts import SYSTEM_TOPIC, build_topic_prompt
-    raw = llm.complete(SYSTEM_TOPIC, build_topic_prompt(hotspots, persona), temperature=0.8)
-    return _parse_topics(raw, filt, count)
+    # max_tokens 给足：3 条选题（每条约 300-500 token）在 1400 下会被截断，
+    # 而截断的 JSON 解析必然失败，最终整批退化成模板选题——用户看到的"变笨"其实是"给少了"
+    raw = llm.complete(SYSTEM_TOPIC, build_topic_prompt(hotspots, persona, focus=focus),
+                       temperature=0.8, max_tokens=2600)
+    return _parse_topics(raw, filt, count, focus=focus)
 
 
-def _mock_topics(hotspots: list, persona: dict, count: int) -> list:
+def _mock_topics(hotspots: list, persona: dict, count: int,
+                 focus: dict | None = None) -> list:
     pos = persona.get("positioning") or "综合自媒体"
     tone = persona.get("tone") or "专业"
     domains = persona.get("domains") or "科技,生活,财经"
@@ -210,10 +223,12 @@ def _mock_topics(hotspots: list, persona: dict, count: int) -> list:
                "教育": "关注孩子成长与自我提升的学习型家长/学生"}
     out = []
     for h in hotspots:
-        dom = h.get("domain") or "科技"
+        dom = h.get("domain") or (focus or {}).get("domain") or "科技"
+        # 直传的那条：给出更像"可写"的角度（用建议角度或标题本身做钩子）
+        hint = h.get("suggestion") or f"围绕「{h.get('title','热点')}」做差异化解读"
         out.append({
             "title": f"从「{h.get('title','热点')}」聊聊{dom}账号的切入角度",
-            "angle": f"以「{tone}」口吻，结合{pos}定位做差异化解读",
+            "angle": f"以「{tone}」口吻，{hint}",
             "reason": f"该热点热度 {h.get('heat',0)}，与账号覆盖领域（{domains}）匹配，适合快速跟进",
             "target_audience": aud_map.get(dom, "泛兴趣人群"),
             "domain": dom,
@@ -231,13 +246,47 @@ def _mock_topics(hotspots: list, persona: dict, count: int) -> list:
     return out[:max(3, count)]
 
 
-def _parse_topics(raw: str, hotspots: list, count: int) -> list:
+def _salvage_objects(text: str) -> list:
+    """从被截断/带前后缀的文本里逐个抠出完整 JSON 对象。
+
+    模型输出超长被截断时，最后一条往往缺右括号。整段 json.loads 会全盘失败，
+    但前面已经完整的那几条是可用的——不能因为最后一条坏了就丢掉全部。
+    """
+    out = []
+    depth, start = 0, None
+    for i, ch in enumerate(text or ""):
+        if ch == "{":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0 and start is not None:
+                try:
+                    obj = json.loads(text[start:i + 1])
+                    if isinstance(obj, dict):
+                        out.append(obj)
+                except Exception:  # noqa: BLE001
+                    pass
+                start = None
+            elif depth < 0:
+                depth = 0
+    return out
+
+
+def _parse_topics(raw: str, hotspots: list, count: int,
+                  focus: dict | None = None) -> list:
+    default_domain = (focus or {}).get("domain") or (
+        hotspots[0].get("domain") if hotspots else "科技")
+    data = []
     try:
         data = json.loads(raw[raw.find("["):raw.rfind("]") + 1])
-        if isinstance(data, list) and data:
-            for d in data:
-                d.setdefault("domain", (hotspots[0].get("domain") if hotspots else "科技"))
-            return data[:max(3, count)]
     except Exception:  # noqa: BLE001
-        pass
-    return _mock_topics(hotspots, {}, count)
+        data = _salvage_objects(raw)      # 截断/包裹文本的兜底
+    if isinstance(data, list) and data:
+        out = [d for d in data if isinstance(d, dict) and (d.get("title") or "").strip()]
+        if out:
+            for d in out:
+                d.setdefault("domain", default_domain)
+            return out[:max(3, count)]
+    return _mock_topics(hotspots, {}, count, focus=focus)

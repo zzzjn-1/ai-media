@@ -15,6 +15,25 @@ DB_PATH = os.environ.get("DB_PATH", str(DB_DIR / "app.db"))
 FAISS_INDEX_PATH = os.environ.get("FAISS_INDEX_PATH", str(DB_DIR / "faiss.index"))
 FAISS_META_PATH = os.environ.get("FAISS_META_PATH", str(DB_DIR / "faiss_meta.json"))
 
+# -------- 本地 .env 加载（离线演示用，免手动 export）--------
+# 与 db/security.py 的 DB_FIELD_KEY 解析保持一致：仅当同名变量尚未在环境中
+# 设置时，才从项目根 .env 注入 os.environ，绝不覆盖已显式导出的变量。
+def _load_local_env_if_present() -> None:
+    env_path = PROJECT_ROOT / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, val = line.split("=", 1)
+        key, val = key.strip(), val.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = val
+
+
+_load_local_env_if_present()
+
 # -------- LLM（OpenAI 兼容接口，国内直连） --------
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
@@ -48,9 +67,59 @@ JWT_SECRET = os.environ.get("JWT_SECRET", "m3-dev-secret-please-change-32b+")
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRE_HOURS = int(os.environ.get("JWT_EXPIRE_HOURS", "72"))
 
-# -------- 热点采集调度（T3.2 / 4.6） --------
-HOTSPOT_ENABLED = os.environ.get("HOTSPOT_ENABLED", "true").lower() == "true"
-HOTSPOT_INTERVAL_MINUTES = int(os.environ.get("HOTSPOT_INTERVAL_MINUTES", "60"))
+# -------- 热点采集 V2（来源 / 调度 / 排序） --------
+# ⚠️ 旧键 HOTSPOT_ENABLED / HOTSPOT_INTERVAL_MINUTES 已废弃：
+#    - 前者重命名为 HOTSPOT_SCHED_ENABLED（语义完全重叠，保留会造成
+#      "关了一个开关、调度还在跑"的排查地狱）
+#    - 后者被"每源独立节奏"取代（间隔移入 api/core/hot_sources.py 的 SOURCES 注册表）
+#    全库不应再有对这两个旧键的引用。
+HOT_SOURCES_ENABLED = [
+    s.strip() for s in os.environ.get(
+        "HOT_SOURCES_ENABLED", "weibo,zhihu,baidu,douyin,bilibili,toutiao"
+    ).split(",") if s.strip()
+]
+HOTSPOT_API_BASE = os.environ.get("HOTSPOT_API_BASE", "")   # 自托管 DailyHot 实例；空则用内置免费源
+HOTSPOT_TIMEOUT = int(os.environ.get("HOTSPOT_TIMEOUT", "8"))  # 单源超时(s)
+HOTSPOT_SCHED_ENABLED = os.environ.get("HOTSPOT_SCHED_ENABLED", "true").lower() == "true"
+HOTSPOT_MIN_REFRESH_INTERVAL = int(os.environ.get("HOTSPOT_MIN_REFRESH_INTERVAL", "60"))  # 手动刷新最小间隔(s)
+HOTSPOT_SIGNAL_TTL_HOURS = int(os.environ.get("HOTSPOT_SIGNAL_TTL_HOURS", "24"))      # 退榜阈值(h)
+HOTSPOT_NEW_WINDOW_HOURS = int(os.environ.get("HOTSPOT_NEW_WINDOW_HOURS", "24"))      # 新颖度窗口(h)
+HOTSPOT_SOURCE_STALE_MINUTES = int(os.environ.get("HOTSPOT_SOURCE_STALE_MINUTES", "180"))  # 源快照过期(分)
+HOTSPOT_SUGGESTION_ENABLED = os.environ.get("HOTSPOT_SUGGESTION_ENABLED", "true").lower() == "true"
+# 单次请求最多为几条热点惰性生成建议（批量 1 次 LLM 调用，控制首屏延迟与成本）
+HOTSPOT_SUGGESTION_MAX_PER_REQUEST = int(
+    os.environ.get("HOTSPOT_SUGGESTION_MAX_PER_REQUEST", "5"))
+HOTSPOT_MAX_SOURCES_PER_REFRESH = int(os.environ.get("HOTSPOT_MAX_SOURCES_PER_REFRESH", "6"))
+HOTSPOT_RAW_RETENTION_DAYS = int(os.environ.get("HOTSPOT_RAW_RETENTION_DAYS", "7"))   # raw 层保留天数
+HOTSPOT_LOG_RETENTION_DAYS = int(os.environ.get("HOTSPOT_LOG_RETENTION_DAYS", "30"))  # 采集日志保留天数
+# 推荐流事件（曝光/采纳/出题）保留天数：比 raw 长得多（指标要看趋势），但也得设上限
+HOTSPOT_EVENT_RETENTION_DAYS = int(os.environ.get("HOTSPOT_EVENT_RETENTION_DAYS", "90"))
+# 同一条热点多少秒内的重复「采纳」只算一次（双击 / 点完返回再点，是同一个动作）
+HOTSPOT_ADOPT_DEDUPE_SECONDS = int(os.environ.get("HOTSPOT_ADOPT_DEDUPE_SECONDS", "30"))
+# 相关性权重：领域命中 / 新颖度 / 覆盖度 / 归一化热度 / 可创作性（和须为 1.0）
+_HOTSPOT_FEED_WEIGHTS_RAW = os.environ.get("HOTSPOT_FEED_WEIGHTS", "0.30,0.25,0.20,0.15,0.10")
+
+
+def _parse_feed_weights(raw: str) -> tuple[float, ...]:
+    """解析 5 因子权重。非法输入只告警并回落默认，绝不抛异常导致服务起不来。"""
+    default = (0.30, 0.25, 0.20, 0.15, 0.10)
+    try:
+        parts = tuple(float(x) for x in raw.split(",") if x.strip())
+    except ValueError:
+        print(f"  [配置告警] HOTSPOT_FEED_WEIGHTS 含非数字：{raw!r}，已回落默认值 {default}")
+        return default
+    if len(parts) != 5:
+        print(f"  [配置告警] HOTSPOT_FEED_WEIGHTS 需 5 个数（领域/新颖/覆盖/热度/可创作），"
+              f"实际 {len(parts)} 个，已回落默认值 {default}")
+        return default
+    if any(w < 0 for w in parts) or abs(sum(parts) - 1.0) > 1e-6:
+        print(f"  [配置告警] HOTSPOT_FEED_WEIGHTS 须非负且和为 1.0，实际和={sum(parts):.3f}，"
+              f"已回落默认值 {default}")
+        return default
+    return parts
+
+
+HOTSPOT_FEED_WEIGHTS = _parse_feed_weights(_HOTSPOT_FEED_WEIGHTS_RAW)
 
 # -------- CORS（本地开发放行，生产按域名收紧） --------
 CORS_ORIGINS = os.environ.get("CORS_ORIGINS", "*").split(",")

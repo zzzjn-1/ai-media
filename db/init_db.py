@@ -18,7 +18,12 @@ SCHEMA = os.path.join(HERE, "schema.sql")
 TARGET = os.path.join(HERE, "app.db")
 
 EXPECTED_TABLES = [
-    "users", "materials", "material_chunks", "hotspots", "topics",
+    "users", "materials", "material_chunks",
+    # 热点三层模型 + 健康状态 + 采集日志（V2 新增 4 张）
+    "hot_raw_items", "hot_signals", "hot_source_state", "hot_collect_log",
+    "hotspots", "topics",
+    # 推荐流事件（P2-7：曝光/采纳/出题，采纳率的分母与分子）
+    "hot_feed_event",
     "copy_tasks", "copy_versions", "platform_rules", "stats",
 ]
 
@@ -35,7 +40,7 @@ def build(conn: sqlite3.Connection) -> None:
 
 def verify(conn: sqlite3.Connection) -> None:
     cur = conn.cursor()
-    # 1) 9 张表齐全
+    # 1) 14 张表齐全
     rows = cur.execute(
         "SELECT name FROM sqlite_master WHERE type='table' "
         "AND name NOT LIKE 'sqlite_%' ORDER BY name"
@@ -43,19 +48,19 @@ def verify(conn: sqlite3.Connection) -> None:
     tables = {r[0] for r in rows}
     missing = [t for t in EXPECTED_TABLES if t not in tables]
     assert not missing, f"缺少表：{missing}"
-    print(f"  [OK] 表数量 {len(tables)}，9 张核心表齐全")
+    print(f"  [OK] 表数量 {len(tables)}，{len(EXPECTED_TABLES)} 张核心表齐全")
 
     # 2) 外键开关已开启
     fk = cur.execute("PRAGMA foreign_keys").fetchone()[0]
     assert fk == 1, "foreign_keys 未开启"
     print("  [OK] 外键约束已启用 (PRAGMA foreign_keys=ON)")
 
-    # 3) 索引存在
+    # 3) 索引存在（V2 后 18 个 + P2-7 事件表 2 个 = 20；其中 idx_hotspots_domain 为同名替换）
     idx = cur.execute(
         "SELECT name FROM sqlite_master WHERE type='index' "
         "AND name LIKE 'idx_%'"
     ).fetchall()
-    assert len(idx) >= 9, f"索引不足：{len(idx)}"
+    assert len(idx) >= 20, f"索引不足：{len(idx)}（应 >= 20）"
     print(f"  [OK] 自定义索引 {len(idx)} 个已建立")
 
     # 4) 平台规则种子数据
@@ -85,20 +90,62 @@ def verify(conn: sqlite3.Connection) -> None:
     assert leftover == 0, "级联删除失败：子表仍有残留"
     print("  [OK] 外键级联删除实测通过（删用户→素材/分块联动清除）")
 
-    # 6) 去重约束实测
+    # 6) 去重约束实测（三层各自承担不同职责，三处都要验）
+    # 6.1 raw 层：同批次同源同标题只留一条
     cur.execute(
-        "INSERT INTO hotspots(title,dedup_hash) VALUES('热点A','h1')"
+        "INSERT INTO hot_raw_items(source_code,title,batch_id,fetched_at) "
+        "VALUES('weibo','热点A','20261014T165003','2026-10-14 16:50:03')"
     )
     conn.commit()
     try:
         cur.execute(
-            "INSERT INTO hotspots(title,dedup_hash) VALUES('热点A副本','h1')"
+            "INSERT INTO hot_raw_items(source_code,title,batch_id,fetched_at) "
+            "VALUES('weibo','热点A','20261014T165003','2026-10-14 16:50:03')"
         )
         conn.commit()
-        raise AssertionError("dedup_hash 唯一约束未生效")
+        raise AssertionError("hot_raw_items 唯一约束未生效")
     except sqlite3.IntegrityError:
         conn.rollback()
-        print("  [OK] hotspots.dedup_hash 唯一约束生效（热点去重）")
+        print("  [OK] hot_raw_items(source_code,title,batch_id) 唯一约束生效")
+
+    # 6.2 signal 层：同一归一化指纹只留一条（跨源合并的落点）
+    cur.execute(
+        "INSERT INTO hot_signals(canonical_key,canonical_title,first_seen_at,last_seen_at) "
+        "VALUES('k1','热点A','2026-10-14 16:50:03','2026-10-14 16:50:03')"
+    )
+    conn.commit()
+    try:
+        cur.execute(
+            "INSERT INTO hot_signals(canonical_key,canonical_title,first_seen_at,last_seen_at) "
+            "VALUES('k1','热点A 副本','2026-10-14 16:50:03','2026-10-14 16:50:03')"
+        )
+        conn.commit()
+        raise AssertionError("hot_signals.canonical_key 唯一约束未生效")
+    except sqlite3.IntegrityError:
+        conn.rollback()
+        print("  [OK] hot_signals.canonical_key 唯一约束生效（跨源聚合去重）")
+
+    # 6.3 物化层：hotspots.dedup_hash 唯一且 upsert 行数不增（F2 依赖）
+    cur.execute("INSERT INTO hotspots(title,dedup_hash) VALUES('热点A','h1')")
+    conn.commit()
+    cur.execute(
+        "INSERT INTO hotspots(title,dedup_hash) VALUES('热点A副本','h1') "
+        "ON CONFLICT(dedup_hash) DO UPDATE SET title=excluded.title"
+    )
+    conn.commit()
+    n = cur.execute("SELECT COUNT(*) FROM hotspots WHERE dedup_hash='h1'").fetchone()[0]
+    assert n == 1, f"hotspots upsert 未生效：行数 {n}"
+    print("  [OK] hotspots.dedup_hash 唯一约束 + upsert 行数不增")
+
+    # 7) 清理自检痕迹
+    #    ⚠️ verify() 会在【正式库】上跑（--reset 路径），自检写入的测试行必须删干净。
+    #    否则 clean_chunk.py 的 seed 逻辑会看到"已有热点"而跳过注种，
+    #    结果是空库启动、看板无数据（已踩过一次）。
+    cur.execute("DELETE FROM hotspots WHERE dedup_hash='h1'")
+    cur.execute("DELETE FROM hot_signals WHERE canonical_key='k1'")
+    cur.execute("DELETE FROM hot_raw_items WHERE title='热点A' AND source_code='weibo'")
+    conn.commit()
+    print("  [OK] 自检测试行已清理（不污染正式库）")
 
 
 def main() -> int:

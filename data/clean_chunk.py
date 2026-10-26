@@ -31,7 +31,11 @@ CORPUS_DIR = HERE / "corpus"
 DB_PATH = HERE.parent / "db" / "app.db"
 # 引入 M1 数据库安全模块（字段级加密 + 口令哈希，落实计划书 2.2.4 / 4.2）
 sys.path.insert(0, str(HERE.parent / "db"))
+# 引入项目根，复用 api 下的热点管道（种子必须与真实采集走同一条链路）
+sys.path.insert(0, str(HERE.parent))
 import security  # noqa: E402
+from api.core.hot_seed import SEED_BATCH, SEED_ITEMS  # noqa: E402
+from api.core.hot_signal import run_pipeline  # noqa: E402
 
 SEED_USER_ID = 1
 # 注意：ensure_seed_user 为 INSERT OR IGNORE —— 该口令仅对【全新库】生效；
@@ -39,13 +43,6 @@ SEED_USER_ID = 1
 SEED_USER_PASSWORD = "Demo@2026"  # 示例素材归属账号口令（仅演示，生产请改）
 # 官方领域词表（与 frontend/src/api/types.ts 的 DOMAINS 保持一致；新增领域需同步此处）
 SEED_DOMAINS = ["科技", "生活", "财经", "美妆", "教育"]
-# 美妆/教育热点种子（与既有科技/生活/财经种子同风格；INSERT OR IGNORE 幂等）
-HOTSPOT_SEEDS = [
-    ("早C晚A护肤翻车，敏感肌避雷清单", "成分党热度下，新手盲目叠加酸类与维 A 导致屏障受损的案例增多，避雷清单类内容高收藏。", "美妆", 88, "上升"),
-    ("国货彩妆性价比测评热度走高", "平价彩妆测评与平替对比成为小红书热门选题，真实上脸内容更易获得收藏。", "美妆", 75, "平稳"),
-    ("AI 编程课真假难辨，成人自学路径图走红", "成人再就业需求下，零基础自学编程的路径规划与资源筛选内容搜索走高。", "教育", 82, "上升"),
-    ("少儿编程到底该不该学引热议", "家长群体对少儿编程的价值与焦虑并存，逻辑思维培养类科普内容稳定输出。", "教育", 70, "平稳"),
-]
 
 NAME_RE = re.compile(r"^(?P<platform>[^_]+)_(?P<domain>[^_]+)_(?P<style>[^_]+)_(?P<seq>\d+)\.txt$")
 MAX_CHUNK_CHARS = 300
@@ -113,19 +110,18 @@ def ensure_seed_user(conn: sqlite3.Connection):
     )
 
 
-def ensure_hotspot_seeds(conn: sqlite3.Connection):
-    """补充美妆/教育热点种子（INSERT OR IGNORE 幂等，不覆盖既有数据）。"""
-    added = 0
-    for title, summary, domain, heat, trend in HOTSPOT_SEEDS:
-        dedup = hashlib.sha256(title.encode("utf-8")).hexdigest()
-        cur = conn.execute(
-            """INSERT OR IGNORE INTO hotspots
-               (title, summary, source, url, domain, heat, trend, dedup_hash)
-               VALUES (?,?,?,?,?,?,?,?)""",
-            (title, summary, "示例种子", "", domain, heat, trend, dedup),
-        )
-        added += cur.rowcount
-    return added
+def ensure_hotspot_seeds(conn: sqlite3.Connection) -> int:
+    """内置热点种子：走 raw → signal → 物化 同一条链路。
+
+    ⚠️ 不再直接 INSERT hotspots。直接写的种子没有 signal_id / first_seen_at /
+    norm_heat，会让默认 feed 视图与真实采集数据行为不一致（最难排查的一类分裂）。
+    仅在热点表为空时注入，避免重跑脚本污染真实数据。
+    """
+    n = conn.execute("SELECT COUNT(*) FROM hotspots").fetchone()[0]
+    if n > 0:
+        return 0
+    r = run_pipeline(conn, SEED_ITEMS, SEED_BATCH)
+    return r["inserted"]
 
 
 def try_embed(text: str):
@@ -154,6 +150,7 @@ def main():
         raise SystemExit(f"未找到数据库 {DB_PATH}，请先运行 db/init_db.py 初始化")
     conn = sqlite3.connect(str(DB_PATH))
     conn.execute("PRAGMA foreign_keys = ON")
+    conn.row_factory = sqlite3.Row
     ensure_seed_user(conn)
     hotspots_added = ensure_hotspot_seeds(conn)
     if args.reset:

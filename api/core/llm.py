@@ -16,13 +16,11 @@ import os
 import sys
 
 from ..config import LLM_API_KEY, LLM_BASE_URL, LLM_MAX_TOKENS, LLM_MODEL, LLM_TEMPERATURE
+# 领域词表唯一真源在 api/core/domain_keywords.py（覆盖 5 个官方领域）。
+# 此处仅做导入，禁止在本文件重新定义——否则会与热点领域判定长期漂移。
+from .domain_keywords import DOMAIN_KW
 
 # 与 M2 语料同源的领域关键词，使生成内容与素材在语义上连贯
-DOMAIN_KW = {
-    "科技": ["大模型", "算力", "端侧推理", "开源生态", "AI Agent", "向量数据库", "RAG 检索增强"],
-    "生活": ["晨间作息", "收纳整理", "一人食", "通勤效率", "居家好物", "情绪管理"],
-    "财经": ["美联储加息", "CPI 数据", "权益资产", "现金仓位", "复利效应", "行业景气度"],
-}
 PLATFORM_OPENER = {
     "weixin": "在公众号这样开篇，结构完整、论证清晰：",
     "xhs": "小红书姐妹看过来👀，短句分段、口语种草：",
