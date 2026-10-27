@@ -19,17 +19,17 @@
       <circle cx="10" cy="26" r="6" fill="#3B82F6" />
       <circle cx="556" cy="26" r="6" fill="#06B6D4" />
       <circle cx="1102" cy="26" r="6" fill="#22D3EE" />
-      <text x="4" y="58" fontSize="12" fill="#64748B" letterSpacing="1">起点</text>
-      <text x="4" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">计划书 M1–M5</text>
-      <text x="4" y="104" fontSize="11.5" fill="#94A3B8">需求 → 数据 → 后端 → 前端 → 测试</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="4" y="58" fontSize="12" fill="#64748B" letterSpacing="1">起点</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="4" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">计划书 M1–M5</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="4" y="104" fontSize="11.5" fill="#94A3B8">需求 → 数据 → 后端 → 前端 → 测试</text>
 
-      <text x="490" y="58" fontSize="12" fill="#64748B" letterSpacing="1">验收</text>
-      <text x="490" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">四项指标全部达标</text>
-      <text x="490" y="104" fontSize="11.5" fill="#94A3B8">检索 / 适配 / 可用率 / 耗时</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="490" y="58" fontSize="12" fill="#64748B" letterSpacing="1">验收</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="490" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">四项指标全部达标</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="490" y="104" fontSize="11.5" fill="#94A3B8">检索 / 适配 / 可用率 / 耗时</text>
 
-      <text x="880" y="58" fontSize="12" fill="#64748B" letterSpacing="1">当前</text>
-      <text x="880" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">热点采集三期重构</text>
-      <text x="880" y="104" fontSize="11.5" fill="#94A3B8">真实采集 → 推荐流 → 漏斗度量</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="880" y="58" fontSize="12" fill="#64748B" letterSpacing="1">当前</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="880" y="82" fontSize="14" fontWeight="bold" fill="#E2E8F0">热点采集三期重构</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="880" y="104" fontSize="11.5" fill="#94A3B8">真实采集 → 推荐流 → 漏斗度量</text>
     </svg>
 
     <Text style={{ fontSize: 18, color: '#CBD5E1', marginTop: 26, lineHeight: 1.8, width: 900 }}>

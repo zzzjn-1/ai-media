@@ -21,59 +21,59 @@
         </marker>
       </defs>
 
-      <text x="106" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">采 集</text>
-      <text x="392" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">适 配</text>
-      <text x="678" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">三 层 存 储</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="106" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">采 集</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="392" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">适 配</text>
+      <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="678" y="22" textAnchor="middle" fontSize="11" fill="#94A3B8" letterSpacing="1">三 层 存 储</text>
 
       <g>
         <rect x="8" y="34" width="196" height="112" rx="12" fill="#FFFBEB" stroke="#FDE68A" strokeWidth="1.5" />
-        <text x="106" y="62" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#92400E">六源真实热榜</text>
-        <text x="106" y="88" textAnchor="middle" fontSize="11.5" fill="#B45309">微博 · 知乎 · 百度</text>
-        <text x="106" y="108" textAnchor="middle" fontSize="11.5" fill="#B45309">抖音 · B站 · 头条</text>
-        <text x="106" y="130" textAnchor="middle" fontSize="10.5" fill="#A16207">实测 5 / 6 可用（知乎需登录态）</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="106" y="62" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#92400E">六源真实热榜</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="106" y="88" textAnchor="middle" fontSize="11.5" fill="#B45309">微博 · 知乎 · 百度</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="106" y="108" textAnchor="middle" fontSize="11.5" fill="#B45309">抖音 · B站 · 头条</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="106" y="130" textAnchor="middle" fontSize="10.5" fill="#A16207">实测 5 / 6 可用（知乎需登录态）</text>
       </g>
 
       <path d="M208 90 L 232 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
 
       <g>
         <rect x="238" y="34" width="196" height="112" rx="12" fill="#EFF6FF" stroke="#BFDBFE" strokeWidth="1.5" />
-        <text x="336" y="62" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1E40AF">适配器链</text>
-        <text x="336" y="88" textAnchor="middle" fontSize="11.5" fill="#3B82F6">dailyhot → official</text>
-        <text x="336" y="108" textAnchor="middle" fontSize="11.5" fill="#3B82F6">→ vvhan → tenapi</text>
-        <text x="336" y="130" textAnchor="middle" fontSize="10.5" fill="#60A5FA">单源失败即熔断降级</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="336" y="62" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1E40AF">适配器链</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="336" y="88" textAnchor="middle" fontSize="11.5" fill="#3B82F6">dailyhot → official</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="336" y="108" textAnchor="middle" fontSize="11.5" fill="#3B82F6">→ vvhan → tenapi</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="336" y="130" textAnchor="middle" fontSize="10.5" fill="#60A5FA">单源失败即熔断降级</text>
       </g>
 
       <path d="M438 90 L 462 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
 
       <g>
         <rect x="468" y="34" width="196" height="112" rx="12" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
-        <text x="566" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0F172A">hot_raw_items</text>
-        <text x="566" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#334155">原始层</text>
-        <text x="566" y="106" textAnchor="middle" fontSize="11.5" fill="#64748B">追加式，跨平台同名</text>
-        <text x="566" y="124" textAnchor="middle" fontSize="11.5" fill="#64748B">各自保留，留证据链</text>
-        <text x="566" y="142" textAnchor="middle" fontSize="10.5" fill="#94A3B8">按天清理</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="566" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0F172A">hot_raw_items</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="566" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#334155">原始层</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="566" y="106" textAnchor="middle" fontSize="11.5" fill="#64748B">追加式，跨平台同名</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="566" y="124" textAnchor="middle" fontSize="11.5" fill="#64748B">各自保留，留证据链</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="566" y="142" textAnchor="middle" fontSize="10.5" fill="#94A3B8">按天清理</text>
       </g>
 
       <path d="M668 90 L 692 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
 
       <g>
         <rect x="698" y="34" width="196" height="112" rx="12" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
-        <text x="796" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0F172A">hot_signals</text>
-        <text x="796" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#334155">聚合层</text>
-        <text x="796" y="106" textAnchor="middle" fontSize="11.5" fill="#64748B">同话题跨源合并</text>
-        <text x="796" y="124" textAnchor="middle" fontSize="11.5" fill="#64748B">热度归一化到 0–100</text>
-        <text x="796" y="142" textAnchor="middle" fontSize="10.5" fill="#94A3B8">24h 生命周期</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="796" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0F172A">hot_signals</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="796" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#334155">聚合层</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="796" y="106" textAnchor="middle" fontSize="11.5" fill="#64748B">同话题跨源合并</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="796" y="124" textAnchor="middle" fontSize="11.5" fill="#64748B">热度归一化到 0–100</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="796" y="142" textAnchor="middle" fontSize="10.5" fill="#94A3B8">24h 生命周期</text>
       </g>
 
       <path d="M898 90 L 922 90" stroke="#93C5FD" strokeWidth="2" markerEnd="url(#arG)" />
 
       <g>
         <rect x="928" y="34" width="160" height="112" rx="12" fill="url(#gN)" />
-        <text x="1008" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#E0F2FE">hotspots</text>
-        <text x="1008" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">物化层</text>
-        <text x="1008" y="106" textAnchor="middle" fontSize="11.5" fill="#E0F2FE">feed 打分与过滤</text>
-        <text x="1008" y="124" textAnchor="middle" fontSize="11.5" fill="#E0F2FE">前端直接读</text>
-        <text x="1008" y="142" textAnchor="middle" fontSize="10.5" fill="#BAE6FD">保留原表名兼容外键</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="1008" y="58" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#E0F2FE">hotspots</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="1008" y="82" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">物化层</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="1008" y="106" textAnchor="middle" fontSize="11.5" fill="#E0F2FE">feed 打分与过滤</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="1008" y="124" textAnchor="middle" fontSize="11.5" fill="#E0F2FE">前端直接读</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="1008" y="142" textAnchor="middle" fontSize="10.5" fill="#BAE6FD">保留原表名兼容外键</text>
       </g>
     </svg>
   </Box>

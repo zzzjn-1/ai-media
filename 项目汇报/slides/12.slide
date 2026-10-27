@@ -26,7 +26,7 @@
       </Box>
       <Box style={{ marginTop: 'auto', borderTop: '1px solid rgba(148,163,184,0.25)', paddingTop: 14 }}>
         <Text style={{ fontSize: 12.5, color: '#94A3B8', lineHeight: 1.7 }}>
-          从 88.9% 到 100% 的三次迭代：补风格加权、召回池 20→40、索引签名自动重建。
+          从 88.9% 到 100% 的四次迭代：补风格加权、召回池 20→40、索引签名自动重建、哈希向量退出粗排（改全量召回）。
         </Text>
       </Box>
     </Box>

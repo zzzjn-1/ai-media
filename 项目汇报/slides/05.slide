@@ -134,7 +134,7 @@
         <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>张数据表</Text>
       </Box>
       <Box style={{ alignItems: 'center' }}>
-        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>19</Text>
+        <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#3B82F6', letterSpacing: -1 }}>21</Text>
         <Text style={{ fontSize: 12.5, color: '#64748B', marginTop: 2 }}>个接口路由</Text>
       </Box>
     </Box>

@@ -50,25 +50,25 @@
           </defs>
 
           <rect x="6" y="8" width="404" height="56" rx="9" fill="#0F172A" />
-          <text x="24" y="32" fontSize="13.5" fontWeight="bold" fill="#FFFFFF">曝光 EXPOSE</text>
-          <text x="24" y="52" fontSize="11" fill="#94A3B8">前端渲染完成后上报，按屏记条数 —— 这就是分母</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="24" y="32" fontSize="13.5" fontWeight="bold" fill="#FFFFFF">曝光 EXPOSE</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="24" y="52" fontSize="11" fill="#94A3B8">前端渲染完成后上报，按屏记条数 —— 这就是分母</text>
 
           <rect x="6" y="80" width="256" height="56" rx="9" fill="url(#gF)" />
-          <text x="24" y="104" fontSize="13.5" fontWeight="bold" fill="#FFFFFF">采纳 ADOPT</text>
-          <text x="24" y="124" fontSize="11" fill="#E0F2FE">点「用它做选题」，带上点在第几名</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="24" y="104" fontSize="13.5" fontWeight="bold" fill="#FFFFFF">采纳 ADOPT</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="24" y="124" fontSize="11" fill="#E0F2FE">点「用它做选题」，带上点在第几名</text>
 
           <rect x="6" y="152" width="150" height="56" rx="9" fill="#0F172A" />
-          <text x="24" y="176" fontSize="13" fontWeight="bold" fill="#FFFFFF">出题 GENERATE</text>
-          <text x="24" y="196" fontSize="10.5" fill="#94A3B8">仅服务端写入</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="24" y="176" fontSize="13" fontWeight="bold" fill="#FFFFFF">出题 GENERATE</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="24" y="196" fontSize="10.5" fill="#94A3B8">仅服务端写入</text>
 
-          <text x="278" y="104" fontSize="11.5" fontWeight="bold" fill="#0F172A">ctr = 采纳 ÷ 曝光</text>
-          <text x="278" y="120" fontSize="10.5" fill="#64748B">推荐得准不准</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="278" y="104" fontSize="11.5" fontWeight="bold" fill="#0F172A">ctr = 采纳 ÷ 曝光</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="278" y="120" fontSize="10.5" fill="#64748B">推荐得准不准</text>
 
-          <text x="172" y="176" fontSize="11.5" fontWeight="bold" fill="#0F172A">转化 = 出题 ÷ 采纳</text>
-          <text x="172" y="192" fontSize="10.5" fill="#64748B">选题好不好用</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="172" y="176" fontSize="11.5" fontWeight="bold" fill="#0F172A">转化 = 出题 ÷ 采纳</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="172" y="192" fontSize="10.5" fill="#64748B">选题好不好用</text>
 
           <line x1="6" y1="224" x2="582" y2="224" stroke="#E2E8F0" strokeWidth="1" />
-          <text x="6" y="242" fontSize="10.5" fill="#94A3B8">无曝光时 ctr 返回空值而不是 0 —— 0 会被读成「没人点」，结论正好相反</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="6" y="242" fontSize="10.5" fill="#94A3B8">无曝光时 ctr 返回空值而不是 0 —— 0 会被读成「没人点」，结论正好相反</text>
         </svg>
       </Box>
 

@@ -57,37 +57,37 @@
         <g>
           <rect x="6" y="46" width="124" height="124" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
           <circle cx="68" cy="78" r="16" fill="url(#gB)" />
-          <text x="68" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">1</text>
-          <text x="68" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">热点看板</text>
-          <text x="68" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">六源真实采集</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="68" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">1</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="68" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">热点看板</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="68" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">六源真实采集</text>
         </g>
         <g>
           <rect x="150" y="46" width="124" height="124" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
           <circle cx="212" cy="78" r="16" fill="url(#gB)" />
-          <text x="212" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">2</text>
-          <text x="212" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">选题列表</text>
-          <text x="212" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">热点一键直传</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="212" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">2</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="212" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">选题列表</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="212" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">热点一键直传</text>
         </g>
         <g>
           <rect x="294" y="46" width="124" height="124" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
           <circle cx="356" cy="78" r="16" fill="url(#gB)" />
-          <text x="356" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">3</text>
-          <text x="356" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">文案生成</text>
-          <text x="356" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">RAG · ≥3 版本</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="356" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">3</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="356" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">文案生成</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="356" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">RAG · ≥3 版本</text>
         </g>
         <g>
           <rect x="438" y="46" width="124" height="124" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
           <circle cx="500" cy="78" r="16" fill="url(#gB)" />
-          <text x="500" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">4</text>
-          <text x="500" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">平台适配</text>
-          <text x="500" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">规范硬约束</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="500" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">4</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="500" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#0F172A">平台适配</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="500" y="142" textAnchor="middle" fontSize="11.5" fill="#64748B">规范硬约束</text>
         </g>
         <g>
           <rect x="572" y="46" width="116" height="124" rx="14" fill="#0F172A" stroke="#0F172A" strokeWidth="1.5" />
           <circle cx="630" cy="78" r="16" fill="url(#gB)" />
-          <text x="630" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">5</text>
-          <text x="630" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#FFFFFF">导出发布</text>
-          <text x="630" y="142" textAnchor="middle" fontSize="11.5" fill="#94A3B8">txt / docx</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="630" y="84" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#FFFFFF">5</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="630" y="118" textAnchor="middle" fontSize="17" fontWeight="bold" fill="#FFFFFF">导出发布</text>
+          <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="630" y="142" textAnchor="middle" fontSize="11.5" fill="#94A3B8">txt / docx</text>
         </g>
 
         <g stroke="#3B82F6" strokeWidth="2" fill="none">
@@ -98,13 +98,13 @@
         </g>
 
         <path d="M630 172 C 630 226, 68 226, 68 174" stroke="#06B6D4" strokeWidth="1.5" strokeDasharray="5 5" fill="none" />
-        <text x="350" y="248" textAnchor="middle" fontSize="12.5" fill="#64748B">导出与发布数据反哺下一轮选题（闭环持续运转）</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="350" y="248" textAnchor="middle" fontSize="12.5" fill="#64748B">导出与发布数据反哺下一轮选题（闭环持续运转）</text>
 
         <rect x="6" y="272" width="682" height="100" rx="12" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.2" />
-        <text x="26" y="300" fontSize="13" fontWeight="bold" fill="#0F172A">闭环为什么能成立</text>
-        <text x="26" y="324" fontSize="12" fill="#475569">上游每个环节都为下游产出结构化输入：热点产出领域与建议角度，选题产出素材与检索线索，</text>
-        <text x="26" y="344" fontSize="12" fill="#475569">生成产出多版本候选，适配产出平台规范校验结果——没有一环是死胡同。</text>
-        <text x="26" y="362" fontSize="11.5" fill="#94A3B8">对应实现：前端六页工作台 + FlowContext 跨页流转 + 后端 19 个路由</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="26" y="300" fontSize="13" fontWeight="bold" fill="#0F172A">闭环为什么能成立</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="26" y="324" fontSize="12" fill="#475569">上游每个环节都为下游产出结构化输入：热点产出领域与建议角度，选题产出素材与检索线索，</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="26" y="344" fontSize="12" fill="#475569">生成产出多版本候选，适配产出平台规范校验结果——没有一环是死胡同。</text>
+        <text font-family="Microsoft YaHei, Source Han Sans SC, sans-serif" x="26" y="362" fontSize="11.5" fill="#94A3B8">对应实现：前端六页工作台 + FlowContext 跨页流转 + 后端 21 个路由</text>
       </svg>
     </Box>
   </Box>

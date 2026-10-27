@@ -31,9 +31,9 @@
     </Box>
     <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 10, padding: '0 16px' }}>
       <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#3B82F6', width: 42 }}>03</Text>
-      <Text style={{ fontSize: 13.5, fontWeight: 'bold', color: '#0F172A', width: 206 }}>评测口径与生产不一致</Text>
-      <Text style={{ fontSize: 12, color: '#64748B', width: 292, lineHeight: 1.6 }}>评测脚本自建检索路径，分数虚高</Text>
-      <Text style={{ fontSize: 12, color: '#334155', flex: 1, lineHeight: 1.6 }}>评测直接调用生产函数，同一代码路径出分，重跑后再无口径差异</Text>
+      <Text style={{ fontSize: 13.5, fontWeight: 'bold', color: '#0F172A', width: 206 }}>评测口径与评测集漂移</Text>
+      <Text style={{ fontSize: 12, color: '#64748B', width: 292, lineHeight: 1.6 }}>评测脚本自建检索路径致分数虚高；gold 素材 id 是库快照，库一重建就全错位</Text>
+      <Text style={{ fontSize: 12, color: '#334155', flex: 1, lineHeight: 1.6 }}>评测直调生产函数；内置漂移自检——0% 假故障在重建评测集后回到 180/180</Text>
     </Box>
     <Box style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 10, padding: '0 16px' }}>
       <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#3B82F6', width: 42 }}>04</Text>
@@ -64,8 +64,8 @@
         <Text style={{ fontSize: 11.5, color: '#CBD5E1', marginTop: 4, lineHeight: 1.6 }}>有了 ctr 才有对照前提，改一档跑一周再比</Text>
       </Box>
       <Box style={{ flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(148,163,184,0.22)', borderRadius: 10, padding: '10px 14px' }}>
-        <Text style={{ fontSize: 12.5, color: '#67E8F9', fontWeight: 'bold' }}>检索与端侧补齐</Text>
-        <Text style={{ fontSize: 11.5, color: '#CBD5E1', marginTop: 4, lineHeight: 1.6 }}>BGE 向量权重接入，移动端交互专项优化</Text>
+        <Text style={{ fontSize: 12.5, color: '#67E8F9', fontWeight: 'bold' }}>先换语料，再谈向量</Text>
+        <Text style={{ fontSize: 11.5, color: '#CBD5E1', marginTop: 4, lineHeight: 1.6 }}>BGE 实测与哈希向量同分，瓶颈是语料；移动端待专项优化</Text>
       </Box>
     </Box>
   </Box>

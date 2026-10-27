@@ -25,8 +25,8 @@
   <Box style={{ position: 'relative', marginTop: 'auto', flexDirection: 'row', alignItems: 'center', gap: 16 }}>
     <Text style={{ fontSize: 15, color: '#94A3B8' }}>汇报人：项目组</Text>
     <Box style={{ width: 1, height: 14, background: '#475569' }} />
-    <Text style={{ fontSize: 15, color: '#94A3B8' }}>2026-10-26</Text>
+    <Text style={{ fontSize: 15, color: '#94A3B8' }}>2026-10-27</Text>
     <Box style={{ width: 1, height: 14, background: '#475569' }} />
-    <Text style={{ fontSize: 15, color: '#94A3B8' }}>V2 · 含热点采集三期</Text>
+    <Text style={{ fontSize: 15, color: '#94A3B8' }}>V2.1 · 含热点采集三期与工作台补强</Text>
   </Box>
 </Slide>
